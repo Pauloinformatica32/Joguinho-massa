@@ -12,6 +12,10 @@ export function checkpointFor(region=0,beforeBoss=false){const i=Math.max(0,Math
 export function syncProgress(state){
  state.quests=ACTS.map(a=>({id:a.id,name:a.name,goal:1,progress:defeated(state,a.boss)?1:0,complete:defeated(state,a.boss)}));
  state.quests.push({id:'records',name:'Opcional · Recuperar os três registros da Aurora',goal:3,progress:['log-1','log-2','log-3'].filter(id=>state.events.includes(id)).length,complete:['log-1','log-2','log-3'].every(id=>state.events.includes(id))});
+ if(state.events.includes('teo-first-meeting')||state.events.includes('teo-maintenance-request')){
+  const repaired=state.events.includes('shortcut-maintenance');
+  state.quests.push({id:'teo-maintenance',name:'Opcional · Téo: restaurar a ponte de manutenção',goal:1,progress:repaired?1:0,complete:repaired});
+ }
  for(const act of ACTS)if(defeated(state,act.boss)){
   if(!state.events.includes(act.id))state.events.push(act.id);
   for(const ability of act.abilities)awardAbility(state,ability);
@@ -29,4 +33,8 @@ export function objective(state){
  if(index===0&&state.events.includes('log-1')&&state.events.includes('yara-reunion')&&!state.events.includes('yara-terminal'))return 'Ato 1 · Volte a Yara e compartilhe os registros do terminal';
  if(!state.events.includes(`log-${index+1}`))return ['Ato 1 · Fale com Yara e investigue o terminal dos telhados','Ato 2 · Encontre o cientista e o registro de distribuição','Ato 3 · Consulte a IA e os registros dos laboratórios'][index];
  return ['Ato 1 · Derrote Matrona e libere o Complexo Industrial','Ato 2 · Derrote Warden e recupere a credencial da Torre','Ato 3 · Derrote Véspera no núcleo e desligue o transmissor'][index];
+}
+export function teoObjective(state){
+ if(regionAt(state.player.x).id!=='factory'||!state.events.includes('teo-first-meeting')||state.events.includes('teo-maintenance-complete'))return '';
+ return state.events.includes('shortcut-maintenance')?'Opcional · Volte a Téo: a ponte foi restaurada':'Opcional · Ative o terminal Ponte de manutenção na passarela superior';
 }

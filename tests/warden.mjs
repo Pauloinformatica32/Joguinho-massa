@@ -25,7 +25,8 @@ for(const fps of [30,60,120]){
   for(let i=0;i<Math.floor(.6*fps);i++)updateBoss(b,p,dt,context);
   assert.equal(p.health,100,attack+' telegraph');const old=b.x;
   while(b.wardenState==='windup')updateBoss(b,p,dt,context);
-  if(attack==='slam'){assert.equal(b.waves.length,2);assert.equal(b.waves[0].h,phase===2?40:22);assert.equal(wardenFrame(b),phase===2?4:3);}
+  if(attack==='discharge'&&phase===2){assert.equal(b.wardenState,'laser');p.x=(b.laser.a.x+b.laser.z.x)/2-p.w/2;p.y=(b.laser.a.y+b.laser.z.y)/2-p.h/2;}
+  if(attack==='slam'){assert.equal(b.waves.length,2);assert.equal(b.waves[0].h,phase===2?180:100);assert.equal(wardenFrame(b),phase===2?4:3);}
   for(let i=0;i<Math.ceil(.4*fps);i++)updateBoss(b,p,dt,context);
   assert.ok(p.health<100,attack+' damage');const hp=p.health;p.invuln=0;
   for(let i=0;i<Math.ceil(.1*fps);i++)updateBoss(b,p,dt,context);

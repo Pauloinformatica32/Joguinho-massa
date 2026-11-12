@@ -88,3 +88,56 @@ export function orenConversation(state){
  if(state.bosses.some(b=>b.id==='boss-0'&&b.dead)&&!state.events.includes('oren-matrona'))return OREN_DIALOGUES.matrona;
  return OREN_DIALOGUES.repeat;
 }
+
+const teo=text=>({speaker:'Téo · Operário Sobrevivente',text});
+export const TEO_DIALOGUES={
+ reunion:{event:'teo-first-meeting',lines:[
+  teo('Ei! Você aí! Se veio fazer a manutenção, está uns três turnos atrasado.'),
+  kael('Não trabalho aqui.'),
+  teo('Ótimo. Então ainda tem chance de sair vivo.'),
+  kael('O que aconteceu com os funcionários?'),
+  teo('As máquinas receberam novas ordens. De uma hora pra outra, qualquer trabalhador virou uma ameaça.'),
+  kael('Ordens de quem?'),
+  teo('Aurora Dynamics. Quem mais? E aquele grandalhão de segurança garante que ninguém chegue perto dos controles.'),
+  kael('Está falando do Warden?'),
+  teo('Conhece aquela lata de ferro? Então sabe que não é uma boa ideia ficar no caminho dele.'),
+  kael('Estou procurando uma maneira de chegar até ele.'),
+  teo('Nesse caso, talvez eu possa ajudar. Tem uma passagem de manutenção que ainda funciona... mais ou menos.')
+ ]},
+ mission:{event:'teo-maintenance-request',lines:[
+  teo('O painel da ponte de manutenção está sem alimentação. Se conseguir religar o sistema, a passagem vai abrir.'),
+  kael('E você vai fazer o quê?'),
+  teo('Tentar não ser esmagado por uma prensa enquanto você brinca de eletricista.'),
+  kael('Você realmente sabe como pedir ajuda.'),
+  teo('Anos trabalhando aqui. Aprendi com os melhores.')
+ ]},
+ complete:{event:'teo-maintenance-complete',lines:[
+  teo('Olha só! A ponte voltou a funcionar. Achei que nunca mais fosse ver aquela sucata se mexer.'),
+  kael('Você me deve uma.'),
+  teo('Eu te dei o caminho. Estamos quites.'),
+  teo('E toma cuidado com as poças azuis. Aquilo não é água. O sistema de refrigeração está contaminado.'),
+  kael('Obrigado pelo aviso.'),
+  teo('Não agradece ainda. Você continua dentro da fábrica.')
+ ]},
+ reminder:{event:null,lines:[
+  teo('O painel fica na passarela superior, à direita. Procure o terminal Ponte de manutenção.'),
+  kael('E a passagem continua sem energia?'),
+  teo('Até onde eu sei, reclamar ainda não gera eletricidade.')
+ ]},
+ repeat:{event:null,lines:[
+  teo('Ainda está vivo? Impressionante.'),
+  kael('Também é bom te ver.'),
+  teo('Se passar pelo Warden, manda lembranças. De preferência com um martelo.')
+ ]}
+};
+TEO_DIALOGUES.reunionRepaired={event:'teo-first-meeting',lines:[
+ ...TEO_DIALOGUES.reunion.lines.slice(0,-1),
+ teo('A passagem de manutenção era uma opção. Pelo barulho, você já religou a ponte. Resolveu fazer hora extra?')
+]};
+export function teoConversation(state){
+ const seen=id=>state.events.includes(id),repaired=seen('shortcut-maintenance');
+ if(!seen('teo-first-meeting'))return repaired?TEO_DIALOGUES.reunionRepaired:TEO_DIALOGUES.reunion;
+ if(repaired&&!seen('teo-maintenance-complete'))return TEO_DIALOGUES.complete;
+ if(!repaired&&!seen('teo-maintenance-request'))return TEO_DIALOGUES.mission;
+ return repaired?TEO_DIALOGUES.repeat:TEO_DIALOGUES.reminder;
+}

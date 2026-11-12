@@ -1,0 +1,50 @@
+{
+  "report": {
+    "decks": [
+      {
+        "id": "warden-deck-left",
+        "x": 4545,
+        "y": 700,
+        "w": 100,
+        "h": 16
+      },
+      {
+        "id": "warden-deck-center",
+        "x": 4770,
+        "y": 660,
+        "w": 110,
+        "h": 16
+      },
+      {
+        "id": "warden-deck-right",
+        "x": 5010,
+        "y": 690,
+        "w": 95,
+        "h": 16
+      }
+    ],
+    "hooks": [
+      {
+        "id": "warden-hook-left",
+        "x": 4660,
+        "y": 500,
+        "industrial": true,
+        "recharge": 3,
+        "cooldown": 0
+      },
+      {
+        "id": "warden-hook-right",
+        "x": 4970,
+        "y": 480,
+        "industrial": true,
+        "recharge": 3,
+        "cooldown": 0
+      }
+    ]
+  },
+  "hook": {
+    "apex": 293.2432526007224,
+    "inside": true
+  },
+  "errors": []
+}
