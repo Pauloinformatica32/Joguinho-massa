@@ -1,0 +1,20 @@
+export async function runTowerTests(){
+const {Engine,newState}=await import('/js/engine.js'),{UI}=await import('/js/ui.js'),{normalizeSave}=await import('/js/save.js'),{syncProgress}=await import('/js/campaign.js'),{TOWER_FLOORS,TOWER_ELEVATORS,TOWER_ARENA}=await import('/js/tower-layout.js'),{moveBody}=await import('/js/physics.js'),{buildMap}=await import('/js/map.js');
+const s=newState();s.devTowerTest=true;s.bosses.slice(0,2).forEach(b=>{b.dead=true;b.health=0});syncProgress(s);
+const e=new Engine(document.querySelector('#game'),s,new UI()),p=s.player;let checks=0;const check=(n,b)=>{checks++;if(!b)throw Error(n)};
+const place=x=>{p.x=x;p.y=733;p.vx=p.vy=0;e.tower.syncCamera(true)};const travel=()=>{for(let i=0;i<100;i++)e.tower.update(.02)};
+check('no automatic EMP after Warden',!s.abilities.emp);
+place(5190);e.update(.016);check('tower accessible from factory',p.x>=5190);place(5390);check('floor one',s.towerFloor==='tower_floor_1');
+place(8190);e.interact();check('EMP denied',!e.tower.transition&&!s.events.includes('tower_elevator_1_2'));
+s.abilities.emp=true;e.interact();check('EMP unlock',!!e.tower.transition&&s.events.includes('tower_elevator_1_2'));e.interact();travel();check('arrival floor two',s.towerFloor==='tower_floor_2'&&p.x===8990);
+s.abilities.emp=false;place(8940);e.interact();travel();check('return floor one without repeated EMP',p.x===8130);s.abilities.emp=true;place(8190);e.interact();travel();
+place(10525);e.interact();e.tower.update(.01);check('barrier disabled',e.world.map.towerBarriers[0].solid.disabled);e.tower.update(10);check('barrier restored',!e.world.map.towerBarriers[0].solid.disabled);place(10650);e.interact();check('barrier accessible on return',e.world.map.towerBarriers[0].solid.disabled);
+place(12370);e.interact();travel();check('floor three arrival',p.x===13210);place(13150);e.interact();travel();check('return floor two',p.x===12310);
+for(const f of TOWER_FLOORS){place(f.checkpoint);e.interact();check('checkpoint '+f.id,s.checkpoint.x===f.checkpoint);const loaded=normalizeSave(s);check('reload '+f.id,loaded.towerFloor===f.id&&loaded.player.x===p.x&&loaded.checkpoint.x===f.checkpoint&&loaded.abilities.emp&&loaded.events.includes('tower_elevator_2_3'));p.health=0;e.respawn();check('respawn '+f.id,p.x===f.checkpoint);e.render();check('camera '+f.id,e.camera.x>=f.left&&e.camera.x+e.canvas.width<=f.right);}
+place(13520);const boss=s.bosses.find(b=>b.id==='boss-3');check('arena coordinates',boss.arena.left===TOWER_ARENA.left&&boss.x===TOWER_ARENA.spawnX);
+place(13910);e.update(.016);check('boss activation',boss.active);e.closeDialog();p.x=13800;e.checkGates();check('arena lock',p.x===13900);
+e.finishBoss(boss);check('boss alone does not end',!s.events.includes('ending')&&!boss.active);e.closeDialog();place(15420);s.abilities.emp=false;e.interact();check('final requires EMP',!e.tower.transition);s.abilities.emp=true;e.interact();check('shutdown starts',e.tower.transition?.shutdown);travel();check('ending only after shutdown',s.events.includes('ending')&&s.events.includes('tower-central-shutdown'));check('shutdown saved',normalizeSave(s).events.includes('tower-central-shutdown'));
+const map=buildMap();check('earlier NPCs preserved',map.npcs.find(n=>n.id==='scientist').x===3400&&map.npcs.find(n=>n.id==='yara').x===610);check('Warden and Matrona intact',s.bosses[0].arena.left===1510&&s.bosses[1].arena.left===4490);
+const fresh=newState();const old={...fresh,towerLayout:undefined,player:{...fresh.player,x:6700},bosses:s.bosses,abilities:{...s.abilities}};check('old tower relocation',normalizeSave(old).player.x===5390);
+const np=e.world.map.npcs.find(n=>n.id==='scientist');s.bosses[1].dead=false;s.abilities.emp=false;place(np.x);e.interact();check('Iris withholds EMP before Warden',!s.abilities.emp);e.closeDialog();s.bosses[1].dead=true;e.interact();check('Iris awards EMP after Warden',s.abilities.emp);e.closeDialog();globalThis.__towerPreview=e;const dash=await import('/tests/dash-cases.js');const dashResult=dash.runDashTests();return {checks,dashResult};
+}

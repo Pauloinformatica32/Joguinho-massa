@@ -1,3 +1,4 @@
+import{TOWER_ARENA}from'./tower-layout.js';
 import{updateWarden,clearWarden,renderWarden,wardenHurtbox,transitionWarden}from'./warden.js';
 import{hurt,intersects}from'./combat.js';
 import{REGIONS,ROOM_W,GROUND,MATRONA_ARENA,WARDEN_ARENA}from'./map.js';
@@ -7,7 +8,7 @@ export const BOSS_DATA=[
  {id:'boss-2',assetId:'warden',room:1,name:'WARDEN · SEGURANÇA INDUSTRIAL',title:'Warden',ability:'emp',hp:240,color:'#9984ff',intro:'Warden: os dispositivos continuarão saindo. Sua investigação termina antes da Torre Aurora.'},
  {id:'boss-3',assetId:'vespera',room:2,name:'VÃ‰SPERA Â· DIRETORA DO PROJETO',title:'VÃ©spera',ability:null,hp:320,color:'#ff4f93',intro:'VÃ©spera: a cidade chama caos de liberdade. Minha rede acabarÃ¡ com seus conflitos. A epidemia foi apenas o primeiro teste.'}
 ];
-export function createBosses(){return BOSS_DATA.map(d=>({...d,x:d.room===1?WARDEN_ARENA.spawnX:REGIONS[d.room].x+2070,y:GROUND-(d.room===1?112:132),w:d.room===1?64:74,h:d.room===1?112:132,health:d.hp,maxHealth:d.hp,arena:d.room===1?{...WARDEN_ARENA}:d.room===0?{...MATRONA_ARENA}:{left:REGIONS[d.room].x+(d.room===1?2090:1690),right:REGIONS[d.room].x+(d.room===1?2760:2360)},active:false,dead:false,phase:1,timer:.8,warning:0,attackType:'recovery',hitCooldown:0,projectiles:[]}))}
+export function createBosses(){return BOSS_DATA.map(d=>({...d,x:d.room===1?WARDEN_ARENA.spawnX:d.room===2?TOWER_ARENA.spawnX:REGIONS[d.room].x+2070,y:GROUND-(d.room===1?112:132),w:d.room===1?64:74,h:d.room===1?112:132,health:d.hp,maxHealth:d.hp,arena:d.room===1?{...WARDEN_ARENA}:d.room===0?{...MATRONA_ARENA}:{...TOWER_ARENA},active:false,dead:false,phase:1,timer:.8,warning:0,attackType:'recovery',hitCooldown:0,projectiles:[]}))}
 export function updateBoss(b,p,dt,context={}){
  if(b.dead)return null;
  const inside=p.x+p.w>b.arena.left&&p.x<b.arena.right&&(b.assetId!=='matrona'||p.y+p.h>=GROUND-140);

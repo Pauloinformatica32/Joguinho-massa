@@ -4,11 +4,12 @@ export class Camera{
   const maxX=Math.max(0,worldW-w),maxY=Math.max(0,worldH-h);
   let tx=Math.max(0,Math.min(maxX,target.x+target.w/2-w*.46));
   let ty=Math.max(0,Math.min(maxY,target.y+target.h/2-h*.58));
+  if(this.region){const f=this.region;tx=Math.max(f.left,Math.min(Math.max(f.left,f.right-w),tx));}
   if(this.arena){
    const a=this.arena;
    tx=w>=a.right-a.left?(a.left+a.right-w)/2:Math.max(a.left,Math.min(a.right-w,target.x+target.w/2-w/2));
    tx=Math.max(0,Math.min(maxX,tx));ty=Math.max(0,Math.min(maxY,a.floor-h+60));
   }
-  this.x+=(tx-this.x)*Math.min(1,dt*5);this.y+=(ty-this.y)*Math.min(1,dt*4);
+  this.x+=(tx-this.x)*Math.min(1,dt*5);if(this.region)this.x=Math.max(this.region.left,Math.min(Math.max(this.region.left,this.region.right-w),this.x));this.y+=(ty-this.y)*Math.min(1,dt*4);
  }
 }

@@ -12,3 +12,16 @@ $('#dialog-close').onclick=()=>{if(engine)engine.advanceDialog();else dialog.cla
 window.addEventListener('keydown',e=>{const key=e.key.toLowerCase();if([' ','arrowleft','arrowright','arrowup','arrowdown'].includes(key))e.preventDefault();if(!engine){if(key==='enter'&& !title.classList.contains('hidden'))$('#new-game').click();if(key==='g')$('#asset-lab-button').click();return}if(key==='f3'){e.preventDefault();if(!e.repeat)engine.toggleCombatDebug();return}if(!$('#ending-screen').classList.contains('hidden'))return;if(key==='g'){engine.toggleAssetLab();return}if(engine.assetLab.open)return;if(!dialog.classList.contains('hidden')){if(key==='enter'&&e.target.closest?.('#dialog-screen button'))return;if((key==='e'||key==='enter')&&!e.repeat){e.preventDefault();engine.advanceDialog()}return}if(key==='escape'){togglePause();return}if(key==='m'){togglePause(true);ui.panel(state,'map');return}if(engine.paused)return;engine.keydown(key);if(key==='e'&&!e.repeat){engine.interact();if(!dialog.classList.contains('hidden'))engine.paused=true}});
 window.addEventListener('keyup',e=>engine?.keyup(e.key.toLowerCase()));window.addEventListener('blur',()=>{engine?.keys.clear();engine?.pressed.clear()});$('#game').addEventListener('pointerdown',e=>{if(engine&&!engine.paused&&!e.target.closest('button'))engine.keydown('mouse')});$('#game').addEventListener('pointerup',()=>engine?.keyup('mouse'));
 function frame(now){const dt=Math.min(.033,(now-last)/1000);last=now;if(engine&&!engine.paused)engine.update(dt);else if(engine?.state.player.state==='death')engine.renderPausedDeath(dt);if(engine?.assetLab.open)engine.renderAssetLab(dt);requestAnimationFrame(frame)}requestAnimationFrame(frame);
+
+// Explicit localhost-only developer session. Never writes campaign saves.
+if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('towerTest')==='1'){
+ const {TOWER_FLOORS,TOWER_ELEVATORS}=await import('./tower-layout.js');
+ const test=newState();test.devTowerTest=true;test.bosses.slice(0,2).forEach(b=>{b.dead=true;b.health=0});
+ begin(test);
+ window.towerTest={
+  floor(number=1){const f=TOWER_FLOORS[number-1];if(!f)return;engine.tower.transition=null;state.player.x=f.checkpoint;state.player.y=733;state.player.vx=state.player.vy=0;state.checkpoint={x:f.checkpoint,y:733,region:2,floor:f.id,name:f.name};engine.tower.syncCamera(true);engine.render()},
+  emp(owned=true){state.abilities.emp=owned},
+  elevator(number=1,reverse=false){const lift=TOWER_ELEVATORS[number-1];if(!lift)return;state.player.x=lift.stops[reverse?1:0].x;state.player.y=733;engine.tower.syncCamera(true);engine.interact()},
+  final(){this.floor(3);const b=state.bosses.find(b=>b.id==='boss-3');b.dead=true;b.active=false;b.health=0;state.player.x=15410;engine.tower.syncCamera(true);engine.interact()}
+ };window.towerTest.floor(1);
+}

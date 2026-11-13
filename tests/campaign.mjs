@@ -9,14 +9,14 @@ import {moveBody} from '../js/physics.js';
 
 const map=buildMap();
 assert.deepEqual(REGIONS.map(r=>r.id),['slum','factory','corporate']);
-assert.equal(WORLD_W,7600);assert.equal(MAP_ROOMS.length,9);
+assert.equal(WORLD_W,15600);assert.equal(MAP_ROOMS.length,9);
 assert.deepEqual(createBosses().map(b=>b.assetId),['matrona','warden','vespera']);
 assert.ok(spawnEnemies().every(e=>e.x>=0&&e.x<WORLD_W&&e.x<createBosses()[e.room].arena.left));
 assert.ok(map.npcs.every(n=>n.x>=0&&n.x<WORLD_W));
 assert.ok(map.terminals.every(t=>t.x>=0&&t.x<WORLD_W));
 assert.ok(map.hazards.every(h=>h.x<createBosses()[REGIONS.indexOf(regionAt(h.x))].arena.left));
 for(let i=0;i<3;i++)assert.ok(map.checkpoints.some(cp=>cp.x===checkpointFor(i).x));
-assert.equal(assetRegionAt(5300),'corporate');assert.equal(assetRegionAt(6900),'virus_core');
+assert.equal(assetRegionAt(5300),'corporate');assert.equal(assetRegionAt(14000),'virus_core');
 assert.ok(!JSON.stringify(map).match(/sewers|abismo|Esgotos/));
 assert.equal(buildMap(['shortcut-maintenance']).platforms.length,map.platforms.length+1);
 

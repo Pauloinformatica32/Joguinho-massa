@@ -1,0 +1,4 @@
+Dra. Iris Vale - NPC Nova Aurora
+
+Extraia este ZIP na pasta raiz do projeto, mantendo assets/characters/npcs/iris/.
+No jogo registre iris no manifesto e use o assetId iris no NPC scientist.

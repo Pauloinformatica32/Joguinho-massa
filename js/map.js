@@ -1,3 +1,4 @@
+import{TOWER_FLOORS,buildTower,towerFloorAt}from'./tower-layout.js';
 export const ROOM_W=2400,WORLD_H=900,GROUND=790;
 export const FACTORY_LAYOUT=2;
 export const factoryX=x=>x>=4000?x+400:x;
@@ -9,14 +10,14 @@ export const REGIONS=[
  {id:'factory',name:'Complexo Industrial',subtitle:'ATO II · A DISTRIBUIÇÃO',color:'#302a2b',x:ROOM_W},
  {id:'corporate',name:'Torre Aurora',subtitle:'ATO III · A REDE DE CONTROLE',color:'#1c2037',x:ROOM_W*2+400}
 ];
-for(const r of REGIONS)r.width=r.id==='factory'?2800:ROOM_W;
+for(const r of REGIONS)r.width=r.id==='factory'?2800:r.id==='corporate'?10400:ROOM_W;
 export const WARDEN_ARENA=Object.freeze({left:REGIONS[1].x+REGIONS[1].width-710,right:REGIONS[1].x+REGIONS[1].width-40,floor:GROUND,spawnX:REGIONS[1].x+REGIONS[1].width-290});
 export const WORLD_W=REGIONS.at(-1).x+REGIONS.at(-1).width;
 export function regionAt(x){return REGIONS.find(r=>x>=r.x&&x<r.x+r.width)||(x<0?REGIONS[0]:REGIONS.at(-1))}
-export function assetRegionAt(x){const r=regionAt(x);return r.id==='slum'?'slums':r.id==='factory'?'industrial':x>=r.x+1500?'virus_core':'corporate'}
+export function assetRegionAt(x){const r=regionAt(x);return r.id==='slum'?'slums':r.id==='factory'?'industrial':towerFloorAt(x)?.id==='tower_floor_3'?'virus_core':'corporate'}
 const ROOM_NAMES=[['Ruas do Setor 9','Telhados e oficina','Bloqueio de Matrona'],['Recepção de carga','Linha de distribuição','Segurança Warden'],['Átrio corporativo','Laboratórios secretos','Núcleo de Véspera']];
-export const MAP_ROOMS=REGIONS.flatMap((r,i)=>ROOM_NAMES[i].map((name,j)=>({id:i*3+j,name:i===0?SECTOR9_AREAS[j].name:name,region:i,x:i===0?SECTOR9_AREAS[j].left:r.x+j*800})));
-export function roomAt(x){return [...MAP_ROOMS].reverse().find(r=>x>=r.x)?.id??0}
+export const MAP_ROOMS=REGIONS.flatMap((r,i)=>ROOM_NAMES[i].map((name,j)=>({id:i*3+j,name:i===0?SECTOR9_AREAS[j].name:i===2?TOWER_FLOORS[j].name:name,region:i,x:i===0?SECTOR9_AREAS[j].left:i===2?TOWER_FLOORS[j].left:r.x+j*800})));
+export function roomAt(x){if(x>=5200)return 6+(towerFloorAt(x)?.index||0);return [...MAP_ROOMS].reverse().find(r=>x>=r.x)?.id??0}
 const platform=(x,y,w,h,kind='metal')=>({x,y,w,h,kind});
 export function buildMap(events=[]){
  const platforms=[],hazards=[],checkpoints=[],terminals=[],secrets=[],npcs=[],hookPoints=[];
@@ -61,7 +62,7 @@ export function buildMap(events=[]){
   {id:'yara',x:610,y:GROUND,name:'Yara · Hacker',assetId:'yara',defaultFacing:-1,facePlayerOnDialog:true,ability:'hook',text:'Robôs e cidadãos com implantes estão perdendo o controle. Os terminais dos telhados registraram as primeiras infecções. Matrona isolou o Setor 9 para impedir que as provas saiam daqui. Use este gancho nos pontos amarelos.'},
   {id:'oren-slum',x:1000,y:GROUND,name:'Oren · Mecânico',assetId:'oren',defaultFacing:-1,facePlayerOnDialog:true,shop:true,text:'Posso reforçar sua proteção por 20 créditos. Procure dados e peças nos telhados; cada segredo financia a próxima melhoria.'},
   {id:'oren-factory',x:2700,y:GROUND,name:'Oren · Mecânico',assetId:'oren',defaultFacing:-1,facePlayerOnDialog:true,shop:true,text:'Segui a linha de carga até aqui. Continuo oferecendo reforços por 20 créditos. Warden guarda a credencial da Torre Aurora.'},
-  {id:'scientist',x:3400,y:GROUND,name:'Cientista desertor',assetId:'npc_survivor',ability:'emp',text:'Eu trabalhava para a Aurora Dynamics. Distribuímos o vírus em dispositivos novos e atualizações de implantes. Ele não foi feito para destruir: altera decisões de humanos e máquinas conectados. Warden protege a operação. Leve meu pulso eletromagnético.'},
+  {id:'scientist',x:3400,y:GROUND,name:'Dra. Íris Vale',assetId:'iris',defaultFacing:-1,facePlayerOnDialog:true,ability:'emp',text:'Eu trabalhava para a Aurora Dynamics. Distribuímos o vírus em dispositivos novos e atualizações de implantes. Ele não foi feito para destruir: altera decisões de humanos e máquinas conectados. Warden protege a operação. Leve meu pulso eletromagnético.'},
   {id:'corporate-ai',x:5800,y:GROUND,name:'IA corporativa · arquivo interno',assetId:'npc_survivor',text:'Autorização experimental Kael reconhecida. Véspera dirige o projeto de controle populacional. A epidemia foi um teste em humanos. Ela acredita que só uma rede central pode garantir estabilidade. O transmissor está no núcleo desta torre.'}
  );
  // Insert a maintenance sector before the existing security arena.
@@ -79,5 +80,7 @@ export function buildMap(events=[]){
  for(const p of platforms)if(p.x>=2400&&p.x<5200&&p.h<70)p.oneWay=true;
  const pool=hazards.find(h=>h.kind==='acid');Object.assign(pool,{id:'coolant-pool',x:3500,y:GROUND-18,w:210,h:18,kind:'coolant'});
  const press=hazards.find(h=>h.kind==='press');Object.assign(press,{id:'industrial-press',x:4010,y:GROUND-100,w:70,h:100});
- return{platforms,hazards,checkpoints,terminals,secrets,npcs,hookPoints,visuals:[]};
+ const map={platforms,hazards,checkpoints,terminals,secrets,npcs,hookPoints,visuals:[]};
+ for(const list of [platforms,hazards,checkpoints,terminals,secrets,npcs,hookPoints])for(let i=list.length-1;i>=0;i--)if(list[i].x>=5200)list.splice(i,1);
+ buildTower(map,events);return map;
 }

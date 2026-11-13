@@ -41,7 +41,7 @@ for(const fps of [30,60,120]){
 }
 for(const x of [2700,3980,4100,4710,4900,6500]){
  const old=newState();delete old.factoryLayout;old.bosses[0].dead=true;old.bosses[1].dead=x>=4800;old.player.x=x;old.player.y=736;old.checkpoint={x:3980,y:733,region:1};old.credits=123;
- const next=normalizeSave(old);assert.equal(next.player.x,factoryX(x));assert.equal(next.checkpoint.x,4380);assert.equal(next.credits,123);assert.equal(normalizeSave(next).player.x,next.player.x);
+ const next=normalizeSave(old);assert.equal(next.player.x,factoryX(x));assert.equal(next.checkpoint.x,next.player.x>=5200?5390:4380);assert.equal(next.credits,123);assert.equal(normalizeSave(next).player.x,next.player.x);
 }
 assert.equal(checkpointFor(1,true).x,4380);assert.equal(REGIONS[1].width,2800);
 const oldPoolSave=newState();delete oldPoolSave.factoryLayout;oldPoolSave.bosses[0].dead=true;oldPoolSave.player.x=3550;oldPoolSave.player.y=736;

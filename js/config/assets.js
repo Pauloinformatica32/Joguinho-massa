@@ -14,6 +14,7 @@ export const ASSET_MANIFEST={
   npc_survivor:{procedural:true,category:'characters',name:'Habitante sobrevivente',config:'assets/characters/npcs/survivor/config.json',regions:['slums','industrial','corporate','virus_core']},
   yara:{category:'characters',name:'Yara',config:'assets/characters/npcs/yara/config.json',regions:['slums']},
   oren:{category:'characters',name:'Oren',config:'assets/characters/npcs/oren/config.json',regions:['slums','industrial']},
+  iris:{category:'characters',name:'Dra. Íris Vale',config:'assets/characters/npcs/iris/config.json',regions:['industrial']},
   ion_pistol:{procedural:true,category:'weapons',name:'Pistola de energia',config:'assets/weapons/ion_pistol/config.json',regions:['slums','industrial','corporate','virus_core']}
  },
  regions:{slums:['assets/backgrounds/slums_far.png','assets/backgrounds/slums_mid.png','assets/environments/slums/platform_tile.png'],industrial:['assets/backgrounds/industrial_far.png','assets/backgrounds/industrial_mid.png','assets/environments/industrial/platform_tile.png'],sewers:['assets/backgrounds/sewers_far.png','assets/backgrounds/sewers_mid.png','assets/environments/sewers/platform_tile.png'],corporate:['assets/backgrounds/corporate_far.png','assets/backgrounds/corporate_mid.png','assets/environments/corporate/platform_tile.png'],virus_core:['assets/backgrounds/virus_core_far.png','assets/backgrounds/virus_core_mid.png','assets/environments/virus_core/platform_tile.png']},
