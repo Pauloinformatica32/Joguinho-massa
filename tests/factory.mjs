@@ -10,12 +10,13 @@ const map=buildMap(),world={map},pool=map.hazards.find(h=>h.kind==='coolant');
 for(const fps of [30,60,120]){
  const dt=1/fps,p=createPlayer(),e=spawnEnemies().find(e=>e.type==='executor');
  p.x=e.x-40;p.y=GROUND-p.h;e.attackCooldown=0;
- updateEnemies([e],p,dt,world);assert.equal(p.health,100);assert.equal(e.pendingAttack,'melee');
- for(let i=0;i<fps*.6;i++)updateEnemies([e],p,dt,world);
+ updateEnemies([e],p,dt,world);assert.equal(p.health,100);assert.equal(e.e7State,'guard_transition');
+ for(let i=0;i<fps*2;i++)updateEnemies([e],p,dt,world);
  assert.equal(p.health,100-e.damage);assert.equal(p.lastDamage.entity,e.id);assert.equal(p.lastDamage.source,'enemy_melee');
- p.health=100;p.invuln=0;p.y-=150;e.pendingAttack='melee';e.windupTimer=dt/2;updateEnemies([e],p,dt,world);assert.equal(p.health,100);
- p.y=GROUND-p.h;e.pendingAttack=null;e.attackCooldown=10;
- e.projectiles=[{x:p.x,y:p.y,vx:0,life:2,damage:8}];updateEnemies([e],p,dt,world);assert.equal(p.health,92);assert.equal(p.lastDamage.source,'projectile');assert.equal(e.projectiles.length,0);
+ p.health=100;p.invuln=0;p.y-=150;e.e7State='shield_bash';e.e7Timer=.2;e.attackHit=false;updateEnemies([e],p,dt,world);assert.equal(p.health,100);
+ p.y=GROUND-p.h;
+ const drone=spawnEnemies().find(e=>e.type==='drone');drone.attackCooldown=10;
+ drone.projectiles=[{x:p.x,y:p.y,w:6,h:6,vx:0,vy:0,life:2,damage:8}];updateEnemies([drone],p,dt,world);assert.equal(p.health,92);assert.equal(p.lastDamage.source,'projectile');assert.equal(drone.projectiles.length,0);
  e.dead=true;e.respawn=30;e.projectiles=[{life:2}];updateEnemies([e],p,dt,world);assert.equal(e.projectiles.length,0);
  const fake={state:{player:p,abilities:{}},world,hazardTick:0,damagePlayer:Engine.prototype.damagePlayer};
  p.x=pool.x+20;p.y=GROUND-p.h;p.invuln=0;p.health=100;Engine.prototype.updateHazards.call(fake,dt);assert.equal(p.health,88);assert.equal(p.lastDamage.source,'hazard_pool');

@@ -70,9 +70,9 @@ export function runM4Tests(config){
   const patrol=fresh(),distant=target(patrol);distant.x=3600;patrol.attackCooldown=10;
   for(let i=0;i<fps*8;i++)updateEnemies([patrol],distant,dt,world);
   check('small patrol area '+fps,Math.abs(patrol.x-patrol.homeX)<=123);
-  const other=spawnEnemies().find(e=>e.type==='executor'),near=createPlayer();near.x=other.x-40;near.y=GROUND-near.h;other.attackCooldown=0;
+  const other=spawnEnemies().find(e=>e.type==='drone'),near=createPlayer();near.x=other.x-40;near.y=other.y;other.attackCooldown=0;
   updateEnemies([other],near,dt,{map:buildMap()});
-  check('executor retains original attack '+fps,other.pendingAttack==='melee'&&!other.assetId);
+  check('industrial drone delegates to V3 without changing M4 '+fps,other.pendingAttack==='suppression'&&other.assetId==='v3_drone'&&other.v3State==='warning');
  }
  return checks;
 }

@@ -1,3 +1,5 @@
+import{isV3,v3Muzzle}from'./v3-drone.js';
+import{isE7,e7ShieldBox,e7AttackBox}from'./e7-shield.js';
 import{wardenHurtbox}from'./warden.js';
 import{m4AttackBox}from'./m4.js';
 import {industrialAttackBox} from './enemies.js';
@@ -11,7 +13,7 @@ export function drawCombatDebug(c,state,enemies,camera,map) {
  const body=e=>{c.lineWidth=3;box(e,'#3c8fff');c.lineWidth=1;box(enemyHurtbox(e),'#60ff8d',true)};
  for(const h of map?.hazards||[])box(h,'#ffad42');
  const p=state.player;if(!p.dead){body(p);arrow(p,p.facing);if(p.state==='attack'&&p.attackTimer>0&&(!p.externalAttackAnimation||p.attackFrameReady))box(p.attackBox,'#ff355b')}
- for(const e of enemies){if(e.dead)continue;body(e);arrow(e,e.meleePending||e.attackTimer>0?e.meleeFacing:e.facing);box(e.assetId==='m4'?m4AttackBox(e):e.room===1&&e.pendingAttack==='melee'?industrialAttackBox(e):enemyAttackBox(e),'#ff355b');for(const q of e.projectiles||[])box({x:q.x,y:q.y,w:12,h:12},'#ff355b')}
+ for(const e of enemies){if(e.dead)continue;body(e);arrow(e,e.meleePending||e.attackTimer>0?e.meleeFacing:e.facing);if(isV3(e)){const m=v3Muzzle(e);box({x:m.x-3,y:m.y-3,w:6,h:6},'#ffdb65');c.fillStyle='#ffe8b7';c.fillText('V-3 '+e.v3State+' '+e.v3Shots+'/3 CD:'+e.attackCooldown.toFixed(2),e.x-20,e.y-30);for(const q of e.projectiles)box(q,'#ff355b');continue;}if(isE7(e)){box(e7ShieldBox(e),'#ffdb65',e.e7State!=='guard');box(e7AttackBox(e),'#ff355b');c.fillStyle='#ffe8b7';c.fillText('E-7 '+e.e7State+' V:'+((e.vulnerableTimer||0).toFixed(2))+' CD:'+e.attackCooldown.toFixed(2),e.x-35,e.y-30);continue;}box(e.assetId==='m4'?m4AttackBox(e):e.room===1&&e.pendingAttack==='melee'?industrialAttackBox(e):enemyAttackBox(e),'#ff355b');for(const q of e.projectiles||[])box({x:q.x,y:q.y,w:12,h:12},'#ff355b')}
  for(const b of state.bosses){if(!b.active||b.dead)continue;if(b.assetId==='warden'){c.lineWidth=3;box(b,'#3c8fff');c.lineWidth=1;}else body(b);arrow(b,b.walkFacing??b.facing);
   if(b.assetId==='warden'){box(wardenHurtbox(b),'#60ff8d',true);for(const q of [...(b.offense||[]),...(b.waves||[])]){box(q,'#ff355b');c.fillStyle='#ffe8b7';c.fillText(q.source+' '+q.w+'x'+q.h,q.x,q.y-4);}}
   if(b.assetId==='warden'){

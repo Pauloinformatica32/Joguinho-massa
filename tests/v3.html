@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><title>V-3 integration checks</title>
+<script>
+fetch('/index.html').then(r=>r.text()).then(html=>{
+ document.open();document.write(html.replace('<head>','<head><base href="/">').replace('src="js/main.js"','src="tests/v3-browser.js"'));document.close();
+});
+</script>

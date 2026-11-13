@@ -2,6 +2,8 @@ export const ASSET_MANIFEST={
  // Planned backgrounds remain registered; enable once their PNGs are installed.
  loadBackgrounds:false,
  entities:{
+  v3_drone:{category:'enemies',name:'Drone Sentinela V-3',config:'assets/enemies/v3_drone/config.json',regions:['industrial']},
+  e7_shield:{category:"enemies",name:"Escudeiro de Contenção E-7",config:"assets/enemies/e7_shield/config.json",regions:["industrial"]},
   servant_shooter:{category:"enemies",name:"Servo Atirador",config:"assets/enemies/servant_shooter/config.json",regions:["slums"]},
   implanted_infected:{category:"enemies",name:"Implantado Infectado",config:"assets/enemies/infected/config.json",regions:["slums"]},
   protagonist:{category:'characters',name:'Kael',config:'assets/characters/protagonist/config.json',regions:['slums','industrial','corporate','virus_core']},

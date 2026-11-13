@@ -1,0 +1,16 @@
+{
+  "id": "e7_shield",
+  "name": "Escudeiro de Contenção E-7",
+  "scale": 0.85,
+  "origin": {"x": 80, "y": 116},
+  "collision": {"width": 34, "height": 64, "offsetX": 0, "offsetY": 0},
+  "nativeFacing": -1,
+  "facing": -1,
+  "combat": {"detect": 340, "range": 78, "guard": 0.65, "transition": 0.6, "windup": 0.4, "active": 0.2, "vulnerable": 0.8, "recovery": 0.5, "bashSpeed": 170},
+  "animations": {
+    "idle": {"sheet": "assets/enemies/e7_shield/idle.png", "frameWidth": 160, "frameHeight": 150, "columns": 1, "count": 1, "fps": 1, "loop": true},
+    "walk": {"sheet": "assets/enemies/e7_shield/walk.png", "frameWidth": 160, "frameHeight": 160, "columns": 8, "count": 8, "fps": 9, "loop": true, "origin": {"x": 80, "y": 122}},
+    "idle_to_guard": {"sheet": "assets/enemies/e7_shield/idle_to_guard.png", "frameWidth": 160, "frameHeight": 150, "columns": 6, "count": 6, "fps": 10, "loop": false, "freezeLast": true},
+    "guard": {"sheet": "assets/enemies/e7_shield/guard.png", "frameWidth": 160, "frameHeight": 150, "columns": 1, "count": 1, "fps": 1, "loop": true}
+  }
+}
