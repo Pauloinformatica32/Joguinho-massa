@@ -2,12 +2,15 @@ export const ASSET_MANIFEST={
  // Planned backgrounds remain registered; enable once their PNGs are installed.
  loadBackgrounds:false,
  entities:{
+  v3_drone:{category:'enemies',name:'Drone Sentinela V-3',config:'assets/enemies/v3_drone/config.json',regions:['industrial']},
+  e7_shield:{category:"enemies",name:"Escudeiro de Contenção E-7",config:"assets/enemies/e7_shield/config.json",regions:["industrial"]},
   servant_shooter:{category:"enemies",name:"Servo Atirador",config:"assets/enemies/servant_shooter/config.json",regions:["slums"]},
   implanted_infected:{category:"enemies",name:"Implantado Infectado",config:"assets/enemies/infected/config.json",regions:["slums"]},
   protagonist:{category:'characters',name:'Kael',config:'assets/characters/protagonist/config.json',regions:['slums','industrial','corporate','virus_core']},
   cyborg_soldier:{category:'enemies',name:'Patrulheiro cibernético',config:'assets/enemies/cyborg_soldier/config.json',regions:['slums','industrial','corporate','virus_core']},
   infected_drone:{category:'enemies',name:'Drone infetado',config:'assets/enemies/infected_drone/config.json',regions:['slums','industrial','corporate','virus_core']},
   infected_robot:{category:'enemies',name:'Robô industrial corrompido',config:'assets/enemies/infected_robot/config.json',regions:['slums','industrial','corporate','virus_core']},
+  m4:{category:'enemies',name:'Autômato de Manutenção M-4',config:'assets/enemies/m4/config.json',regions:['industrial']},
   matrona:{category:'bosses',name:'Matrona-7',config:'assets/bosses/matrona/config.json',regions:['slums']},abismo:{category:'bosses',name:'Abismo',config:'assets/bosses/abismo/config.json',procedural:true,regions:[]},
   warden:{category:'bosses',name:'Warden Prime',config:'assets/bosses/warden/config.json',regions:['industrial']},vespera:{category:'bosses',name:'Véspera',config:'assets/bosses/vespera/config.json',procedural:true,regions:['corporate','virus_core']},
   emp_pulse:{procedural:true,category:'effects',name:'Pulso eletromagnético',config:'assets/effects/emp_pulse/config.json',regions:['slums','industrial','corporate','virus_core']},
@@ -15,6 +18,7 @@ export const ASSET_MANIFEST={
   yara:{category:'characters',name:'Yara',config:'assets/characters/npcs/yara/config.json',regions:['slums']},
   oren:{category:'characters',name:'Oren',config:'assets/characters/npcs/oren/config.json',regions:['slums','industrial']},
   iris:{category:'characters',name:'Dra. Íris Vale',config:'assets/characters/npcs/iris/config.json',regions:['industrial']},
+  teo:{category:'characters',name:'Téo',config:'assets/characters/npcs/teo/config.json',regions:['industrial']},
   ion_pistol:{procedural:true,category:'weapons',name:'Pistola de energia',config:'assets/weapons/ion_pistol/config.json',regions:['slums','industrial','corporate','virus_core']}
  },
  regions:{slums:['assets/backgrounds/slums_far.png','assets/backgrounds/slums_mid.png','assets/environments/slums/platform_tile.png'],industrial:['assets/backgrounds/industrial_far.png','assets/backgrounds/industrial_mid.png','assets/environments/industrial/platform_tile.png'],sewers:['assets/backgrounds/sewers_far.png','assets/backgrounds/sewers_mid.png','assets/environments/sewers/platform_tile.png'],corporate:['assets/backgrounds/corporate_far.png','assets/backgrounds/corporate_mid.png','assets/environments/corporate/platform_tile.png'],virus_core:['assets/backgrounds/virus_core_far.png','assets/backgrounds/virus_core_mid.png','assets/environments/virus_core/platform_tile.png']},

@@ -1,6 +1,6 @@
 import{REGIONS,MAP_ROOMS,regionAt}from'./map.js';
 import{ABILITY_INFO}from'./abilities.js';
-import{objective,defeated}from'./campaign.js';
+import{objective,defeated,teoObjective}from'./campaign.js';
 import{LOGS}from'./dialogue.js';
 export class UI{
  constructor(){this.toastEl=document.querySelector('#toast');this.toastTimer=0;this.panelTab='map'}
@@ -13,7 +13,7 @@ export class UI{
   document.querySelector('#energy-text').textContent=`${Math.floor(p.energy)} / ${p.maxEnergy}`;
   document.querySelector('#credits-label').textContent=state.credits??40;
   const r=regionAt(p.x);document.querySelector('#area-label').textContent=`${r.name.toUpperCase()} · ${r.subtitle}`;
-  document.querySelector('#objective').textContent=objective(state)+' · E para interagir';
+  document.querySelector('#objective').textContent=[objective(state),teoObjective(state),'E para interagir'].filter(Boolean).join(' · ');
   const boss=state.bosses.find(b=>b.active&&!b.dead);
   document.querySelector('#boss-hud').classList.toggle('hidden',!boss);
   if(boss){document.querySelector('#boss-name').textContent=boss.name+(boss.attackType==='windup'?' · DEFESA ATIVA':' · VULNERÁVEL');document.querySelector('#boss-fill').style.width=`${boss.health/boss.maxHealth*100}%`}

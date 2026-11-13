@@ -1,111 +1,153 @@
 {
-    "id":  "warden",
-    "origin":  {
-                   "y":  116,
-                   "x":  64
-               },
-    "nativeFacing":  -1,
-    "scale":  1.1,
-    "collision":  {
-                      "height":  112,
-                      "width":  64
-                  },
-    "animations":  {
-                       "phase1_walk":  {
-                                           "scale":  1.1,
-                                           "origin":  {
-                                                          "y":  116,
-                                                          "x":  64
-                                                      },
-                                           "nativeFacing":  -1,
-                                           "columns":  8,
-                                           "frameHeight":  128,
-                                           "loop":  true,
-                                           "frameWidth":  128,
-                                           "count":  8,
-                                           "sheet":  "assets/bosses/warden/phase1_walk.png",
-                                           "fps":  8
-                                       },
-                       "phase2_slam":  {
-                                           "scale":  0.47,
-                                           "origin":  {
-                                                          "y":  251,
-                                                          "x":  128
-                                                      },
-                                           "nativeFacing":  -1,
-                                           "columns":  6,
-                                           "frameHeight":  256,
-                                           "loop":  false,
-                                           "frameWidth":  256,
-                                           "count":  6,
-                                           "sheet":  "assets/bosses/warden/phase2_slam.png",
-                                           "fps":  8
-                                       },
-                       "phase2_walk":  {
-                                           "scale":  0.47,
-                                           "origin":  {
-                                                          "y":  251,
-                                                          "x":  128
-                                                      },
-                                           "nativeFacing":  -1,
-                                           "columns":  8,
-                                           "frameHeight":  256,
-                                           "loop":  true,
-                                           "frameWidth":  256,
-                                           "count":  8,
-                                           "sheet":  "assets/bosses/warden/phase2_walk.png",
-                                           "fps":  8
-                                       },
-                       "phase1_idle":  {
-                                           "scale":  1.1,
-                                           "origin":  {
-                                                          "y":  116,
-                                                          "x":  64
-                                                      },
-                                           "nativeFacing":  -1,
-                                           "columns":  1,
-                                           "frameHeight":  128,
-                                           "loop":  true,
-                                           "frameWidth":  128,
-                                           "count":  1,
-                                           "sheet":  "assets/bosses/warden/phase1_idle.png",
-                                           "fps":  8
-                                       },
-                       "phase1_slam":  {
-                                           "scale":  1.1,
-                                           "origin":  {
-                                                          "y":  116,
-                                                          "x":  64
-                                                      },
-                                           "nativeFacing":  -1,
-                                           "columns":  6,
-                                           "frameHeight":  128,
-                                           "loop":  false,
-                                           "frameWidth":  128,
-                                           "count":  6,
-                                           "sheet":  "assets/bosses/warden/phase1_slam.png",
-                                           "fps":  8
-                                       },
-                       "phase2_idle":  {
-                                           "scale":  0.47,
-                                           "origin":  {
-                                                          "y":  251,
-                                                          "x":  128
-                                                      },
-                                           "nativeFacing":  -1,
-                                           "columns":  1,
-                                           "frameHeight":  256,
-                                           "loop":  true,
-                                           "frameWidth":  256,
-                                           "count":  1,
-                                           "sheet":  "assets/bosses/warden/phase2_idle.png",
-                                           "fps":  8
-                                       }
-                   },
-    "name":  "Warden",
-    "visual":  {
-                   "offsetY":  0,
-                   "offsetX":  0
-               },
-    "facing":  -1
+  "id": "warden",
+  "origin": {
+    "y": 116,
+    "x": 64
+  },
+  "nativeFacing": -1,
+  "scale": 1.1,
+  "collision": {
+    "height": 112,
+    "width": 64
+  },
+  "animations": {
+    "phase1_walk": {
+      "scale": 1.1,
+      "origin": {
+        "y": 116,
+        "x": 64
+      },
+      "nativeFacing": -1,
+      "columns": 8,
+      "frameHeight": 128,
+      "loop": true,
+      "frameWidth": 128,
+      "count": 8,
+      "sheet": "assets/bosses/warden/phase1_walk.png",
+      "fps": 8
+    },
+    "phase2_slam": {
+      "scale": 0.47,
+      "origin": {
+        "y": 251,
+        "x": 128
+      },
+      "nativeFacing": -1,
+      "columns": 6,
+      "frameHeight": 256,
+      "loop": false,
+      "frameWidth": 256,
+      "count": 6,
+      "sheet": "assets/bosses/warden/phase2_slam.png",
+      "fps": 8,
+      "corePoints": [
+        {
+          "x": 145,
+          "y": 65
+        },
+        {
+          "x": 151,
+          "y": 60
+        },
+        {
+          "x": 148,
+          "y": 64
+        },
+        {
+          "x": 131,
+          "y": 96
+        },
+        {
+          "x": 131,
+          "y": 96
+        },
+        {
+          "x": 133,
+          "y": 94
+        }
+      ],
+      "hammerImpact": {
+        "x": 40,
+        "y": 251
+      },
+      "impactFrame": 4
+    },
+    "phase2_walk": {
+      "scale": 0.47,
+      "origin": {
+        "y": 251,
+        "x": 128
+      },
+      "nativeFacing": -1,
+      "columns": 8,
+      "frameHeight": 256,
+      "loop": true,
+      "frameWidth": 256,
+      "count": 8,
+      "sheet": "assets/bosses/warden/phase2_walk.png",
+      "fps": 8
+    },
+    "phase1_idle": {
+      "scale": 1.1,
+      "origin": {
+        "y": 116,
+        "x": 64
+      },
+      "nativeFacing": -1,
+      "columns": 1,
+      "frameHeight": 128,
+      "loop": true,
+      "frameWidth": 128,
+      "count": 1,
+      "sheet": "assets/bosses/warden/phase1_idle.png",
+      "fps": 8
+    },
+    "phase1_slam": {
+      "scale": 1.1,
+      "origin": {
+        "y": 116,
+        "x": 64
+      },
+      "nativeFacing": -1,
+      "columns": 6,
+      "frameHeight": 128,
+      "loop": false,
+      "frameWidth": 128,
+      "count": 6,
+      "sheet": "assets/bosses/warden/phase1_slam.png",
+      "fps": 8,
+      "hammerImpact": {
+        "x": 24,
+        "y": 116
+      },
+      "impactFrame": 3
+    },
+    "phase2_idle": {
+      "scale": 0.47,
+      "origin": {
+        "y": 251,
+        "x": 128
+      },
+      "nativeFacing": -1,
+      "columns": 1,
+      "frameHeight": 256,
+      "loop": true,
+      "frameWidth": 256,
+      "count": 1,
+      "sheet": "assets/bosses/warden/phase2_idle.png",
+      "fps": 8,
+      "corePoints": [
+        {
+          "x": 145,
+          "y": 65
+        }
+      ]
+    }
+  },
+  "name": "Warden",
+  "visual": {
+    "offsetY": 0,
+    "offsetX": 0
+  },
+  "facing": -1
 }

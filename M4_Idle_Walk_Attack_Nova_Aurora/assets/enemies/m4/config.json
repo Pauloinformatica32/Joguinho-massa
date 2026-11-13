@@ -1,0 +1,55 @@
+{
+  "id": "m4",
+  "name": "Autômato de Manutenção M-4",
+  "scale": 1,
+  "origin": {
+    "x": 64,
+    "y": 96
+  },
+  "visual": {
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "collision": {
+    "width": 38,
+    "height": 60,
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "facing": 1,
+  "animations": {
+    "idle": {
+      "sheet": "assets/enemies/m4/idle.png",
+      "frameWidth": 128,
+      "frameHeight": 96,
+      "columns": 1,
+      "count": 1,
+      "fps": 1,
+      "loop": true
+    },
+    "run": {
+      "sheet": "assets/enemies/m4/walk.png",
+      "frameWidth": 128,
+      "frameHeight": 96,
+      "columns": 6,
+      "count": 6,
+      "fps": 9,
+      "loop": true
+    },
+    "attack": {
+      "sheet": "assets/enemies/m4/attack.png",
+      "frameWidth": 128,
+      "frameHeight": 96,
+      "columns": 6,
+      "count": 6,
+      "fps": 10,
+      "loop": false,
+      "events": [
+        {
+          "frame": 3,
+          "name": "strike"
+        }
+      ]
+    }
+  }
+}

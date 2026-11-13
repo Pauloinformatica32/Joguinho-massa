@@ -1,10 +1,10 @@
 {
   "id": "iris",
   "name": "Dra. Íris Vale",
-  "scale": 1,
+  "scale": 0.48,
   "origin": {
-    "x": 20,
-    "y": 61
+    "x": 21.5,
+    "y": 124
   },
   "visual": {
     "offsetX": 0,
@@ -17,12 +17,12 @@
     "offsetY": 0
   },
   "facing": -1,
-  "nativeFacing": -1,
+  "nativeFacing": 1,
   "animations": {
     "idle": {
       "sheet": "assets/characters/npcs/iris/idle.png",
-      "frameWidth": 40,
-      "frameHeight": 64,
+      "frameWidth": 43,
+      "frameHeight": 124,
       "columns": 1,
       "count": 1,
       "fps": 1,

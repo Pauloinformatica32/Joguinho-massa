@@ -1,5 +1,6 @@
 // Transient platform state belongs to the live map; permanent bridges use events.
 export function updateLevelPlatforms(map,p,dt){
+ for(const h of map.hookPoints||[])if(h.cooldown>0)h.cooldown=Math.max(0,h.cooldown-dt);
  for(const s of map.platforms){
   if(s.kind!=='unstable')continue;
   if(s.disabled){s.restoreTimer=Math.max(0,s.restoreTimer-dt);if(!s.restoreTimer){s.disabled=false;s.warning=0}continue}
@@ -8,4 +9,4 @@ export function updateLevelPlatforms(map,p,dt){
   if(s.warning>=.65){s.disabled=true;s.restoreTimer=4;s.warning=0}
  }
 }
-export function resetLevelPlatforms(map){for(const s of map.platforms)if(s.kind==='unstable'){s.disabled=false;s.warning=s.restoreTimer=0}}
+export function resetLevelPlatforms(map){for(const h of map.hookPoints||[])if(h.recharge)h.cooldown=0;for(const s of map.platforms)if(s.kind==='unstable'){s.disabled=false;s.warning=s.restoreTimer=0}}

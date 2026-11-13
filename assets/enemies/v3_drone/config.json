@@ -1,0 +1,13 @@
+{
+  "id": "v3_drone",
+  "name": "Drone Sentinela V-3",
+  "scale": 0.25,
+  "origin": {"x": 126, "y": 67},
+  "collision": {"width": 60, "height": 28, "offsetX": 0, "offsetY": 0},
+  "nativeFacing": -1,
+  "facing": -1,
+  "combat": {"detect": 420, "warning": 0.45, "shots": 3, "shotInterval": 0.16, "projectileSpeed": 230, "projectileLife": 2.4, "cooldown": 2.5, "recovery": 0.8, "patrolSpeed": 40, "combatSpeed": 52, "hoverAmplitude": 4},
+  "animations": {
+    "idle": {"sheet": "assets/enemies/v3_drone/idle.png", "frameWidth": 252, "frameHeight": 134, "columns": 1, "count": 1, "fps": 1, "loop": true}
+  }
+}

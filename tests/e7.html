@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><title>E-7 integration checks</title>
+<script>
+fetch('/index.html').then(r=>r.text()).then(html=>{
+ document.open();document.write(html.replace('<head>','<head><base href="/">').replace('src="js/main.js"','src="tests/e7-browser.js"'));document.close();
+});
+</script>

@@ -1,0 +1,21 @@
+{
+  "id": "teo",
+  "name": "Téo",
+  "scale": 0.48,
+  "origin": { "x": 29, "y": 126 },
+  "visual": { "offsetX": 0, "offsetY": 0 },
+  "collision": { "width": 28, "height": 54, "offsetX": 0, "offsetY": 0 },
+  "facing": -1,
+  "nativeFacing": -1,
+  "animations": {
+    "idle": {
+      "sheet": "assets/characters/npcs/teo/idle.png",
+      "frameWidth": 58,
+      "frameHeight": 126,
+      "columns": 1,
+      "count": 1,
+      "fps": 1,
+      "loop": true
+    }
+  }
+}

@@ -1,0 +1,8 @@
+<!doctype html><meta charset="utf-8"><title>M-4 integration check</title>
+<script>
+fetch('/index.html').then(r=>r.text()).then(html=>{
+ document.open();
+ document.write(html.replace('<head>','<head><base href="/">').replace('src="js/main.js"','src="tests/m4-browser.js"'));
+ document.close();
+});
+</script>

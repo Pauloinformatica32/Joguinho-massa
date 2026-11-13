@@ -1,0 +1,12 @@
+M-4 / Pacote de sprites para Nova Aurora
+
+Copie a pasta assets/enemies/m4 para a raiz do projeto.
+idle.png: 128x96, 1 quadro
+walk.png: 768x96, 6 quadros de 128x96
+attack.png: 768x96, 6 quadros de 128x96
+config.json: configuração inicial para o spriteRenderer, deve ser revisada pelo Codex.
+
+Todos os sprites usam fundo transparente e pé alinhado na base da célula.
+As animações foram normalizadas para ter a mesma escala aproximada em jogo.
+ATENÇÃO: a animação de ataque foi derivada de uma imagem gerada com aparência um pouco diferente do sprite-base.
+Verifique a continuidade visual no navegador antes de considerá-la definitiva.
