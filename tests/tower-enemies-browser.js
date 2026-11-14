@@ -25,7 +25,7 @@ export async function runTowerEnemiesBrowser(){
     const calls=[],ctx={save(){},restore(){},translate(){this.flipped=true},scale(){},drawImage(...args){calls.push(args)}};
     for(const direction of [-1,1]){
      ctx.flipped=false;e.spriteRenderer.draw(ctx,id,name,{},0,{x:100,y:100,frameOverride:frame,facing:direction});const args=calls.at(-1);
-     check(id+' '+name+' source/direction '+frame+' '+direction,args[1]===frame*a.frameWidth&&args[3]===a.frameWidth&&args[4]===a.frameHeight&&args[7]===Math.round(a.frameWidth*cfg.scale)&&args[8]===Math.round(a.frameHeight*cfg.scale)&&ctx.imageSmoothingEnabled===false&&ctx.flipped===(direction===1));
+     check(id+' '+name+' source/direction '+frame+' '+direction,args[1]===frame*a.frameWidth&&args[3]===a.frameWidth&&args[4]===a.frameHeight&&args[7]===Math.round(a.frameWidth*cfg.scale)&&args[8]===Math.round(a.frameHeight*cfg.scale)&&ctx.imageSmoothingEnabled===false&&ctx.flipped===(direction*(a.nativeFacing??cfg.nativeFacing)<0));
     }
     c.fillStyle='#daeeee';c.fillText(id+' '+name+' '+frame,8+frame*144,row*110+14);c.fillStyle='#596c77';c.fillRect(10+frame*144,row*110+96,118,1);
     e.spriteRenderer.draw(c,id,name,{},0,{x:65+frame*144,y:row*110+(id==='optic_s6'?30:96),frameOverride:frame,facing:frame%2?1:-1});

@@ -1,3 +1,4 @@
+import{primaryKey}from'./input.js';
 import{TOWER_ARENA,TOWER_FLOORS}from'./tower-layout.js';
 
 export const CENTRAL_TERMINAL_ID='tower-central-shutdown';
@@ -86,7 +87,7 @@ export function drawCentralConsole(c,state,map,time){
  for(const sign of [-1,1]){rect(c,'#161f2c',x+sign*42-3,y-35,6,26);rect(c,'#b4a16b',x+sign*42-2,y-33,4,4)}
  if(s.near){
   if(ready){rect(c,'#65c5c1',x-58,y-2,116,2);rect(c,'#08131b',x-134,y-130,268,28);rect(c,'#76c9c6',x-134,y-130,268,2);rect(c,'#76c9c6',x-134,y-104,268,2);c.fillStyle='#e0fff2'}else c.fillStyle=off?'#8ba8af':'#cd8c9b';
-  c.font=ready?'bold 11px monospace':'11px monospace';c.fillText(off?'REDE DESCONECTADA':ready?(s.emp?'[E] DESATIVAR NÚCLEO CENTRAL':'[E] EMP NECESSÁRIO'):'ACESSO BLOQUEADO · VÉSPERA',x,y-112);
+  c.font=ready?'bold 11px monospace':'11px monospace';c.fillText(off?'REDE DESCONECTADA':ready?(s.emp?'['+primaryKey('interact')+'] DESATIVAR NÚCLEO CENTRAL':'['+primaryKey('interact')+'] EMP NECESSÁRIO'):'ACESSO BLOQUEADO · VÉSPERA',x,y-112);
  }else{c.fillStyle='#718c96';c.font='9px monospace';c.fillText('CONTROLE CENTRAL / EMP',x,y-107)}
  c.restore();
 }

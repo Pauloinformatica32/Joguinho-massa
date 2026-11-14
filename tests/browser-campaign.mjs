@@ -94,7 +94,10 @@ try{
   document.querySelector('#ending-screen').classList.add('hidden');resumeCampaign();p.x=120;p.y=736;e.update(1/60);
   checkCampaign('revisit Setor 9',e.state.currentMap===0);
   const cp=e.world.map.checkpoints.find(cp=>cp.x===1580);p.x=cp.x;p.y=736;e.interact();
-  p.health=0;p.dead=true;p.attackTimer=.3;p.dashTimer=.1;e.respawn();
+  p.health=0;p.dead=true;p.attackTimer=.3;p.dashTimer=.1;e.beginPlayerDeath();
+  checkCampaign('respawn waits for death animation',e.respawn()===false&&p.dead);
+  while(e.deathStage==='animation')e.renderPausedDeath(1/60);
+  e.respawn();
   checkCampaign('respawn at valid checkpoint',p.x===1580&&p.health===p.maxHealth&&!p.dead&&p.attackTimer===0&&p.dashTimer===0);
   checkCampaign('victories survive death',e.state.bosses.every(b=>b.dead));
   // Exercise the connected ground route in both directions without teleporting between regions.

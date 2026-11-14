@@ -2,6 +2,8 @@ import{networkQuestion,networkChallenge,NETWORK_DIFFICULTIES,TUTORIAL_QUESTION}f
 import{answerNetworkQuestion}from'./upgrades.js';
 import{terminalText,YARA_DIALOGUES}from'./dialogue.js';
 import{saveGame}from'./save.js';
+import{setDialoguePortrait}from'./dialogue-portraits.js';
+import{matchesAction,controlText}from'./input.js';
 
 // Reuses the game's dialogue modal, pause flag, buttons and story event handler.
 export class NetworkTerminalController{
@@ -52,9 +54,9 @@ export class NetworkTerminalController{
   if(root&&root.dataset.questionId!==q.id){root.remove();root=null;}
   if(!root){
    root=document.createElement('section');root.id='yara-help';root.dataset.questionId=q.id;
-   root.innerHTML='<button id="yara-help-toggle" type="button" aria-expanded="false" aria-controls="yara-hint-panel">PEDIR DICA À YARA</button><aside id="yara-hint-panel" class="hidden yara-comm" role="region" aria-labelledby="yara-hint-heading"><header><span class="yara-portrait"><img alt="Yara" width="21" height="60"></span><div><span class="yara-signal" aria-hidden="true"><i></i><i></i><i></i></span><strong id="yara-hint-heading">YARA — CONEXÃO ESTABELECIDA</strong></div></header><p id="yara-hint-text" aria-live="polite"></p><button id="yara-hint-close" type="button" aria-describedby="yara-hint-text">FECHAR DICA · ESC</button></aside>';
+   root.innerHTML='<button id="yara-help-toggle" type="button" aria-expanded="false" aria-controls="yara-hint-panel">PEDIR DICA À YARA</button><aside id="yara-hint-panel" class="hidden yara-comm" role="region" aria-labelledby="yara-hint-heading"><header><span class="portrait-frame yara-portrait"><img alt="Yara" width="96" height="96"></span><div><span class="yara-signal" aria-hidden="true"><i></i><i></i><i></i></span><strong id="yara-hint-heading">YARA — CONEXÃO ESTABELECIDA</strong></div></header><p id="yara-hint-text" aria-live="polite"></p><button id="yara-hint-close" type="button" aria-describedby="yara-hint-text">FECHAR DICA · ESC</button></aside>';
    dialog.insertBefore(root,document.querySelector('#dialog-close'));
-   const image=root.querySelector('img');image.onerror=()=>image.parentElement.classList.add('hidden');image.src=this.e.assets?.getConfig('yara')?.animations?.idle?.sheet||'assets/characters/npcs/yara/idle.png';
+   setDialoguePortrait(root.querySelector('.yara-portrait'),'Yara');
    root.querySelector('#yara-hint-text').textContent=q.hint;
    const toggle=root.querySelector('#yara-help-toggle'),close=root.querySelector('#yara-hint-close');
    toggle.onclick=()=>this.setHintOpen(!this.session?.hintOpen);close.onclick=()=>this.setHintOpen(false);
@@ -82,7 +84,7 @@ export class NetworkTerminalController{
  decorate(closeLabel){
   const screen=document.querySelector('#dialog-screen');screen.classList.add('network-screen');
   screen.dataset.difficulty=this.session.q.difficulty;
-  document.querySelector('#dialog-text').style.whiteSpace='pre-line';document.querySelector('#dialog-close').textContent=closeLabel;
+  document.querySelector('#dialog-text').style.whiteSpace='pre-line';document.querySelector('#dialog-close').textContent=controlText(closeLabel);
   document.querySelector('#dialog-screen .dialog').scrollTop=0;
   const buttons=[...screen.querySelectorAll('button')].filter(b=>!b.disabled&&!b.closest('.hidden'));buttons[0]?.focus({preventScroll:true});
  }
@@ -93,7 +95,7 @@ export class NetworkTerminalController{
   if(key==='escape'){event.preventDefault();if(this.session.hintOpen)this.setHintOpen(false);else this.e.closeDialog();return;}
   if(event.repeat){event.preventDefault();return;}
   if(/^[1-4]$/.test(key)&&['question','failure'].includes(this.session.stage)){event.preventDefault();this.answer(Number(key)-1);return;}
-  if(key==='e'||key==='enter'){if(key==='enter'&&event.target.closest?.('#dialog-screen button'))return;event.preventDefault();this.advance();return;}
+  if(matchesAction('interact',event)||key==='enter'){if(key==='enter'&&event.target.closest?.('#dialog-screen button'))return;event.preventDefault();this.advance();return;}
   if([' ','arrowleft','arrowright','arrowup','arrowdown','j','k','shift'].includes(key))event.preventDefault();
  }
 }

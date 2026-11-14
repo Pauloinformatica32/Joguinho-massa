@@ -1,6 +1,6 @@
 // World-space architecture. Existing story, arena and NPC coordinates stay stable.
 export const WORLD_TOP=-720;
-export const WORLD_DESIGN=1;
+export const WORLD_DESIGN=2;
 export const DISTRICTS=[
  {left:0,right:700,name:'09 / RUA DOS SOBREVIVENTES'},
  {left:700,right:1400,name:'09 / REDE DOS TELHADOS'},
@@ -14,16 +14,6 @@ export function expandWorld(map){
  // A sealed quarantine bulkhead makes the rooftop approach part of the main
  // route. Yara is well before it; its upper crossing uses her existing hook.
  map.platforms.push({id:'s9-quarantine-bulkhead',x:1390,y:300,w:36,h:490,kind:'metal'});
- const route=(id,points,kind)=>{
-  for(let i=0;i<points.length;i++){const [x,y,w]=points[i];map.platforms.push({id:id+'-'+i,x,y,w,h:20,kind,oneWay:true,architecture:true});}
- };
- route('s9-aerial',[[220,590,150],[370,490,135],[510,385,130],[660,280,140],[810,175,140],[970,70,150],[1150,-35,150],[980,-140,150],[780,-245,150],[570,-350,180],[360,-245,150],[180,-140,150],[80,-30,140],[190,80,140],[350,185,130],[500,280,130]],'roof');
- route('factory-crane',[[2600,680,160],[2770,570,150],[2940,460,150],[3110,350,160],[3290,240,160],[3470,130,160],[3650,20,180],[3850,-90,160],[4030,-200,160],[3800,-310,190],[3550,-310,180],[3310,-200,170],[3070,-90,180],[2860,20,170],[2660,130,180],[2500,240,140]],'catwalk');
- route('security-archive',[[5590,565,160],[5760,455,150],[5940,345,150],[6100,235,150],[6300,125,180],[6510,15,170],[6720,-95,180],[6940,-205,200],[7180,-315,190],[7410,-205,180],[7630,-95,180],[7830,15,170],[8020,125,160]],'glass');
- route('lab-neural',[[9210,565,160],[9390,455,160],[9570,345,160],[9750,235,160],[9930,125,180],[10140,15,180],[10340,-95,180],[10120,-205,190],[9880,-315,190],[9650,-205,180],[9420,-95,180],[9210,15,180],[9010,125,160]],'catwalk');
- // Final ascent ends before the boss boundary; nothing occludes final attacks.
- route('core-service',[[13070,680,140],[13230,570,140],[13390,460,140],[13550,350,140],[13710,240,150],[13540,130,150],[13370,20,150],[13190,-90,150],[13050,-200,140]],'fleshmetal');
- for(const [x,y]of [[640,90],[1000,-115],[600,-420],[300,-210],[3250,60],[3670,-150],[3970,-360],[2800,-130],[6530,-150],[6960,-370],[7520,-140],[9820,-120],[10200,-370],[9360,-260],[13550,0],[13210,-270]])map.hookPoints.push({x,y,architectural:true});
  for(const [x,y,item]of [[640,-350,'Memória dos moradores 09'],[1220,-35,'Peças da antena comunitária'],[3890,-310,'Projeto da linha de montagem'],[2590,240,'Registro dos turnos perdidos'],[7250,-315,'Auditoria de vigilância'],[9970,-315,'Protocolo de consentimento neural'],[13120,-200,'Mapa da alimentação central']])map.secrets.push({x,y,item});
  for(const [id,x,y,name,text]of [
   ['world-s9-antenna',620,-350,'Antena comunitária','Os moradores desviaram energia para manter os abrigos ativos. A quarentena desligou a última ligação com o exterior.'],
@@ -31,8 +21,7 @@ export function expandWorld(map){
   ['world-security-audit',7250,-315,'Auditoria de acesso','As câmeras registram os trabalhadores antes e depois de cada atualização neural.'],
   ['world-lab-consent',9970,-315,'Arquivo de pesquisa','As assinaturas de consentimento foram geradas pelo próprio sistema de controle.']
  ])map.terminals.push({id,x,y,name,text});
- // Additional floor-level refuges keep existing checkpoint behavior and saves.
- map.checkpoints.push({x:680,name:'Subestação dos telhados'},{x:3330,name:'Oficina dos turnos'},{x:7050,floor:'tower_floor_1',name:'Arquivo de segurança'},{x:11200,floor:'tower_floor_2',name:'Observação dos laboratórios'},{x:13810,floor:'tower_floor_3',name:'Último abrigo / controle central'});
+ // Checkpoint definitions live exclusively in checkpoints.js.
  map.worldDesign=WORLD_DESIGN;
  // Upper lab walkways must not bypass EMP-controlled security partitions.
  for(const b of map.towerBarriers){b.y=WORLD_TOP;b.h=790-WORLD_TOP;Object.assign(b.solid,{y:b.y,h:b.h});}
@@ -90,7 +79,8 @@ export function drawArchitecture(c,camera,canvas,state,map,time){
   for(const [xx,yy]of [[350,-280],[1080,-90]]){rect(c,'#182932',xx,yy,92,74);rect(c,'#3b5058',xx+4,yy+4,84,12);for(let y=yy+22;y<yy+70;y+=14)rect(c,'#314650',xx+6,y,80,3);for(const dx of [10,76])rect(c,'#263f49',xx+dx,yy+74,6,58);}
   rect(c,'#39535f',625,-620,8,255);for(let yy=-600;yy<-400;yy+=40){rect(c,'#334852',593,yy,72,5);rect(c,'#7d4454',625,yy-6,8,5);}
   for(let xx=Math.max(40,start);xx<end;xx+=320){rect(c,'#263e47',xx,786,130,3);rect(c,'#477b85',xx+20,786,48,1);}
-  rect(c,'#182632',1380,280,56,20);for(let yy=315;yy<790;yy+=38){rect(c,'#8c6452',1388,yy,40,5);rect(c,'#763749',1397,yy+8,6,14);}
+  const returnOpen=map.platforms.find(p=>p.id==='s9-quarantine-bulkhead')?.disabled;
+  rect(c,'#182632',1380,280,56,20);for(let yy=315;yy<790;yy+=38){if(returnOpen){rect(c,'#427b78',1384,yy,4,14);rect(c,'#427b78',1430,yy,4,14)}else{rect(c,'#8c6452',1388,yy,40,5);rect(c,'#763749',1397,yy+8,6,14)}}
  }else if(theme==='factory'){
   rect(c,'#4a4940',3100,-405,1150,26);for(let xx=3110;xx<4250;xx+=48)rect(c,'#1f2b30',xx,-400,24,12);
   const trolley=3540+Math.round(Math.sin(time*.15)*130);rect(c,'#75603f',trolley,-378,95,30);rect(c,'#344952',trolley+42,-348,5,185);rect(c,'#8d754a',trolley+15,-163,60,18);

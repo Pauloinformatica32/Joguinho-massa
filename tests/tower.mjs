@@ -12,7 +12,7 @@ for(const fps of [30,60,120]){
  // Climb from the lab floor onto the first high route using the actual hook
  // impulse, gravity and world collision, then clear the security partition.
  const p=createPlayer();p.x=9370;p.y=736;p.grounded=true;
- const hook=map.hookPoints.find(h=>h.x===9440);
+ const hook={...map.hookPoints.find(h=>h.x===9510),cooldown:0};
  check('lab anchor reachable from ground '+fps,hookInRange(p,hook));activateHook(p,hook);
  let landed=false;
  for(let tick=0;tick<fps*2;tick++){

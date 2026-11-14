@@ -1,0 +1,250 @@
+{
+  "results": [
+    {
+      "id": "yara",
+      "src": "assets/ui/portraits/yara.png",
+      "loaded": true,
+      "portraitSize": [
+        96,
+        96
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "kael",
+      "src": "assets/ui/portraits/kael.png",
+      "loaded": true,
+      "portraitSize": [
+        96,
+        96
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "yara",
+      "src": "assets/ui/portraits/yara.png",
+      "loaded": true,
+      "portraitSize": [
+        96,
+        96
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "oren",
+      "src": "assets/ui/portraits/oren.png",
+      "loaded": true,
+      "portraitSize": [
+        96,
+        96
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "iris",
+      "src": "assets/ui/portraits/iris.png",
+      "loaded": true,
+      "portraitSize": [
+        96,
+        96
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "teo",
+      "src": "assets/ui/portraits/teo.png",
+      "loaded": true,
+      "portraitSize": [
+        96,
+        96
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "yara",
+      "src": "assets/ui/portraits/yara.png",
+      "loaded": true,
+      "portraitSize": [
+        96,
+        96
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "yara",
+      "src": "assets/ui/portraits/yara.png",
+      "loaded": true,
+      "portraitSize": [
+        64,
+        64
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "kael",
+      "src": "assets/ui/portraits/kael.png",
+      "loaded": true,
+      "portraitSize": [
+        64,
+        64
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "teo",
+      "src": "assets/ui/portraits/teo.png",
+      "loaded": true,
+      "portraitSize": [
+        64,
+        64
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "yara",
+      "src": "assets/ui/portraits/yara.png",
+      "loaded": true,
+      "portraitSize": [
+        64,
+        64
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "kael",
+      "src": "assets/ui/portraits/kael.png",
+      "loaded": true,
+      "portraitSize": [
+        64,
+        64
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "teo",
+      "src": "assets/ui/portraits/teo.png",
+      "loaded": true,
+      "portraitSize": [
+        64,
+        64
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "yara",
+      "src": "assets/ui/portraits/yara.png",
+      "loaded": true,
+      "portraitSize": [
+        64,
+        64
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "kael",
+      "src": "assets/ui/portraits/kael.png",
+      "loaded": true,
+      "portraitSize": [
+        64,
+        64
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "teo",
+      "src": "assets/ui/portraits/teo.png",
+      "loaded": true,
+      "portraitSize": [
+        64,
+        64
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    },
+    {
+      "id": "kael",
+      "src": "assets/ui/portraits/kael.png",
+      "loaded": true,
+      "portraitSize": [
+        64,
+        64
+      ],
+      "fit": true,
+      "overflow": false,
+      "overlap": false,
+      "buttonFits": true,
+      "style": "pixelated"
+    }
+  ],
+  "hint": {
+    "src": "assets/ui/portraits/yara.png",
+    "loaded": true,
+    "text": true,
+    "choices": 4,
+    "unchanged": true
+  },
+  "consoleErrors": 0
+}

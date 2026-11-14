@@ -31,3 +31,5 @@ try {
   $output.Save((Join-Path $dest "$name.png"),[Drawing.Imaging.ImageFormat]::Png);$output.Dispose()
  }
 } finally {$zip.Dispose()}
+# Never restore the original fall's damage/collapse poses when rebuilding assets.
+& (Join-Path $PSScriptRoot 'fix-kael-fall.ps1')

@@ -34,6 +34,7 @@
       "loop": true
     },
     "attack": {
+      "nativeFacing": 1,
       "sheet": "assets/enemies/interceptor_i9/attack.png",
       "frameWidth": 160,
       "frameHeight": 192,

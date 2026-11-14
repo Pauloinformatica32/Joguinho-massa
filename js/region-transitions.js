@@ -1,5 +1,8 @@
+import{primaryKey}from'./input.js';
+import{towerFloorAt}from'./tower-layout.js';
 import {saveGame} from './save.js';
-import {syncProgress,checkpointFor} from './campaign.js';
+import {syncProgress} from './campaign.js';
+import {travelCheckpoint} from './checkpoints.js';
 export const ACCESS_GATES=[
  {id:'industrial',x:2390,stops:[2310,2470],arrivals:[2470,2290],title:'COMPLEXO INDUSTRIAL — INSTALAÇÕES AURORA',back:'SETOR 9 — DISTRITO EM QUARENTENA',boss:'boss-0'},
  {id:'corporate',x:5190,stops:[5110,5280],arrivals:[5310,5090],title:'TORRE AURORA — ACESSO CORPORATIVO',back:'COMPLEXO INDUSTRIAL — INSTALAÇÕES AURORA',boss:'boss-2',emp:true}
@@ -23,7 +26,7 @@ export class RegionTransitions{
     for(const s of e.world.map.platforms)if(!s.disabled&&s.h>=70&&p.x+p.w>s.x&&p.x<s.x+s.w&&p.y+p.h>s.y&&p.y<s.y+s.h)throw Error('Destino bloqueado');
     Object.assign(p,{grounded:false,doubleJumpUsed:false,fall:false,invuln:2,facing:t.side? -1:1});
     for(const enemy of e.enemies){enemy.projectiles=[];enemy.pendingAttack=null;enemy.windupTimer=0;}
-    e.effects.clear();syncProgress(e.state);e.state.lastRegion=e.state.region;e.state.checkpoint=checkpointFor(e.state.currentMap);p.checkpoint={...e.state.checkpoint};e.camera.arena=null;e.tower.syncCamera(true);e.requestRegionAssets();saveGame(e.state);t.moved=true;
+    e.effects.clear();syncProgress(e.state);e.state.lastRegion=e.state.region;e.state.checkpoint=travelCheckpoint(e.state,e.state.currentMap,towerFloorAt(p.x)?.id);p.checkpoint={...e.state.checkpoint};e.camera.arena=null;e.tower.syncCamera(true);e.requestRegionAssets();saveGame(e.state);t.moved=true;
    }catch(error){Object.assign(p,t.origin);this.active=null;e.world.map.regionPresentation=null;this.state='idle';e.ui.toast('Acesso indisponível. Tente novamente.');return false;}
   }
   e.world.update(dt);e.render(false);const c=e.ctx;
@@ -39,6 +42,6 @@ export function drawAccessGates(c,state,map){
   const dh=280*(1-opening);c.fillStyle='#283842';c.fillRect(g.x-49,510,98,dh);for(let y=520;y<510+dh;y+=28){c.fillStyle='#53616a';c.fillRect(g.x-44,y,88,3);c.fillStyle='#a3834d';c.fillRect(g.x-44,y+5,12,5);}
   c.fillStyle='#13222c';c.fillRect(g.x-180,565,74,108);for(let y=578;y<670;y+=17){c.fillStyle='#4a5a63';c.fillRect(g.x-174,y,62,4);}
   c.font='11px monospace';c.textAlign='center';c.fillStyle='#a4bac2';c.fillText('AURORA DYNAMICS',g.x,450);c.font='9px monospace';c.fillStyle='#c57b75';c.fillText('ACESSO RESTRITO / SEGURANÇA',g.x,463);
-  for(const sx of g.stops){c.fillStyle='#354a55';c.fillRect(sx-13,733,26,57);c.fillStyle=authorized?'#63dfce':'#e75066';c.fillRect(sx-8,739,16,17);if(Math.abs(state.player.x-sx)<125){c.font='11px monospace';c.fillText('E · '+(authorized?'ACESSAR':'BLOQUEADO'),sx,716);}}
+  for(const sx of g.stops){c.fillStyle='#354a55';c.fillRect(sx-13,733,26,57);c.fillStyle=authorized?'#63dfce':'#e75066';c.fillRect(sx-8,739,16,17);if(Math.abs(state.player.x-sx)<125){c.font='11px monospace';c.fillText(primaryKey('interact')+' · '+(authorized?'ACESSAR':'BLOQUEADO'),sx,716);}}
  }
 }

@@ -1,0 +1,25 @@
+/* One portrait treatment for conversations and remote assistance. */
+.portrait-frame{--portrait-size:96px;position:relative;display:block;box-sizing:border-box;width:var(--portrait-size);height:var(--portrait-size);flex:0 0 var(--portrait-size);overflow:hidden;border:1px solid #65d9d4;background:#102531;box-shadow:3px 3px 0 #071019}
+.portrait-frame:after{content:'';position:absolute;inset:3px;border:1px solid #80e4e522;border-bottom-color:#d665a8;pointer-events:none}
+.portrait-frame img{position:static;display:block;width:100%;height:100%;max-width:100%;object-fit:cover;image-rendering:pixelated}
+.portrait-frame img[hidden]{display:none}
+.portrait-frame.portrait-missing:before{content:'◇';display:grid;place-items:center;height:100%;color:#5e8491;font:28px monospace}
+#dialog-screen:not(.network-screen){position:fixed;inset:0;align-items:end;padding:20px;background:#050b1166;backdrop-filter:none}
+#dialog-screen:not(.network-screen) .dialog{box-sizing:border-box;width:min(760px,100%);max-height:calc(100dvh - 100px);overflow:auto;padding:22px;border:1px solid #528c98;border-left:3px solid #67ded7;background:#0b1925f5;box-shadow:5px 5px 0 #030b12}
+.dialog.has-portrait{display:grid;grid-template-columns:96px minmax(0,1fr);column-gap:20px;align-items:start}
+.dialog.has-portrait>#dialog-portrait{grid-column:1;grid-row:1/span 4}
+.dialog.has-portrait>#speaker,.dialog.has-portrait>#dialog-text,.dialog.has-portrait>#dialog-actions,.dialog.has-portrait>#dialog-close{grid-column:2;min-width:0}
+#dialog-screen:not(.network-screen) #speaker{display:block;color:#86ece5;font:700 16px/1.4 monospace;letter-spacing:.04em;overflow-wrap:anywhere}
+#dialog-screen:not(.network-screen) #speaker:before{content:'';display:inline-block;width:4px;height:11px;margin-right:9px;background:#75e9e0}
+#dialog-screen:not(.network-screen) #dialog-text{font:14px/1.7 monospace;color:#d8e7ea;white-space:pre-line;overflow-wrap:anywhere;margin:10px 0 16px}
+#dialog-screen:not(.network-screen) #dialog-close{float:none;justify-self:end;min-height:40px;max-width:100%;font:11px/1.5 monospace;white-space:normal}
+#dialog-screen:not(.network-screen) #dialog-actions button{float:none;min-height:40px;max-width:100%;white-space:normal;font:11px/1.5 monospace}
+.yara-comm .portrait-frame{--portrait-size:64px}
+@media(max-width:640px){
+ #dialog-screen:not(.network-screen){padding:8px}
+ #dialog-screen:not(.network-screen) .dialog{padding:16px;max-height:calc(100dvh - 80px)}
+ .dialog.has-portrait{grid-template-columns:64px minmax(0,1fr);column-gap:12px}
+ .portrait-frame{--portrait-size:64px}
+ #dialog-screen:not(.network-screen) #speaker{font-size:13px}
+ #dialog-screen:not(.network-screen) #dialog-text{font-size:13px;line-height:1.65}
+}

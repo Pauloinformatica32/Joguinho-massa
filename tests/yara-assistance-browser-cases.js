@@ -15,7 +15,7 @@ export function probe(e,stage){
  document.querySelector('#dialog-screen').dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));check(!s.hintOpen&&e.paused&&e.network.session===s&&s.stage===stage,'Escape closes hint only');check(snapshot(e)===before&&buttons.every(b=>b.isConnected&&!b.disabled),'repeat requests have no effects');visited[stage].add(q.id);
  return{checks};
 }
-export async function preview(e){e.network.setHintOpen(true);const image=document.querySelector('#yara-hint-panel img');await image.decode();check(image.naturalWidth===21&&image.naturalHeight===60,'existing Yara sprite reused');return{checks,questionId:e.network.session.q.id};}
+export async function preview(e){e.network.setHintOpen(true);const image=document.querySelector('#yara-hint-panel img');await image.decode();check(image.naturalWidth===627&&image.naturalHeight===627&&image.getAttribute('src')==='assets/ui/portraits/yara.png','dedicated Yara portrait loaded');return{checks,questionId:e.network.session.q.id};}
 export function fit(e){const panel=document.querySelector('#yara-hint-panel'),r=panel.getBoundingClientRect(),dialog=document.querySelector('#dialog-screen .dialog').getBoundingClientRect(),buttons=[...document.querySelectorAll('[data-network-answer]')];
  check(dialog.left>=0&&dialog.top>=0&&dialog.right<=innerWidth+1&&dialog.bottom<=innerHeight+1,'help modal fits '+innerWidth+'x'+innerHeight);
  check(buttons.length===4&&buttons.every(b=>{const box=b.getBoundingClientRect();return !b.disabled&&(box.right<=r.left||box.left>=r.right||box.bottom<=r.top||box.top>=r.bottom)}),'hint panel does not cover choices');

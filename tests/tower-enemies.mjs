@@ -12,16 +12,32 @@ let checks=0;const check=(name,ok)=>{checks++;assert.ok(ok,name)};
 const make=id=>{const e=spawnEnemies().find(e=>e.assetId===id);e.y=e.homeY=790-e.h;return e};
 const world={map:{platforms:[{x:5200,y:790,w:7400,h:110}]}};
 const hero=e=>({...createPlayer(),x:e.x-35,y:736,health:100,maxHealth:100});
+// Runtime assets are independent of the user's extracted source-package directory.
+const approvedAssets=JSON.parse(readFileSync('tests/tower-enemy-assets.json'));
 for(const id of Object.keys(SPECS)){
  const cfg=JSON.parse(readFileSync(`assets/enemies/${id}/config.json`));
  for(const [name,a]of Object.entries(cfg.animations)){
-  const bytes=readFileSync(a.sheet),original=readFileSync(`Torre_Aurora_3_Inimigos_Sprites/${a.sheet}`);
-  check(id+' '+name+' unchanged',createHash('sha256').update(bytes).digest('hex')===createHash('sha256').update(original).digest('hex'));
+  const bytes=readFileSync(a.sheet);
+  check(id+' '+name+' approved asset',createHash('sha256').update(bytes).digest('hex')===approvedAssets[a.sheet]);
   check(id+' '+name+' grid',bytes.readUInt32BE(16)===a.frameWidth*a.count&&bytes.readUInt32BE(20)===a.frameHeight&&a.columns===a.count);
   check(id+' '+name+' loops',a.loop===(name!=='attack'));
  }
 }
 const list=spawnEnemies();check('seven original slots',list.filter(isTowerEnemy).length===7&&TOWER_ENEMY_SLOTS.every(slot=>list.some(e=>e.id===slot.id&&e.assetId===slot.assetId)));
+for(const fps of [30,60,120])for(const id of Object.keys(SPECS)){
+ const e=make(id),p=hero(e);e.attackCooldown=99;p.x=e.x+450;
+ if(id==='optic_s6'){e.y=e.homeY=670;p.y=736}
+ updateTowerEnemy(e,p,1/fps,world);
+ const phase=e.walkTime,frame=towerFrame(e);
+ for(let i=0;i<20;i++)check('draw sampling does not advance phase '+id,towerFrame(e)===frame);
+ // A stopped recovery must hold locomotion phase even as world/effect time advances.
+ e.towerState='recovery';e.stateTime=0;e.moving=false;
+ updateTowerEnemy(e,p,1/fps,world);
+ check('idle recovery holds locomotion phase '+id,e.walkTime===phase);
+ e.towerState=id==='optic_s6'?'tracking':'patrol';e.stateTime=0;
+ updateTowerEnemy(e,p,1/fps,world);
+ check('movement resumes phase without reset '+id,e.walkTime>phase);
+}
 check('industrial enemies preserved',list.find(e=>e.assetId==='m4').homeX===3070&&list.find(e=>e.assetId==='e7_shield').homeX===3770&&list.find(e=>e.assetId==='v3_drone').homeX===4290);
 for(const fps of [30,60,120]){
  const dt=1/fps;

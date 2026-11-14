@@ -1,0 +1,24 @@
+/* Settings extend the existing pause panel rather than introducing another modal. */
+#title-screen{position:fixed;inset:0;padding:12px;overflow:auto;backdrop-filter:none}
+#title-screen .title-card{max-height:calc(100dvh - 24px);overflow:auto}
+#pause-screen{position:fixed;inset:0;padding:12px;backdrop-filter:none}
+#pause-screen>.panel{max-height:calc(100dvh - 24px);overflow:auto}
+#pause-screen nav{flex-wrap:wrap}
+#pause-screen.settings-mode{position:fixed;inset:0;z-index:1100;padding:16px;backdrop-filter:none;background:#030b13ed}
+.settings-mode>.panel{width:min(820px,100%);max-height:calc(100dvh - 32px);padding:22px;border:1px solid #68cec8;overflow:auto}
+.settings-mode #panel-content{font:13px/1.6 monospace;max-height:calc(100dvh - 270px);min-height:80px}
+.settings-mode nav{flex-wrap:wrap;gap:6px}.settings-mode nav button{min-height:36px}
+.title-settings nav button:not([data-tab="controls"]):not([data-tab="video"]){display:none}
+.settings-mode h3{font-size:15px;letter-spacing:.08em;color:#90efe3}
+.settings-controls p,.settings-video p{font:12px/1.65 monospace;color:#b3cdd4;overflow-wrap:anywhere}
+.binding-list{border-top:1px solid #365361}.binding-row{display:grid;grid-template-columns:minmax(100px,1fr) minmax(80px,.65fr) auto;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #294450}
+.binding-row kbd{font:12px/1.4 monospace;color:#a3fff0;overflow-wrap:anywhere;text-align:right}.binding-row button{font-size:10px;min-height:38px;max-width:180px;white-space:normal}
+#binding-status{color:#91ecde;padding:10px 0;min-height:35px}#binding-confirm:not(:empty){padding:12px;margin-bottom:12px;border:1px solid #db91ac;background:#301c2c}#binding-confirm button{margin:4px;font-size:11px}
+#title-settings{margin-top:12px;width:100%;font-size:11px}.settings-mode button:focus-visible,[data-fullscreen]:focus-visible{outline:2px solid #b0fff2;outline-offset:3px}
+.fullscreen-tools{display:none}.stage:fullscreen{width:100vw;height:100dvh;max-width:none;max-height:none;aspect-ratio:auto;margin:0;border:0;box-shadow:none;background:#000;display:grid;place-items:center;overflow:hidden;--game-width:min(100vw,calc(100dvh * 16 / 9));--game-height:min(100dvh,calc(100vw * 9 / 16))}
+.stage:fullscreen>#game{width:var(--game-width);height:var(--game-height);image-rendering:pixelated;aspect-ratio:16/9}
+.stage:fullscreen>.hud{inset:calc((100dvh - var(--game-height)) / 2) calc((100vw - var(--game-width)) / 2);width:var(--game-width);height:var(--game-height)}
+.stage:fullscreen>.fullscreen-tools{position:absolute;bottom:8px;right:8px;display:flex;gap:8px;z-index:1050}.fullscreen-tools button{min-width:40px;min-height:40px;background:#081924ee;border-color:#65bdb8}
+.stage:fullscreen>#pause-screen,.stage:fullscreen>#death-screen,.stage:fullscreen>#ending-screen{max-width:100%;max-height:100%}
+.stage:fullscreen .asset-lab{max-height:100dvh;overflow:auto}
+@media(max-width:600px){#pause-screen.settings-mode{padding:8px}.settings-mode>.panel{padding:14px;max-height:calc(100dvh - 16px)}.settings-mode #panel-content{max-height:calc(100dvh - 260px)}.binding-row{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;font-size:12px}.binding-row kbd{grid-column:1;grid-row:auto;text-align:left}.binding-row button{grid-column:2;grid-row:span 2}.settings-mode .actions button{font-size:10px;min-height:38px}}

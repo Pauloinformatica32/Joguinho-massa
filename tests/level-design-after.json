@@ -1,0 +1,2058 @@
+{
+  "platforms": [
+    {
+      "x": 0,
+      "y": 790,
+      "w": 2400,
+      "h": 110,
+      "kind": "ground",
+      "id": "solid-0-790"
+    },
+    {
+      "x": 1535,
+      "y": 710,
+      "w": 135,
+      "h": 18,
+      "kind": "arena",
+      "oneWay": true,
+      "id": "arena-left"
+    },
+    {
+      "x": 2200,
+      "y": 710,
+      "w": 135,
+      "h": 18,
+      "kind": "arena",
+      "oneWay": true,
+      "id": "arena-right"
+    },
+    {
+      "x": 950,
+      "y": 718,
+      "w": 42,
+      "h": 72,
+      "kind": "cover",
+      "id": "solid-950-718"
+    },
+    {
+      "x": 1275,
+      "y": 718,
+      "w": 42,
+      "h": 72,
+      "kind": "cover",
+      "id": "solid-1275-718"
+    },
+    {
+      "x": 2400,
+      "y": 790,
+      "w": 2800,
+      "h": 110,
+      "kind": "ground",
+      "id": "solid-2400-790"
+    },
+    {
+      "x": 2780,
+      "y": 710,
+      "w": 60,
+      "h": 80,
+      "kind": "cover",
+      "id": "solid-2780-710"
+    },
+    {
+      "x": 3260,
+      "y": 700,
+      "w": 80,
+      "h": 90,
+      "kind": "cover",
+      "id": "solid-3260-700"
+    },
+    {
+      "x": 3860,
+      "y": 700,
+      "w": 70,
+      "h": 90,
+      "kind": "cover",
+      "id": "solid-3860-700"
+    },
+    {
+      "x": 4160,
+      "y": 700,
+      "w": 95,
+      "h": 90,
+      "kind": "cover",
+      "id": "solid-4160-700"
+    },
+    {
+      "x": 4405,
+      "y": 714,
+      "w": 70,
+      "h": 16,
+      "kind": "catwalk",
+      "oneWay": true,
+      "id": "warden-approach"
+    },
+    {
+      "x": 4545,
+      "y": 700,
+      "w": 100,
+      "h": 16,
+      "kind": "unstable",
+      "oneWay": true,
+      "id": "warden-deck-left",
+      "wardenDeck": true,
+      "warning": 0,
+      "disabled": false,
+      "restoreTimer": 0
+    },
+    {
+      "x": 4770,
+      "y": 660,
+      "w": 110,
+      "h": 16,
+      "kind": "unstable",
+      "oneWay": true,
+      "id": "warden-deck-center",
+      "wardenDeck": true,
+      "warning": 0,
+      "disabled": false,
+      "restoreTimer": 0
+    },
+    {
+      "x": 5010,
+      "y": 690,
+      "w": 95,
+      "h": 16,
+      "kind": "unstable",
+      "oneWay": true,
+      "id": "warden-deck-right",
+      "wardenDeck": true,
+      "warning": 0,
+      "disabled": false,
+      "restoreTimer": 0
+    },
+    {
+      "x": 5200,
+      "y": 790,
+      "w": 3200,
+      "h": 110,
+      "kind": "ground",
+      "id": "solid-5200-790"
+    },
+    {
+      "x": 8400,
+      "y": -1600,
+      "w": 24,
+      "h": 2390,
+      "kind": "metal",
+      "id": "solid-8400--1600"
+    },
+    {
+      "x": 8800,
+      "y": 790,
+      "w": 3800,
+      "h": 110,
+      "kind": "ground",
+      "id": "solid-8800-790"
+    },
+    {
+      "x": 8776,
+      "y": -1600,
+      "w": 24,
+      "h": 2390,
+      "kind": "metal",
+      "id": "solid-8776--1600"
+    },
+    {
+      "x": 12600,
+      "y": -1600,
+      "w": 24,
+      "h": 2390,
+      "kind": "metal",
+      "id": "solid-12600--1600"
+    },
+    {
+      "x": 13000,
+      "y": 790,
+      "w": 2600,
+      "h": 110,
+      "kind": "ground",
+      "id": "solid-13000-790"
+    },
+    {
+      "x": 12976,
+      "y": -1600,
+      "w": 24,
+      "h": 2390,
+      "kind": "metal",
+      "id": "solid-12976--1600"
+    },
+    {
+      "x": 15600,
+      "y": -1600,
+      "w": 24,
+      "h": 2390,
+      "kind": "metal",
+      "id": "solid-15600--1600"
+    },
+    {
+      "x": 6350,
+      "y": 610,
+      "w": 55,
+      "h": 180,
+      "kind": "glass",
+      "id": "solid-6350-610"
+    },
+    {
+      "x": 7430,
+      "y": 610,
+      "w": 55,
+      "h": 180,
+      "kind": "glass",
+      "id": "solid-7430-610"
+    },
+    {
+      "x": 9870,
+      "y": 490,
+      "w": 55,
+      "h": 300,
+      "kind": "glass",
+      "id": "solid-9870-490"
+    },
+    {
+      "x": 11400,
+      "y": 490,
+      "w": 55,
+      "h": 300,
+      "kind": "glass",
+      "id": "solid-11400-490"
+    },
+    {
+      "id": "tower-lab-barrier-1",
+      "x": 10620,
+      "y": -720,
+      "w": 28,
+      "h": 1510,
+      "panelX": 10540,
+      "kind": "glass"
+    },
+    {
+      "id": "tower-lab-barrier-2",
+      "x": 12020,
+      "y": -720,
+      "w": 28,
+      "h": 1510,
+      "panelX": 11940,
+      "kind": "glass"
+    },
+    {
+      "id": "s9-quarantine-bulkhead",
+      "x": 1390,
+      "y": 300,
+      "w": 36,
+      "h": 490,
+      "kind": "metal"
+    },
+    {
+      "id": "s9-step",
+      "x": 180,
+      "y": 690,
+      "w": 260,
+      "h": 18,
+      "kind": "scrap",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "s9-balcony",
+      "x": 430,
+      "y": 610,
+      "w": 170,
+      "h": 18,
+      "kind": "walkway",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "s9-tutorial-roof",
+      "x": 820,
+      "y": 580,
+      "w": 270,
+      "h": 18,
+      "kind": "roof",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "s9-log-roof",
+      "x": 1120,
+      "y": 570,
+      "w": 250,
+      "h": 18,
+      "kind": "walkway",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "s9-shortcut-west",
+      "x": 900,
+      "y": 395,
+      "w": 160,
+      "h": 18,
+      "kind": "roof",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "s9-shortcut-east",
+      "x": 1130,
+      "y": 395,
+      "w": 240,
+      "h": 18,
+      "kind": "walkway",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "s9-quarantine-ledge",
+      "x": 1220,
+      "y": 215,
+      "w": 150,
+      "h": 18,
+      "kind": "roof",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "s9-antenna-lower",
+      "x": 950,
+      "y": 110,
+      "w": 230,
+      "h": 18,
+      "kind": "roof",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "s9-antenna-middle",
+      "x": 740,
+      "y": -100,
+      "w": 240,
+      "h": 18,
+      "kind": "walkway",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "s9-antenna",
+      "x": 570,
+      "y": -350,
+      "w": 240,
+      "h": 18,
+      "kind": "roof",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-loading",
+      "x": 2550,
+      "y": 690,
+      "w": 260,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-assembly",
+      "x": 2870,
+      "y": 680,
+      "w": 290,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-log",
+      "x": 3010,
+      "y": 590,
+      "w": 280,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-maintenance",
+      "x": 3300,
+      "y": 650,
+      "w": 200,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-coolant-west",
+      "x": 3380,
+      "y": 550,
+      "w": 160,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-coolant-east",
+      "x": 3740,
+      "y": 550,
+      "w": 220,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-service-west",
+      "x": 3890,
+      "y": 590,
+      "w": 120,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-service-east",
+      "x": 4090,
+      "y": 590,
+      "w": 280,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-crane-lower",
+      "x": 3460,
+      "y": 310,
+      "w": 260,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-crane-middle",
+      "x": 3730,
+      "y": 40,
+      "w": 250,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-crane",
+      "x": 3770,
+      "y": -310,
+      "w": 360,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-turns-balcony",
+      "x": 2500,
+      "y": 240,
+      "w": 250,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "factory-turns-lower",
+      "x": 2640,
+      "y": 440,
+      "w": 230,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-entry",
+      "x": 5500,
+      "y": 680,
+      "w": 250,
+      "h": 18,
+      "kind": "glass",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-west",
+      "x": 5780,
+      "y": 565,
+      "w": 250,
+      "h": 18,
+      "kind": "glass",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-camera",
+      "x": 6080,
+      "y": 455,
+      "w": 240,
+      "h": 18,
+      "kind": "glass",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-partition-west",
+      "x": 6280,
+      "y": 565,
+      "w": 260,
+      "h": 18,
+      "kind": "glass",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-laser-bridge",
+      "x": 6680,
+      "y": 675,
+      "w": 290,
+      "h": 18,
+      "kind": "glass",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-partition-east",
+      "x": 7200,
+      "y": 565,
+      "w": 500,
+      "h": 18,
+      "kind": "glass",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-lift",
+      "x": 7850,
+      "y": 680,
+      "w": 280,
+      "h": 18,
+      "kind": "glass",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-log",
+      "x": 6180,
+      "y": 245,
+      "w": 250,
+      "h": 18,
+      "kind": "glass",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-archive-lower",
+      "x": 6530,
+      "y": 40,
+      "w": 300,
+      "h": 18,
+      "kind": "glass",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-archive-upper",
+      "x": 6850,
+      "y": -155,
+      "w": 280,
+      "h": 18,
+      "kind": "glass",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "security-audit",
+      "x": 7150,
+      "y": -315,
+      "w": 360,
+      "h": 18,
+      "kind": "glass",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-entry",
+      "x": 9110,
+      "y": 675,
+      "w": 260,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-west",
+      "x": 9420,
+      "y": 560,
+      "w": 280,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-partition-west",
+      "x": 9700,
+      "y": 445,
+      "w": 230,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-log",
+      "x": 9880,
+      "y": 330,
+      "w": 260,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-panel-approach",
+      "x": 10170,
+      "y": 560,
+      "w": 330,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-barrier-east",
+      "x": 10730,
+      "y": 675,
+      "w": 250,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-panel-return",
+      "x": 10240,
+      "y": 675,
+      "w": 220,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-east-approach",
+      "x": 11000,
+      "y": 675,
+      "w": 240,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-camera",
+      "x": 11200,
+      "y": 445,
+      "w": 220,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-partition-east",
+      "x": 11370,
+      "y": 330,
+      "w": 360,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-exit",
+      "x": 11750,
+      "y": 560,
+      "w": 140,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-lift",
+      "x": 12220,
+      "y": 680,
+      "w": 180,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-east-return",
+      "x": 11500,
+      "y": 560,
+      "w": 180,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-exit-return",
+      "x": 11650,
+      "y": 675,
+      "w": 240,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-employees",
+      "x": 10050,
+      "y": 210,
+      "w": 260,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-consent-middle",
+      "x": 9730,
+      "y": -40,
+      "w": 260,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "lab-consent",
+      "x": 9850,
+      "y": -315,
+      "w": 320,
+      "h": 18,
+      "kind": "catwalk",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "core-step",
+      "x": 13070,
+      "y": 680,
+      "w": 230,
+      "h": 18,
+      "kind": "fleshmetal",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "core-maintenance",
+      "x": 13230,
+      "y": 570,
+      "w": 240,
+      "h": 18,
+      "kind": "fleshmetal",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "core-shaft-crossing",
+      "x": 13350,
+      "y": 460,
+      "w": 300,
+      "h": 18,
+      "kind": "fleshmetal",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "core-terminal",
+      "x": 13550,
+      "y": 350,
+      "w": 240,
+      "h": 18,
+      "kind": "fleshmetal",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "core-descent",
+      "x": 13640,
+      "y": 680,
+      "w": 140,
+      "h": 18,
+      "kind": "fleshmetal",
+      "route": "main",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "core-map-middle",
+      "x": 13130,
+      "y": 290,
+      "w": 220,
+      "h": 18,
+      "kind": "fleshmetal",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "core-map",
+      "x": 13050,
+      "y": 100,
+      "w": 260,
+      "h": 18,
+      "kind": "fleshmetal",
+      "route": "optional",
+      "oneWay": true,
+      "architecture": true
+    },
+    {
+      "id": "core-power-column",
+      "x": 13440,
+      "y": 490,
+      "w": 70,
+      "h": 300,
+      "kind": "metal"
+    }
+  ],
+  "hazards": [
+    {
+      "x": 3500,
+      "y": 772,
+      "w": 210,
+      "h": 18,
+      "kind": "coolant",
+      "id": "coolant-pool"
+    },
+    {
+      "x": 4010,
+      "y": 690,
+      "w": 70,
+      "h": 100,
+      "kind": "press",
+      "id": "industrial-press"
+    },
+    {
+      "x": 6810,
+      "y": 772,
+      "w": 120,
+      "h": 18,
+      "kind": "laser"
+    },
+    {
+      "x": 10300,
+      "y": 772,
+      "w": 220,
+      "h": 18,
+      "kind": "virus"
+    }
+  ],
+  "checkpoints": [
+    {
+      "id": "s9-entry",
+      "x": 310,
+      "region": 0,
+      "name": "Abrigo da Chuva",
+      "purpose": "Entrada e aprendizagem; retorno a Yara"
+    },
+    {
+      "id": "s9-matrona",
+      "x": 1440,
+      "region": 0,
+      "name": "Oficina do bloqueio",
+      "purpose": "Após os telhados, imediatamente antes de Matrona"
+    },
+    {
+      "id": "factory-entry",
+      "x": 2570,
+      "region": 1,
+      "name": "Gerador auxiliar",
+      "purpose": "Entrada, montagem e retorno a Oren"
+    },
+    {
+      "id": "factory-warden",
+      "x": 4380,
+      "region": 1,
+      "name": "Manutenção de segurança",
+      "purpose": "Após contenção, antes da arena de Warden"
+    },
+    {
+      "id": "tower_floor_1-checkpoint",
+      "x": 5390,
+      "region": 2,
+      "floor": "tower_floor_1",
+      "name": "Segurança · Abrigo de entrada",
+      "purpose": "Entrada da torre"
+    },
+    {
+      "id": "tower-security-mid",
+      "x": 7050,
+      "region": 2,
+      "floor": "tower_floor_1",
+      "name": "Arquivo de segurança",
+      "purpose": "Entre as duas partições de segurança"
+    },
+    {
+      "id": "tower_floor_2-checkpoint",
+      "x": 9090,
+      "region": 2,
+      "floor": "tower_floor_2",
+      "name": "Laboratórios · Abrigo de entrada",
+      "purpose": "Chegada do elevador"
+    },
+    {
+      "id": "tower-lab-mid",
+      "x": 11200,
+      "region": 2,
+      "floor": "tower_floor_2",
+      "name": "Observação dos laboratórios",
+      "purpose": "Após a primeira barreira EMP, antes da segunda seção"
+    },
+    {
+      "id": "tower_floor_3-checkpoint",
+      "x": 13810,
+      "region": 2,
+      "floor": "tower_floor_3",
+      "name": "Último abrigo · Núcleo central",
+      "purpose": "Após a subida final, antes de Véspera"
+    }
+  ],
+  "terminals": [
+    {
+      "x": 1300,
+      "y": 570,
+      "id": "log-1",
+      "name": "Terminal do isolamento",
+      "questionId": "t02_setor9_dhcp"
+    },
+    {
+      "x": 2310,
+      "y": 790,
+      "id": "gate-industrial",
+      "name": "Porta de carga"
+    },
+    {
+      "x": 3100,
+      "y": 590,
+      "id": "log-2",
+      "name": "Registro de distribuição",
+      "questionId": "t05_industrial_ipv4"
+    },
+    {
+      "x": 3800,
+      "y": 550,
+      "id": "implant-double",
+      "name": "Estabilizador de manutenção",
+      "text": "Salto duplo integrado. Explore as passarelas superiores."
+    },
+    {
+      "x": 5110,
+      "y": 790,
+      "id": "gate-tower",
+      "name": "Elevador da Torre"
+    },
+    {
+      "x": 3350,
+      "y": 650,
+      "id": "shortcut-maintenance",
+      "name": "Ponte de manutenção",
+      "text": "Ponte de manutenção estendida. A passagem superior evita a prensa.",
+      "shortcut": {
+        "id": "factory-repaired-bridge",
+        "x": 3980,
+        "y": 590,
+        "w": 180,
+        "h": 18,
+        "kind": "bridge",
+        "oneWay": true,
+        "route": "shortcut"
+      },
+      "questionId": "t06_industrial_subnet"
+    },
+    {
+      "x": 1000,
+      "y": 395,
+      "id": "shortcut-sector9",
+      "name": "Controle da passarela 09",
+      "text": "Passarela estendida. O atalho superior conecta os telhados à oficina.",
+      "shortcut": {
+        "x": 1060,
+        "y": 395,
+        "w": 70,
+        "h": 18,
+        "kind": "bridge",
+        "oneWay": true,
+        "id": "s9-bridge"
+      },
+      "questionId": "t03_setor9_osi"
+    },
+    {
+      "id": "tower-lab-barrier-1",
+      "x": 10540,
+      "y": 790,
+      "name": "Barreira de contenção · EMP",
+      "barrier": true
+    },
+    {
+      "id": "tower-lab-barrier-2",
+      "x": 11940,
+      "y": 790,
+      "name": "Barreira de contenção · EMP",
+      "barrier": true
+    },
+    {
+      "id": "tower-security-log",
+      "x": 6230,
+      "y": 245,
+      "name": "Vigilância corporativa",
+      "text": "Cada implante registra rotas e escolhas. Desvios são enviados à diretoria.",
+      "questionId": "t09_tower_nat"
+    },
+    {
+      "id": "log-3",
+      "x": 9960,
+      "y": 330,
+      "name": "Desenvolvimento viral",
+      "text": "O vírus altera decisões por meio dos implantes. O lote experimental deixou de respeitar os limites de segurança.",
+      "questionId": "t11_tower_ipv6"
+    },
+    {
+      "id": "tower-log-employees",
+      "x": 10150,
+      "y": 210,
+      "name": "Ensaio interno",
+      "text": "Funcionários foram inscritos sem consentimento. As câmaras registraram obediência crescente após a atualização."
+    },
+    {
+      "id": "tower-log-vespera",
+      "x": 11530,
+      "y": 330,
+      "name": "Rede central",
+      "text": "Véspera mantém o comando de todos os nós. Somente um pulso no computador central interromperá a transmissão."
+    },
+    {
+      "id": "tower-central-shutdown",
+      "x": 15440,
+      "y": 790,
+      "name": "Computador central",
+      "text": "PROTOCOLO CENTRAL — TRANSMISSÃO GLOBAL ATIVA"
+    },
+    {
+      "id": "world-s9-antenna",
+      "x": 620,
+      "y": -350,
+      "name": "Antena comunitária",
+      "text": "Os moradores desviaram energia para manter os abrigos ativos. A quarentena desligou a última ligação com o exterior.",
+      "questionId": "t04_setor9_switch"
+    },
+    {
+      "id": "world-factory-crane",
+      "x": 3870,
+      "y": -310,
+      "name": "Controle da ponte rolante",
+      "text": "Produção ininterrupta. Lotes de implantes seguem da montagem para os laboratórios sem inspeção independente.",
+      "questionId": "t07_industrial_https"
+    },
+    {
+      "id": "world-security-audit",
+      "x": 7250,
+      "y": -315,
+      "name": "Auditoria de acesso",
+      "text": "As câmeras registram os trabalhadores antes e depois de cada atualização neural.",
+      "questionId": "t10_tower_ping"
+    },
+    {
+      "id": "world-lab-consent",
+      "x": 9970,
+      "y": -315,
+      "name": "Arquivo de pesquisa",
+      "text": "As assinaturas de consentimento foram geradas pelo próprio sistema de controle."
+    },
+    {
+      "id": "network-yara",
+      "x": 735,
+      "y": 790,
+      "name": "Terminal de Yara",
+      "text": "O terminal autentica a antiga assinatura de Kael e Yara e libera o módulo de gancho.",
+      "questionId": "t01_yara_dns"
+    },
+    {
+      "id": "network-maintenance",
+      "x": 4100,
+      "y": 590,
+      "name": "Mesa de Resolução",
+      "text": "O terminal otimiza as respostas do sistema de propulsão.",
+      "questionId": "t08_industrial_arp"
+    },
+    {
+      "id": "network-core-service",
+      "x": 13620,
+      "y": 350,
+      "name": "Ponto de Acesso Restrito",
+      "text": "Kael extrai o último módulo de reforço antes do núcleo.",
+      "questionId": "t12_tower_wpa3"
+    }
+  ],
+  "secrets": [
+    {
+      "x": 920,
+      "y": 580,
+      "item": "Célula de energia"
+    },
+    {
+      "x": 3210,
+      "y": 590,
+      "item": "Dados de distribuição"
+    },
+    {
+      "x": 1310,
+      "y": 215,
+      "item": "Peças da vigilância 09"
+    },
+    {
+      "x": 3580,
+      "y": 310,
+      "item": "Esquema do circuito refrigerante"
+    },
+    {
+      "x": 6270,
+      "y": 245,
+      "item": "Arquivo de vigilância Aurora"
+    },
+    {
+      "x": 10180,
+      "y": 210,
+      "item": "Provas dos ensaios humanos"
+    },
+    {
+      "x": 640,
+      "y": -350,
+      "item": "Memória dos moradores 09"
+    },
+    {
+      "x": 1110,
+      "y": 110,
+      "item": "Peças da antena comunitária"
+    },
+    {
+      "x": 3890,
+      "y": -310,
+      "item": "Projeto da linha de montagem"
+    },
+    {
+      "x": 2590,
+      "y": 240,
+      "item": "Registro dos turnos perdidos"
+    },
+    {
+      "x": 7390,
+      "y": -315,
+      "item": "Auditoria de vigilância"
+    },
+    {
+      "x": 9970,
+      "y": -315,
+      "item": "Protocolo de consentimento neural"
+    },
+    {
+      "x": 13120,
+      "y": 100,
+      "item": "Mapa da alimentação central"
+    }
+  ],
+  "npcs": [
+    {
+      "id": "yara",
+      "x": 610,
+      "y": 790,
+      "name": "Yara · Hacker",
+      "assetId": "yara",
+      "defaultFacing": -1,
+      "facePlayerOnDialog": true,
+      "text": "Robôs e cidadãos com implantes estão perdendo o controle. Os terminais dos telhados registraram as primeiras infecções. Matrona isolou o Setor 9 para impedir que as provas saiam daqui. Use este gancho nos pontos amarelos."
+    },
+    {
+      "id": "oren-slum",
+      "x": 1000,
+      "y": 790,
+      "name": "Oren · Mecânico",
+      "assetId": "oren",
+      "defaultFacing": -1,
+      "facePlayerOnDialog": true,
+      "shop": true,
+      "text": "Posso reforçar sua proteção por 20 créditos. Procure dados e peças nos telhados; cada segredo financia a próxima melhoria."
+    },
+    {
+      "id": "oren-factory",
+      "x": 2700,
+      "y": 790,
+      "name": "Oren · Mecânico",
+      "assetId": "oren",
+      "defaultFacing": -1,
+      "facePlayerOnDialog": true,
+      "shop": true,
+      "text": "Segui a linha de carga até aqui. Continuo oferecendo reforços por 20 créditos. Warden guarda a credencial da Torre Aurora."
+    },
+    {
+      "id": "teo-factory",
+      "x": 3180,
+      "y": 790,
+      "name": "Téo · Operário Sobrevivente",
+      "assetId": "teo",
+      "defaultFacing": -1,
+      "facePlayerOnDialog": true
+    },
+    {
+      "id": "scientist",
+      "x": 3400,
+      "y": 790,
+      "name": "Dra. Íris Vale",
+      "assetId": "iris",
+      "defaultFacing": -1,
+      "facePlayerOnDialog": true,
+      "ability": "emp",
+      "text": "Eu trabalhava para a Aurora Dynamics. Distribuímos o vírus em dispositivos novos e atualizações de implantes. Ele não foi feito para destruir: altera decisões de humanos e máquinas conectados. Warden protege a operação. Leve meu pulso eletromagnético."
+    },
+    {
+      "id": "corporate-ai",
+      "x": 5540,
+      "y": 790,
+      "name": "IA corporativa",
+      "assetId": "npc_survivor",
+      "text": "Segurança no primeiro andar. Pesquisa no segundo. Diretoria e transmissor no terceiro. O acesso exige autorização eletromagnética. Retorno ao complexo: saída à esquerda."
+    }
+  ],
+  "hookPoints": [
+    {
+      "id": "s9-tutorial-hook",
+      "x": 900,
+      "y": 500,
+      "from": "ground:0",
+      "to": "s9-tutorial-roof",
+      "purpose": "Primeiro gancho: antena do telhado",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "s9-upper-hook",
+      "x": 1230,
+      "y": 300,
+      "from": "s9-log-roof",
+      "to": "s9-shortcut-east",
+      "purpose": "Subir à passarela de quarentena",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "s9-quarantine-hook",
+      "x": 1280,
+      "y": 110,
+      "from": "s9-shortcut-east",
+      "to": "s9-quarantine-ledge",
+      "purpose": "Cruzar o topo do bloqueio",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "s9-antenna-1",
+      "x": 1040,
+      "y": 40,
+      "from": "s9-quarantine-ledge",
+      "to": "s9-antenna-lower",
+      "purpose": "Ramo da antena comunitária",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "s9-antenna-2",
+      "x": 850,
+      "y": -170,
+      "from": "s9-antenna-lower",
+      "to": "s9-antenna-middle",
+      "purpose": "Subir pelo mastro",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "s9-antenna-3",
+      "x": 660,
+      "y": -420,
+      "from": "s9-antenna-middle",
+      "to": "s9-antenna",
+      "purpose": "Alcançar registro e recompensa",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "factory-coolant-hook",
+      "x": 3650,
+      "y": 390,
+      "from": "factory-coolant-west",
+      "to": "factory-coolant-east",
+      "purpose": "Ponte rolante sobre refrigerante",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "factory-service-hook",
+      "x": 4140,
+      "y": 410,
+      "from": "factory-service-west",
+      "to": "factory-service-east",
+      "purpose": "Alternativa à prensa antes do reparo",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "factory-crane-1",
+      "x": 3570,
+      "y": 230,
+      "from": "factory-coolant-west",
+      "to": "factory-crane-lower",
+      "purpose": "Acesso opcional ao guindaste",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "factory-crane-2",
+      "x": 3830,
+      "y": -40,
+      "from": "factory-crane-lower",
+      "to": "factory-crane-middle",
+      "purpose": "Subir pelo equipamento",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "factory-crane-3",
+      "x": 3910,
+      "y": -370,
+      "from": "factory-crane-middle",
+      "to": "factory-crane",
+      "purpose": "Registro superior da fábrica",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "factory-turns-hook",
+      "x": 2630,
+      "y": 160,
+      "from": "factory-turns-lower",
+      "to": "factory-turns-balcony",
+      "purpose": "Arquivo opcional de turnos",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "security-entry-hook",
+      "x": 5850,
+      "y": 480,
+      "from": "security-entry",
+      "to": "security-west",
+      "purpose": "Subir à segurança",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "security-camera-hook",
+      "x": 6190,
+      "y": 350,
+      "from": "security-west",
+      "to": "security-camera",
+      "purpose": "Cruzamento da partição",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "security-east-hook",
+      "x": 7410,
+      "y": 400,
+      "from": "ground:6930",
+      "to": "security-partition-east",
+      "purpose": "Passagem sobre segunda partição",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "security-log-hook",
+      "x": 6270,
+      "y": 150,
+      "from": "security-camera",
+      "to": "security-log",
+      "purpose": "Arquivo de vigilância",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "security-archive-1",
+      "x": 6660,
+      "y": -30,
+      "from": "security-log",
+      "to": "security-archive-lower",
+      "purpose": "Ramo de auditoria",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "security-archive-2",
+      "x": 6970,
+      "y": -220,
+      "from": "security-archive-lower",
+      "to": "security-archive-upper",
+      "purpose": "Estrutura superior",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "security-archive-3",
+      "x": 7310,
+      "y": -380,
+      "from": "security-archive-upper",
+      "to": "security-audit",
+      "purpose": "Auditoria opcional",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "lab-entry-hook",
+      "x": 9510,
+      "y": 450,
+      "from": "lab-entry",
+      "to": "lab-west",
+      "purpose": "Passarela de pesquisa",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "lab-partition-hook",
+      "x": 9840,
+      "y": 340,
+      "from": "lab-west",
+      "to": "lab-partition-west",
+      "purpose": "Subida da contenção",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "lab-log-hook",
+      "x": 10000,
+      "y": 230,
+      "from": "lab-partition-west",
+      "to": "lab-log",
+      "purpose": "Registro viral",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "lab-east-hook",
+      "x": 11260,
+      "y": 340,
+      "from": "lab-east-approach",
+      "to": "lab-camera",
+      "purpose": "Retomada após EMP",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "lab-exit-hook",
+      "x": 11520,
+      "y": 210,
+      "from": "lab-camera",
+      "to": "lab-partition-east",
+      "purpose": "Cruzar segunda partição",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "lab-employees-hook",
+      "x": 10180,
+      "y": 110,
+      "from": "lab-log",
+      "to": "lab-employees",
+      "purpose": "Provas dos ensaios",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "lab-consent-1",
+      "x": 9850,
+      "y": -120,
+      "from": "lab-employees",
+      "to": "lab-consent-middle",
+      "purpose": "Arquivo lateral",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "lab-consent-2",
+      "x": 9980,
+      "y": -380,
+      "from": "lab-consent-middle",
+      "to": "lab-consent",
+      "purpose": "Consentimento neural",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "core-ascent-hook",
+      "x": 13450,
+      "y": 370,
+      "from": "core-maintenance",
+      "to": "core-shaft-crossing",
+      "purpose": "Cruzar alimentação central",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "core-terminal-hook",
+      "x": 13650,
+      "y": 240,
+      "from": "core-shaft-crossing",
+      "to": "core-terminal",
+      "purpose": "Console de serviço",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "core-map-access",
+      "x": 13200,
+      "y": 190,
+      "from": "core-shaft-crossing",
+      "to": "core-map-middle",
+      "purpose": "Subir ao ramal de alimentação",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "core-map-hook",
+      "x": 13180,
+      "y": 0,
+      "from": "core-map-middle",
+      "to": "core-map",
+      "purpose": "Mapa opcional de alimentação",
+      "architectural": true,
+      "recharge": 4,
+      "cooldown": 0
+    },
+    {
+      "id": "warden-hook-left",
+      "x": 4660,
+      "y": 500,
+      "industrial": true,
+      "recharge": 3,
+      "cooldown": 0,
+      "purpose": "Escape controlado de investida, laser e ondas de Warden"
+    },
+    {
+      "id": "warden-hook-right",
+      "x": 4970,
+      "y": 480,
+      "industrial": true,
+      "recharge": 3,
+      "cooldown": 0,
+      "purpose": "Escape controlado de investida, laser e ondas de Warden"
+    }
+  ],
+  "visuals": [],
+  "towerBarriers": [
+    {
+      "id": "tower-lab-barrier-1",
+      "x": 10620,
+      "y": -720,
+      "w": 28,
+      "h": 1510,
+      "panelX": 10540,
+      "solid": {
+        "id": "tower-lab-barrier-1",
+        "x": 10620,
+        "y": -720,
+        "w": 28,
+        "h": 1510,
+        "panelX": 10540,
+        "kind": "glass"
+      }
+    },
+    {
+      "id": "tower-lab-barrier-2",
+      "x": 12020,
+      "y": -720,
+      "w": 28,
+      "h": 1510,
+      "panelX": 11940,
+      "solid": {
+        "id": "tower-lab-barrier-2",
+        "x": 12020,
+        "y": -720,
+        "w": 28,
+        "h": 1510,
+        "panelX": 11940,
+        "kind": "glass"
+      }
+    }
+  ],
+  "worldDesign": 2,
+  "routes": [
+    {
+      "id": "s9-step",
+      "x": 310,
+      "y": 690,
+      "route": "main"
+    },
+    {
+      "id": "s9-balcony",
+      "x": 515,
+      "y": 610,
+      "route": "main"
+    },
+    {
+      "id": "s9-tutorial-roof",
+      "x": 955,
+      "y": 580,
+      "route": "main"
+    },
+    {
+      "id": "s9-log-roof",
+      "x": 1245,
+      "y": 570,
+      "route": "main"
+    },
+    {
+      "id": "s9-shortcut-west",
+      "x": 980,
+      "y": 395,
+      "route": "optional"
+    },
+    {
+      "id": "s9-shortcut-east",
+      "x": 1250,
+      "y": 395,
+      "route": "main"
+    },
+    {
+      "id": "s9-quarantine-ledge",
+      "x": 1295,
+      "y": 215,
+      "route": "main"
+    },
+    {
+      "id": "s9-antenna-lower",
+      "x": 1065,
+      "y": 110,
+      "route": "optional"
+    },
+    {
+      "id": "s9-antenna-middle",
+      "x": 860,
+      "y": -100,
+      "route": "optional"
+    },
+    {
+      "id": "s9-antenna",
+      "x": 690,
+      "y": -350,
+      "route": "optional"
+    },
+    {
+      "id": "factory-loading",
+      "x": 2680,
+      "y": 690,
+      "route": "main"
+    },
+    {
+      "id": "factory-assembly",
+      "x": 3015,
+      "y": 680,
+      "route": "main"
+    },
+    {
+      "id": "factory-log",
+      "x": 3150,
+      "y": 590,
+      "route": "main"
+    },
+    {
+      "id": "factory-maintenance",
+      "x": 3400,
+      "y": 650,
+      "route": "main"
+    },
+    {
+      "id": "factory-coolant-west",
+      "x": 3460,
+      "y": 550,
+      "route": "main"
+    },
+    {
+      "id": "factory-coolant-east",
+      "x": 3850,
+      "y": 550,
+      "route": "main"
+    },
+    {
+      "id": "factory-service-west",
+      "x": 3950,
+      "y": 590,
+      "route": "main"
+    },
+    {
+      "id": "factory-service-east",
+      "x": 4230,
+      "y": 590,
+      "route": "main"
+    },
+    {
+      "id": "factory-crane-lower",
+      "x": 3590,
+      "y": 310,
+      "route": "optional"
+    },
+    {
+      "id": "factory-crane-middle",
+      "x": 3855,
+      "y": 40,
+      "route": "optional"
+    },
+    {
+      "id": "factory-crane",
+      "x": 3950,
+      "y": -310,
+      "route": "optional"
+    },
+    {
+      "id": "factory-turns-balcony",
+      "x": 2625,
+      "y": 240,
+      "route": "optional"
+    },
+    {
+      "id": "factory-turns-lower",
+      "x": 2755,
+      "y": 440,
+      "route": "optional"
+    },
+    {
+      "id": "security-entry",
+      "x": 5625,
+      "y": 680,
+      "route": "main"
+    },
+    {
+      "id": "security-west",
+      "x": 5905,
+      "y": 565,
+      "route": "main"
+    },
+    {
+      "id": "security-camera",
+      "x": 6200,
+      "y": 455,
+      "route": "main"
+    },
+    {
+      "id": "security-partition-west",
+      "x": 6410,
+      "y": 565,
+      "route": "main"
+    },
+    {
+      "id": "security-laser-bridge",
+      "x": 6825,
+      "y": 675,
+      "route": "main"
+    },
+    {
+      "id": "security-partition-east",
+      "x": 7450,
+      "y": 565,
+      "route": "main"
+    },
+    {
+      "id": "security-lift",
+      "x": 7990,
+      "y": 680,
+      "route": "main"
+    },
+    {
+      "id": "security-log",
+      "x": 6305,
+      "y": 245,
+      "route": "optional"
+    },
+    {
+      "id": "security-archive-lower",
+      "x": 6680,
+      "y": 40,
+      "route": "optional"
+    },
+    {
+      "id": "security-archive-upper",
+      "x": 6990,
+      "y": -155,
+      "route": "optional"
+    },
+    {
+      "id": "security-audit",
+      "x": 7330,
+      "y": -315,
+      "route": "optional"
+    },
+    {
+      "id": "lab-entry",
+      "x": 9240,
+      "y": 675,
+      "route": "main"
+    },
+    {
+      "id": "lab-west",
+      "x": 9560,
+      "y": 560,
+      "route": "main"
+    },
+    {
+      "id": "lab-partition-west",
+      "x": 9815,
+      "y": 445,
+      "route": "main"
+    },
+    {
+      "id": "lab-log",
+      "x": 10010,
+      "y": 330,
+      "route": "main"
+    },
+    {
+      "id": "lab-panel-approach",
+      "x": 10335,
+      "y": 560,
+      "route": "main"
+    },
+    {
+      "id": "lab-barrier-east",
+      "x": 10855,
+      "y": 675,
+      "route": "main"
+    },
+    {
+      "id": "lab-panel-return",
+      "x": 10350,
+      "y": 675,
+      "route": "main"
+    },
+    {
+      "id": "lab-east-approach",
+      "x": 11120,
+      "y": 675,
+      "route": "main"
+    },
+    {
+      "id": "lab-camera",
+      "x": 11310,
+      "y": 445,
+      "route": "main"
+    },
+    {
+      "id": "lab-partition-east",
+      "x": 11550,
+      "y": 330,
+      "route": "main"
+    },
+    {
+      "id": "lab-exit",
+      "x": 11820,
+      "y": 560,
+      "route": "main"
+    },
+    {
+      "id": "lab-lift",
+      "x": 12310,
+      "y": 680,
+      "route": "main"
+    },
+    {
+      "id": "lab-east-return",
+      "x": 11590,
+      "y": 560,
+      "route": "main"
+    },
+    {
+      "id": "lab-exit-return",
+      "x": 11770,
+      "y": 675,
+      "route": "main"
+    },
+    {
+      "id": "lab-employees",
+      "x": 10180,
+      "y": 210,
+      "route": "optional"
+    },
+    {
+      "id": "lab-consent-middle",
+      "x": 9860,
+      "y": -40,
+      "route": "optional"
+    },
+    {
+      "id": "lab-consent",
+      "x": 10010,
+      "y": -315,
+      "route": "optional"
+    },
+    {
+      "id": "core-step",
+      "x": 13185,
+      "y": 680,
+      "route": "main"
+    },
+    {
+      "id": "core-maintenance",
+      "x": 13350,
+      "y": 570,
+      "route": "main"
+    },
+    {
+      "id": "core-shaft-crossing",
+      "x": 13500,
+      "y": 460,
+      "route": "main"
+    },
+    {
+      "id": "core-terminal",
+      "x": 13670,
+      "y": 350,
+      "route": "optional"
+    },
+    {
+      "id": "core-descent",
+      "x": 13710,
+      "y": 680,
+      "route": "main"
+    },
+    {
+      "id": "core-map-middle",
+      "x": 13240,
+      "y": 290,
+      "route": "optional"
+    },
+    {
+      "id": "core-map",
+      "x": 13180,
+      "y": 100,
+      "route": "optional"
+    }
+  ]
+}

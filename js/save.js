@@ -7,6 +7,7 @@ import{createBosses}from'./bosses.js';
 import{freshAbilities}from'./abilities.js';
 import{REGIONS,ROOM_W,WORLD_W,GROUND,regionAt,buildMap,SECTOR9_LAYOUT,FACTORY_LAYOUT,factoryX,MATRONA_ARENA}from'./map.js';
 import{checkpointFor,syncProgress,unlockedAct}from'./campaign.js';
+import{resolveCheckpoint,checkpointState,CHECKPOINTS,TRANSIT_SPAWNS}from'./checkpoints.js';
 const KEY='nova-aurora-save-v1';
 const finite=(value,fallback,min=0,max=100000)=>Number.isFinite(value)?Math.max(min,Math.min(max,value)):fallback;
 export function normalizeSave(v){
@@ -26,6 +27,8 @@ export function normalizeSave(v){
  if(bosses[1].dead)bosses[0].dead=true;
  bosses.forEach(b=>{if(b.dead){b.health=0;if(b.assetId==='vespera')restoreDefeatedVespera(b)}});
  const state={...v,version:2,worldDesign:WORLD_DESIGN,towerLayout:TOWER_LAYOUT,factoryLayout:FACTORY_LAYOUT,sector9Layout:SECTOR9_LAYOUT,player,abilities,bosses,events:Array.isArray(v.events)?[...new Set(v.events.filter(x=>typeof x==='string'))]:[],items:Array.isArray(v.items)?[...new Set(v.items.filter(x=>typeof x==='string'))]:[],credits:finite(v.credits,40,0,99999),playTime:finite(v.playTime,0),explored:[],quests:[]};
+ const history=v.checkpointHistory&&typeof v.checkpointHistory==='object'?v.checkpointHistory:{};
+ state.checkpointHistory=Object.fromEntries(Object.entries(history).filter(([key,id])=>[...CHECKPOINTS,...TRANSIT_SPAWNS].some(cp=>cp.id===id&&key===(cp.floor||'region-'+cp.region))));
  if(!v.towerLayout){if(state.events.includes('ending'))state.events.push('tower-central-shutdown');if(v.version===2&&player.x>=5200){player.x=5390;player.y=GROUND-player.h-3;v.player.x=5390;} }
  syncProgress(state);
  const unlocked=unlockedAct(state);
@@ -37,14 +40,16 @@ export function normalizeSave(v){
  const wasDead=v.player.dead||v.player.health<=0;
  const relocate=invalidPosition||wasDead||(legacy&&oldIndex===2)||desired!==(legacy?(oldIndex>=3?2:oldIndex):REGIONS.indexOf(regionAt(oldX)));
  // Checkpoints are selected from real level data, never arbitrary stale coordinates.
- const checkpoints=buildMap().checkpoints;
+
  let cpRegion=legacy?(v.checkpoint?.region>=3?2:v.checkpoint?.region===2?1:v.checkpoint?.region):v.checkpoint?.region;
  cpRegion=Math.max(0,Math.min(unlocked,Number.isInteger(cpRegion)?cpRegion:desired));
  const checkpointX=(v.sector9Layout||1)<SECTOR9_LAYOUT&&cpRegion===0&&v.checkpoint?.x===1580?1440:v.checkpoint?.x;
  const mappedCheckpoint=legacy&&Number.isFinite(checkpointX)?cpRegion*ROOM_W+checkpointX%ROOM_W:checkpointX;
- const validCp=checkpoints.find(cp=>cp.x===mappedCheckpoint&&REGIONS.indexOf(regionAt(cp.x))===cpRegion);
- state.checkpoint=validCp?{x:validCp.x,y:GROUND-player.h-3,region:cpRegion,floor:validCp.floor,name:validCp.name}:checkpointFor(cpRegion);
- if(relocate){if(!wasDead)state.checkpoint=checkpointFor(desired);player.x=state.checkpoint.x;player.y=state.checkpoint.y;if(wasDead)player.health=player.maxHealth;}
+ const savedFloor=(desired===2&&towerFloorAt(oldX)?.id)||towerFloorAt(mappedCheckpoint)?.id;
+ const validCp=resolveCheckpoint({...v.checkpoint,x:mappedCheckpoint},cpRegion,savedFloor);
+ state.checkpoint=validCp?checkpointState(validCp,player.h):checkpointFor(cpRegion);
+ if(state.checkpoint.id==='s9-matrona'&&(abilities.hook||bosses[0].dead)&&!state.events.includes('s9-quarantine-return'))state.events.push('s9-quarantine-return');
+ if(relocate){if(!wasDead)state.checkpoint=desired===2&&towerFloorAt(oldX)?checkpointState(resolveCheckpoint(null,2,towerFloorAt(oldX).id),player.h):checkpointFor(desired);player.x=state.checkpoint.x;player.y=state.checkpoint.y;if(wasDead)player.health=player.maxHealth;}
  else{player.x=Math.max(0,Math.min(WORLD_W-player.w,mappedX));player.y=Math.min(player.y,GROUND-player.h);}
  // The old waiting area is now inside the larger arena. An old save there
  // resumes at the new pre-boss checkpoint instead of starting combat on load.
@@ -54,7 +59,13 @@ export function normalizeSave(v){
  for(const s of buildMap(state.events).platforms)if(s.h>=70&&s.y<GROUND&&player.x+player.w>s.x&&player.x<s.x+s.w&&player.y+player.h>s.y&&player.y<s.y+s.h){if(s.y-player.h>=WORLD_TOP)player.y=s.y-player.h;else{player.x=s.x-player.w-12;player.y=GROUND-player.h-3;}}
  // A legacy floor coordinate may now be inside the relocated coolant or press.
  if((v.factoryLayout||1)<FACTORY_LAYOUT&&desired===1)for(const h of buildMap(state.events).hazards)if(player.x+player.w>h.x&&player.x<h.x+h.w&&player.y+player.h>h.y&&player.y<h.y+h.h){player.x=h.x-player.w-12;player.y=GROUND-player.h-3;}
- const floor=towerFloorAt(player.x);if(floor&&towerFloorAt(state.checkpoint.x)?.id!==floor.id)state.checkpoint={x:floor.checkpoint,y:GROUND-player.h-3,region:2,floor:floor.id,name:floor.name+' \u00b7 Abrigo'};state.towerFloor=floor?.id||null;
+ // Old suspended decks may no longer exist. Do not drop a resumed save into a
+ // coolant pool merely because the stored body is not yet touching the hazard.
+ if((v.worldDesign||1)<WORLD_DESIGN&&player.y+player.h<GROUND-5){
+  const supported=buildMap(state.events).platforms.some(p=>player.x+player.w>p.x&&player.x<p.x+p.w&&Math.abs(player.y+player.h-p.y)<6);
+  if(!supported){const f=towerFloorAt(player.x);state.checkpoint=checkpointState(resolveCheckpoint(state.checkpoint,REGIONS.indexOf(regionAt(player.x)),f?.id),player.h);player.x=state.checkpoint.x;player.y=state.checkpoint.y}
+ }
+ const floor=towerFloorAt(player.x);if(floor&&towerFloorAt(state.checkpoint.x)?.id!==floor.id)state.checkpoint=checkpointState(resolveCheckpoint(null,2,floor.id),player.h);state.towerFloor=floor?.id||null;
  player.checkpoint={...state.checkpoint};
  const seen=Array.isArray(v.explored)?v.explored.filter(Number.isInteger):[];
  state.explored=[...new Set(seen.filter(id=>id>=0).flatMap(id=>legacy?(id<6?[id]:id<9?[]:id<15?[id>=12?8:id-3]:[]):id>=0&&id<9?[id]:[]))];

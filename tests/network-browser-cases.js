@@ -40,7 +40,7 @@ export async function complete(){
  document.querySelector('#dialog-screen').dispatchEvent(new KeyboardEvent('keydown',{key:'2',bubbles:true}));check(e.network.session.stage==='success','numeric keyboard selects correct DNS');
  check(e.state.abilities.hook,'grapple awarded');const rewards=e.state.network.grantedRewardIds.length;e.network.answer(1);check(e.state.network.grantedRewardIds.length===rewards,'success is single payout');clickFirst();
  check(e.ui.dialogueLines[0].text.includes('assinatura antiga'),'Yara continues tutorial');closeConversation(e);check(e.state.events.includes('yara-network-training'),'tutorial follow-up saved');
- p.x=525;p.y=790-p.h;p.energy=100;e.useImplant();check(p.hookCable&&p.vy<0,'actual grapple works');
+ p.x=850;p.y=790-p.h;p.energy=100;e.useImplant();check(p.hookCable&&p.vy<0,'actual grapple works');
  const cancelTerminal=e.world.map.terminals.find(t=>t.questionId==='t02_setor9_dhcp');place(e,cancelTerminal);e.interact();clickFirst();document.querySelector('#dialog-screen').dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));check(!e.paused&&!e.network.session,'unanswered modal can close');check(!e.state.network.completedTerminalIds.includes('t02_setor9_dhcp'),'closing does not complete question');
  for(const q of NETWORK_QUESTIONS.slice(1)){
   const t=e.world.map.terminals.find(t=>t.questionId===q.id);place(e,t);e.interact();check(e.network.session?.q.id===q.id,'actual terminal interaction '+q.id);clickFirst();

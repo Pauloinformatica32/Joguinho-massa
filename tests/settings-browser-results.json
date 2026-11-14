@@ -1,0 +1,17 @@
+{
+  "titleFullscreen": true,
+  "fullscreen": {
+    "active": true,
+    "logical": [
+      960,
+      540
+    ],
+    "ratio": 1.7777777777777777,
+    "hudAligned": true,
+    "menuFits": true,
+    "preserved": true
+  },
+  "dropThrough": "Mecânica ausente; interface Baixo + Salto preservada, física não alterada.",
+  "checks": 51,
+  "errors": 0
+}

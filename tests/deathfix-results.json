@@ -1,0 +1,152 @@
+{
+  "fallValidation": {
+    "stable": true,
+    "transparent": true
+  },
+  "jump": {
+    "states": [
+      "jump",
+      "fall",
+      "landing",
+      "idle"
+    ],
+    "damage": false,
+    "health": 100
+  },
+  "ground": {
+    "frames": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "health": 95
+  },
+  "air": {
+    "frames": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "health": 90
+  },
+  "deaths": [
+    {
+      "cause": "enemy",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "elapsed": 1.3164000000003726,
+      "lastHold": 0.4335,
+      "frozen": true,
+      "earlyOverlay": false,
+      "stage": "screen",
+      "source": "i9_blade",
+      "checkpointIntact": true,
+      "keys": 0,
+      "respawn": {
+        "x": 5390,
+        "y": 733,
+        "cp": {
+          "x": 5390,
+          "y": 733,
+          "region": 2,
+          "name": "Elevador de serviço"
+        },
+        "alive": true,
+        "stage": null,
+        "timer": 0,
+        "attack": 0,
+        "dash": 0,
+        "hidden": true,
+        "paused": false
+      }
+    },
+    {
+      "cause": "hazard",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "elapsed": 1.3165999999996274,
+      "lastHold": 0.43340000000037254,
+      "frozen": true,
+      "earlyOverlay": false,
+      "stage": "screen",
+      "source": "hazard_laser",
+      "checkpointIntact": true,
+      "keys": 0,
+      "respawn": {
+        "x": 5390,
+        "y": 733,
+        "cp": {
+          "x": 5390,
+          "y": 733,
+          "region": 2,
+          "name": "Elevador de serviço"
+        },
+        "alive": true,
+        "stage": null,
+        "timer": 0,
+        "attack": 0,
+        "dash": 0,
+        "hidden": true,
+        "paused": false
+      }
+    },
+    {
+      "cause": "enemy",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "elapsed": 1.3012000000001862,
+      "lastHold": 0.41790000000037253,
+      "frozen": true,
+      "earlyOverlay": false,
+      "stage": "screen",
+      "source": "i9_blade",
+      "checkpointIntact": true,
+      "keys": 0,
+      "respawn": {
+        "x": 5390,
+        "y": 733,
+        "cp": {
+          "x": 5390,
+          "y": 733,
+          "region": 2,
+          "name": "Elevador de serviço"
+        },
+        "alive": true,
+        "stage": null,
+        "timer": 0,
+        "attack": 0,
+        "dash": 0,
+        "hidden": true,
+        "paused": false
+      }
+    }
+  ]
+}

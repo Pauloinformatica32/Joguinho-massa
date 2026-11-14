@@ -1,3 +1,4 @@
+import{findTransition}from'./level-traversal.js';
 import assert from 'node:assert/strict';
 import {buildMap,REGIONS,GROUND,factoryX} from '../js/map.js';
 import {spawnEnemies,updateEnemies,industrialAttackBox} from '../js/enemies.js';
@@ -30,15 +31,8 @@ for(const fps of [30,60,120]){
   updatePlayer(q,{right:true,jump,platforms:map.platforms},dt,{doubleJump:true,dash:true});
  }
  assert.ok(q.x>=4480,'main route at '+fps+' '+JSON.stringify({x:q.x,y:q.y,jumped}));assert.ok(jumped>=4);
- // Each upper-route jump must land using the real physics, without hook/dash.
- const route=[[2880,790,60],[2960,680,200],[3190,585,170],[3370,490,170],[3540,395,190]];
- for(let i=0;i<route.length-1;i++){
-  const [x,y,w]=route[i],[tx,ty,tw]=route[i+1];let reachable=false;
-  for(const start of [x+w-65,x+w-35]){
-   const a=createPlayer();a.x=start;a.y=y-a.h;a.grounded=true;a.vx=200;
-   for(let tick=0;tick<fps*1.5;tick++){updatePlayer(a,{right:a.x<tx+tw-50,jump:tick===0,platforms:map.platforms},dt,{});if(a.grounded&&a.y+a.h===ty&&a.x+a.w>tx&&a.x<tx+tw)reachable=true;}
-  }assert.ok(reachable,`upper route ${i} at ${fps}`);
- }
+ const route=['factory-assembly','factory-log','factory-maintenance','factory-coolant-west'];
+ for(let i=0;i<route.length-1;i++)assert.ok(findTransition(map,map.platforms.find(p=>p.id===route[i]),map.platforms.find(p=>p.id===route[i+1]),{fps,doubleJump:true,hook:false}), 'authored industrial catwalk '+route[i]);
 }
 for(const x of [2700,3980,4100,4710,4900,6500]){
  const old=newState();delete old.factoryLayout;old.bosses[0].dead=true;old.bosses[1].dead=x>=4800;old.player.x=x;old.player.y=736;old.checkpoint={x:3980,y:733,region:1};old.credits=123;

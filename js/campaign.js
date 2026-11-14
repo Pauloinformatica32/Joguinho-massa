@@ -1,6 +1,7 @@
 import{towerFloorAt}from'./tower-layout.js';
 import{REGIONS,ROOM_W,GROUND,regionAt,roomAt}from'./map.js';
 import{awardAbility}from'./abilities.js';
+import{checkpointById,checkpointState,entryCheckpoint}from'./checkpoints.js';
 
 export const ACTS=[
  {id:'act-1',boss:'boss-0',name:'Ato 1 · Investigar as infecções e derrotar Matrona',revelation:'Os registros de Matrona confirmam: a Aurora Dynamics produziu as infecções. Dispositivos contaminados saem do Complexo Industrial. O bloqueio foi removido.',abilities:['dash','doubleJump']},
@@ -9,7 +10,7 @@ export const ACTS=[
 ];
 export function defeated(state,id){return state.bosses.some(b=>b.id===id&&b.dead)}
 export function unlockedAct(state){return defeated(state,'boss-0')?(defeated(state,'boss-2')?2:1):0}
-export function checkpointFor(region=0,beforeBoss=false){const i=Math.max(0,Math.min(2,region));return{x:REGIONS[i].x+(beforeBoss?(i===0?1440:(i===1?1980:1580)):i===0?310:i===1?170:190),y:GROUND-57,region:i,name:beforeBoss?['Oficina do bloqueio','Manutenção de segurança','Abrigo do núcleo'][i]:['Abrigo da Chuva','Gerador auxiliar','Elevador de serviço'][i]}}
+export function checkpointFor(region=0,beforeBoss=false){const i=Math.max(0,Math.min(2,region));return checkpointState(beforeBoss?checkpointById(['s9-matrona','factory-warden','tower_floor_3-checkpoint'][i]):entryCheckpoint(i))}
 export function syncProgress(state){
  state.quests=ACTS.map(a=>({id:a.id,name:a.name,goal:1,progress:(a.id==='act-3'?state.events.includes('tower-central-shutdown'):defeated(state,a.boss))?1:0,complete:a.id==='act-3'?state.events.includes('tower-central-shutdown'):defeated(state,a.boss)}));
  state.quests.push({id:'records',name:'Opcional · Recuperar os três registros da Aurora',goal:3,progress:['log-1','log-2','log-3'].filter(id=>state.events.includes(id)).length,complete:['log-1','log-2','log-3'].every(id=>state.events.includes(id))});

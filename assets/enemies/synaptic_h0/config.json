@@ -34,6 +34,7 @@
       "loop": true
     },
     "attack": {
+      "nativeFacing": 1,
       "sheet": "assets/enemies/synaptic_h0/attack.png",
       "frameWidth": 160,
       "frameHeight": 192,

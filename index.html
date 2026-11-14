@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#08111b"><title>Nova Aurora — Sinal Morto</title>
-  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/ui.css"><link rel="stylesheet" href="css/asset-lab.css"><link rel="stylesheet" href="css/network-hacking.css">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/ui.css"><link rel="stylesheet" href="css/asset-lab.css"><link rel="stylesheet" href="css/network-hacking.css"><link rel="stylesheet" href="css/dialogue-portraits.css"><link rel="stylesheet" href="css/settings.css">
 </head>
 <body>
 <main id="app">
-  <header class="topbar"><strong>NOVA <i>AURORA</i></strong><span id="area-label">SECTOR 09 · FAVELAS INFERIORES</span><button id="pause-open" aria-label="Pausar">Ⅱ</button></header>
+  <header class="topbar"><strong>NOVA <i>AURORA</i></strong><span id="area-label">SECTOR 09 · FAVELAS INFERIORES</span><button data-fullscreen data-icon type="button" aria-label="Tela cheia">⛶</button><button id="pause-open" aria-label="Pausar">Ⅱ</button></header>
   <section class="stage"><canvas id="game" width="960" height="540" aria-label="Nova Aurora, jogo de plataformas"></canvas>
-    <div class="hud"><div class="status"><div class="portrait">K</div><div><strong>KAEL</strong><div class="bar"><i id="health-fill"></i></div><small id="health-text">100 / 100</small></div><div class="energy"><span>ENERGIA</span><div class="bar cyan"><i id="energy-fill"></i></div><small id="energy-text">100%</small></div><div class="credits"><span>CR</span><strong id="credits-label">40</strong></div></div>
+    <div class="fullscreen-tools"><button id="stage-pause" aria-label="Pausar">Ⅱ</button><button data-fullscreen data-icon type="button" aria-label="Sair da tela cheia">⛶</button></div><div class="hud"><div class="status"><div class="portrait">K</div><div><strong>KAEL</strong><div class="bar"><i id="health-fill"></i></div><small id="health-text">100 / 100</small></div><div class="energy"><span>ENERGIA</span><div class="bar cyan"><i id="energy-fill"></i></div><small id="energy-text">100%</small></div><div class="credits"><span>CR</span><strong id="credits-label">40</strong></div></div>
       <div id="implant-hud" class="implant-hud" aria-label="Implantes opcionais"></div>
       <div class="objective" id="objective">Ato 1 · Investigue as infecções no Setor 9 · E para interagir</div><div class="toast" id="toast"></div>
       <div class="boss-hud hidden" id="boss-hud"><span id="boss-name">CHEFE</span><div class="bar bossbar"><i id="boss-fill"></i></div></div>
     </div>
-    <div class="screen" id="title-screen"><div class="title-card"><p class="eyebrow">UM METROIDVANIA CYBERPUNK ORIGINAL</p><h1>NOVA<br><em>AURORA</em></h1><p class="subtitle">Um vírus controla a cidade. Kael precisa descobrir quem o transmite.</p><label for="pilot-name">IDENTIFICAÇÃO</label><input id="pilot-name" maxlength="14" value="Kael"><div class="actions"><button id="new-game" class="primary">NOVA JORNADA</button><button id="continue-game">CONTINUAR</button></div><small>Setor 9 · Chuva ácida · 03:17</small></div></div>
-    <div class="screen hidden" id="pause-screen"><div class="panel"><p class="eyebrow">TERMINAL PESSOAL</p><h2 id="panel-title">PAUSADO</h2><nav><button data-tab="map">Mapa</button><button data-tab="implants">IMPLANTES</button><button data-tab="abilities">Habilidades</button><button data-tab="journal">Registros</button><button data-tab="controls">Controles</button></nav><div id="panel-content"></div><div class="actions"><button id="save-button">GUARDAR</button><button id="resume-button" class="primary">VOLTAR AO JOGO</button></div></div></div>
-    <div class="screen hidden" id="dialog-screen" role="dialog" aria-modal="true" aria-labelledby="speaker"><div class="dialog"><strong id="speaker">TERMINAL</strong><p id="dialog-text"></p><div id="dialog-actions" class="actions hidden"></div><button id="dialog-close">FECHAR · E</button></div></div>
+    <div class="screen" id="title-screen"><div class="title-card"><p class="eyebrow">UM METROIDVANIA CYBERPUNK ORIGINAL</p><h1>NOVA<br><em>AURORA</em></h1><p class="subtitle">Um vírus controla a cidade. Kael precisa descobrir quem o transmite.</p><label for="pilot-name">IDENTIFICAÇÃO</label><input id="pilot-name" maxlength="14" value="Kael"><div class="actions"><button id="new-game" class="primary">NOVA JORNADA</button><button id="continue-game">CONTINUAR</button></div><small>Setor 9 · Chuva ácida · 03:17</small><button id="title-settings" type="button">CONFIGURAÇÕES</button></div></div>
+    <div class="screen hidden" id="pause-screen" role="dialog" aria-modal="true" aria-labelledby="panel-title"><div class="panel"><p class="eyebrow">TERMINAL PESSOAL</p><h2 id="panel-title">PAUSADO</h2><nav><button data-tab="map">Mapa</button><button data-tab="implants">IMPLANTES</button><button data-tab="abilities">Habilidades</button><button data-tab="journal">Registros</button><button data-tab="controls">CONFIGURAÇÕES · CONTROLES</button><button data-tab="video">VÍDEO</button></nav><div id="panel-content"></div><div class="actions"><button id="save-button">GUARDAR</button><button id="resume-button" class="primary">VOLTAR AO JOGO</button></div></div></div>
+    <div class="screen hidden" id="dialog-screen" role="dialog" aria-modal="true" aria-labelledby="speaker"><div class="dialog"><div id="dialog-portrait" class="portrait-frame hidden"><img alt="" width="96" height="96"></div><strong id="speaker">TERMINAL</strong><p id="dialog-text"></p><div id="dialog-actions" class="actions hidden"></div><button id="dialog-close">FECHAR · E</button></div></div>
     <div class="screen hidden" id="death-screen"><div class="panel"><p class="eyebrow">SINAL PERDIDO</p><h2>O implante entrou em colapso</h2><p id="death-copy">Acordas no último abrigo ativo.</p><button id="respawn-button" class="primary">REINICIAR SINAL</button></div></div>
     <div class="screen hidden" id="ending-screen" role="dialog" aria-modal="true" aria-label="Conclusão da campanha">
       <div class="ending-card">
@@ -36,7 +36,7 @@
       <ul id="asset-lab-results"></ul><pre id="asset-lab-errors"></pre>
     </aside>
   </section>
-  <footer class="controls"><span><b>A / D</b> mover</span><span><b>ESPAÇO</b> saltar</span><span><b>J / CLIQUE</b> atacar</span><span><b>K</b> gancho / EMP</span><span><b>1 / 2 / 3</b> equipar implante</span><span><b>Q</b> alternar</span><span><b>F</b> ativar implante</span><span><b>SHIFT</b> impulso</span><span><b>E</b> interagir</span><span><b>M</b> mapa</span><span><b>ESC</b> pausa</span><button id="asset-lab-button" type="button"><b>G</b> laboratório de assets</button></footer>
+  <footer class="controls" aria-label="Controles atuais"></footer>
 </main>
 <script type="module" src="js/main.js"></script>
 </body></html>

@@ -1,16 +1,70 @@
 import{Engine,newState}from'./engine.js';import{UI}from'./ui.js';import{loadGame,saveGame,hasSave}from'./save.js';
-const $=s=>document.querySelector(s);let engine=null,state=null,ui=null,last=performance.now();const title=$('#title-screen'),pause=$('#pause-screen'),dialog=$('#dialog-screen');
-function begin(next){state=next;ui=new UI();engine=new Engine($('#game'),state,ui);title.classList.add('hidden');pause.classList.add('hidden');dialog.classList.add('hidden');ui.toast(`Sinal ativo · ${state.player.name}`);engine.render();if(state.events.includes('ending')){engine.paused=true;ui.showEnding(state)}}
+import{ACTIONS,controls,keyLabel,primaryKey,canonical,codeOf,matchesAction}from'./input.js';
+import{settingsMenu}from'./settings-ui.js';import{FullscreenController}from'./fullscreen.js';
+const $=s=>document.querySelector(s);let engine=null,state=null,ui=null,last=performance.now(),menuOrigin='game',previousFocus=null;
+const title=$('#title-screen'),pause=$('#pause-screen'),dialog=$('#dialog-screen');
+const clearInput=()=>{engine?.keys.clear();engine?.pressed.clear()};
+const fullscreen=new FullscreenController($('.stage'),clearInput);
+settingsMenu.configure({clearInput,canCapture:()=>!engine?.network.session,fullscreen});
+function refreshInstructions(){
+ const footer=$('.controls');footer.replaceChildren();
+ for(const [action,label]of [['moveLeft','esquerda'],['moveRight','direita'],['moveDown','baixo'],['jump','pular'],['attack','atacar'],['dash','impulso'],['special','gancho / EMP'],['interact','interagir'],['equip1','implante 1'],['equip2','implante 2'],['equip3','implante 3'],['cycleImplant','alternar'],['activateImplant','ativar'],['map','mapa'],['pause','pausa']]){
+  const span=document.createElement('span'),b=document.createElement('b');b.textContent=keyLabel(action);span.append(b,' '+label);footer.append(span);
+ }
+ const button=document.createElement('button');button.id='asset-lab-button';button.type='button';button.textContent='G · laboratório de assets';button.onclick=openAssetLab;footer.append(button);
+}
+function begin(next){settingsMenu.close();state=next;ui=new UI();engine=new Engine($('#game'),state,ui);title.classList.add('hidden');pause.classList.add('hidden');pause.classList.remove('title-settings');dialog.classList.add('hidden');$('#save-button').classList.remove('hidden');$('#resume-button').textContent='VOLTAR AO JOGO';ui.toast(`Sinal ativo · ${state.player.name}`);engine.render();if(state.events.includes('ending')){engine.paused=true;ui.showEnding(state)}}
+function openAssetLab(){if(engine?.state.player.dead||engine?.network.session||!pause.classList.contains('hidden')||!dialog.classList.contains('hidden'))return;if(!engine)begin(newState($('#pilot-name').value.trim()||'Kael'));clearInput();engine.toggleAssetLab()}
+function closeMenu(){settingsMenu.close();pause.classList.add('hidden');if(engine&&menuOrigin!=='title')engine.paused=false;clearInput();previousFocus?.focus?.({preventScroll:true});previousFocus=null}
+function togglePause(force){
+ if(!engine||engine.state.player.dead||engine.network.session||!dialog.classList.contains('hidden')||!$('#ending-screen').classList.contains('hidden'))return;
+ const open=force??pause.classList.contains('hidden');if(!open){closeMenu();return}
+ previousFocus=document.activeElement;menuOrigin='game';engine.paused=true;clearInput();pause.classList.remove('hidden','title-settings');$('#save-button').classList.remove('hidden');$('#resume-button').textContent='VOLTAR AO JOGO';ui.panel(state,'map');$('#resume-button').focus({preventScroll:true});
+}
+function openSettings(fromTitle=false){
+ if(engine?.network.session||engine?.state.player.dead)return;previousFocus=document.activeElement;menuOrigin=fromTitle?'title':'game';if(engine)engine.paused=true;clearInput();ui??=new UI();pause.classList.remove('hidden');pause.classList.toggle('title-settings',fromTitle);$('#save-button').classList.toggle('hidden',fromTitle);$('#resume-button').textContent=fromTitle?'VOLTAR AO INÍCIO':'VOLTAR AO JOGO';ui.panel(state,'controls');pause.querySelector('[data-tab="controls"]').focus({preventScroll:true});
+}
 $('#new-game').onclick=()=>begin(newState($('#pilot-name').value.trim()||'Kael'));
 $('#continue-game').disabled=!hasSave();$('#continue-game').onclick=()=>{const saved=loadGame();if(saved)begin(saved);else ui?.toast('Não existe uma gravação válida.')};
-$('#pause-open').onclick=()=>togglePause();$('#resume-button').onclick=()=>togglePause(false);$('#save-button').onclick=()=>{if(saveGame(state))ui.toast('Progresso guardado no abrigo local.')};$('#respawn-button').onclick=()=>{engine.paused=false;engine.respawn()};
-$('#asset-lab-button').onclick=()=>{if(!engine)begin(newState($('#pilot-name').value.trim()||'Kael'));engine.toggleAssetLab()};$('#asset-lab-close').onclick=()=>engine?.toggleAssetLab(false);
-function togglePause(force){if(!engine||!$('#ending-screen').classList.contains('hidden'))return;const open=force??!engine.paused;engine.paused=open;engine.keys.clear();engine.pressed.clear();pause.classList.toggle('hidden',!open);if(open)ui.panel(state,'map')}
-document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>ui.panel(state,b.dataset.tab));
-$('#ending-continue').onclick=()=>{$('#ending-screen').classList.add('hidden');engine.paused=false;engine.keys.clear();engine.pressed.clear();engine.render();};
+$('#title-settings').onclick=()=>openSettings(true);$('#pause-open').onclick=()=>togglePause();$('#stage-pause').onclick=()=>togglePause();$('#resume-button').onclick=closeMenu;
+$('#save-button').onclick=()=>{if(state&&saveGame(state))ui.toast('Progresso guardado no abrigo local.')};$('#respawn-button').onclick=()=>engine?.respawn();
+$('#asset-lab-close').onclick=()=>engine?.toggleAssetLab(false);
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{clearInput();settingsMenu.close();ui.panel(state,b.dataset.tab)});
+document.querySelectorAll('[data-fullscreen]').forEach(b=>b.onclick=()=>fullscreen.toggle());
+controls.subscribe(()=>{clearInput();refreshInstructions();if(ui&&state)ui.update(state)});refreshInstructions();
+$('#ending-continue').onclick=()=>{$('#ending-screen').classList.add('hidden');engine.paused=false;clearInput();engine.render()};
 $('#dialog-close').onclick=()=>{if(engine)engine.advanceDialog();else dialog.classList.add('hidden')};
-window.addEventListener('keydown',e=>{const key=e.key.toLowerCase();if(engine?.network.session){engine.network.keydown(e);return}if([' ','arrowleft','arrowright','arrowup','arrowdown'].includes(key))e.preventDefault();if(!engine){if(key==='enter'&& !title.classList.contains('hidden'))$('#new-game').click();if(key==='g')$('#asset-lab-button').click();return}if(key==='f3'){e.preventDefault();if(!e.repeat)engine.toggleCombatDebug();return}if(!$('#ending-screen').classList.contains('hidden'))return;if(key==='g'){engine.toggleAssetLab();return}if(engine.assetLab.open)return;if(!dialog.classList.contains('hidden')){if(key==='enter'&&e.target.closest?.('#dialog-screen button'))return;if((key==='e'||key==='enter')&&!e.repeat){e.preventDefault();engine.advanceDialog()}return}if(key==='escape'){togglePause();return}if(key==='m'){togglePause(true);ui.panel(state,'map');return}if(engine.paused)return;engine.keydown(key);if(key==='e'&&!e.repeat){engine.interact();if(!dialog.classList.contains('hidden'))engine.paused=true}});
-window.addEventListener('keyup',e=>engine?.keyup(e.key.toLowerCase()));window.addEventListener('blur',()=>{engine?.keys.clear();engine?.pressed.clear()});$('#game').addEventListener('pointerdown',e=>{if(engine&&!engine.paused&&!e.target.closest('button'))engine.keydown('mouse')});$('#game').addEventListener('pointerup',()=>engine?.keyup('mouse'));
+window.addEventListener('keydown',event=>{
+ if(settingsMenu.handleCapture(event))return;
+ if(event.target?.closest?.('input,textarea,select,[contenteditable="true"]'))return;
+ if(event.ctrlKey||event.altKey||event.metaKey)return;
+ const code=canonical(codeOf(event));
+ if(code==='Escape'&&fullscreen.active){clearInput();return} // Browser owns Escape while leaving fullscreen.
+ if(engine?.state.player.dead)return;
+ if(engine?.network.session){engine.network.keydown(event);return}
+ if(!pause.classList.contains('hidden')){
+  if(!event.repeat&&(code==='Escape'||matchesAction('pause',event))){event.preventDefault();if(settingsMenu.pending||settingsMenu.confirmReset){settingsMenu.pending=null;settingsMenu.confirmReset=false;settingsMenu.redraw();settingsMenu.status('Alteração cancelada.')}else closeMenu()}
+  return; // Tab/Enter/Space retain native button navigation; no gameplay input.
+ }
+ if(!engine){if(event.key==='Enter'&&!event.target?.closest?.('button'))$('#new-game').click();if(code==='KeyG')openAssetLab();return}
+ if(!$('#ending-screen').classList.contains('hidden'))return;
+ if(engine.assetLab.open){if(!event.repeat&&(code==='KeyG'||code==='Escape'))engine.toggleAssetLab(false);return}
+ if(!dialog.classList.contains('hidden')){
+  if(event.key==='Enter'&&event.target?.closest?.('#dialog-screen button'))return;
+  if(!event.repeat&&(matchesAction('interact',event)||event.key==='Enter')){event.preventDefault();clearInput();engine.advanceDialog()}return;
+ }
+ if(code==='F3'){event.preventDefault();if(!event.repeat){if(event.shiftKey){engine.debugLevel=!engine.debugLevel;engine.render(false)}else engine.toggleCombatDebug()}return}
+ if(code==='KeyG'){if(!event.repeat)openAssetLab();return}
+ if(matchesAction('pause',event)){if(!event.repeat){event.preventDefault();togglePause()}return}
+ if(matchesAction('map',event)){if(!event.repeat){event.preventDefault();togglePause(true);ui.panel(state,'map')}return}
+ if(engine.paused)return;
+ if(Object.keys(ACTIONS).some(action=>matchesAction(action,event)))event.preventDefault();
+ engine.keydown(event);
+ if(engine.input.consume('interact')){engine.interact();if(!dialog.classList.contains('hidden'))engine.paused=true}
+});
+window.addEventListener('keyup',event=>engine?.keyup(event));window.addEventListener('blur',clearInput);window.addEventListener('focus',clearInput);document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInput()});
+$('#game').addEventListener('pointerdown',event=>{if(event.button===0&&engine&&!engine.paused&&!engine.state.player.dead&&pause.classList.contains('hidden')&&dialog.classList.contains('hidden'))engine.input.press('Mouse0')});
+for(const type of ['pointerup','pointercancel'])window.addEventListener(type,()=>engine?.input.release('Mouse0'));
 function frame(now){const dt=Math.min(.033,(now-last)/1000);last=now;if(engine&&!engine.paused)engine.update(dt);else if(engine?.state.player.state==='death')engine.renderPausedDeath(dt);if(engine?.assetLab.open)engine.renderAssetLab(dt);requestAnimationFrame(frame)}requestAnimationFrame(frame);
 
 // Explicit localhost-only developer session. Never writes campaign saves.

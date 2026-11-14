@@ -1,0 +1,393 @@
+{
+  "log": [
+    {
+      "from": "ground:0",
+      "to": "s9-tutorial-roof",
+      "mode": {
+        "type": "hook",
+        "id": "s9-tutorial-hook"
+      },
+      "seconds": 0.8666666666666667,
+      "x": 986.6088449418874,
+      "y": 526
+    },
+    {
+      "from": "s9-tutorial-roof",
+      "to": "s9-log-roof",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.6833333333333333,
+      "x": 1125.0221848082685,
+      "y": 516
+    },
+    {
+      "from": "s9-log-roof",
+      "to": "s9-shortcut-east",
+      "mode": {
+        "type": "hook",
+        "id": "s9-upper-hook"
+      },
+      "seconds": 0.8833333333333333,
+      "x": 1290.114502087999,
+      "y": 341
+    },
+    {
+      "from": "s9-shortcut-east",
+      "to": "s9-quarantine-ledge",
+      "mode": {
+        "type": "hook",
+        "id": "s9-quarantine-hook"
+      },
+      "seconds": 0.9166666666666666,
+      "x": 1275.639598474609,
+      "y": 161
+    },
+    {
+      "from": "ground:2400",
+      "to": "factory-loading",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.4666666666666667,
+      "x": 2666.1524699373535,
+      "y": 636
+    },
+    {
+      "from": "factory-loading",
+      "to": "factory-assembly",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.7,
+      "x": 2847.580259020857,
+      "y": 626
+    },
+    {
+      "from": "factory-assembly",
+      "to": "factory-log",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.5166666666666667,
+      "x": 2985.8620277921896,
+      "y": 536
+    },
+    {
+      "from": "factory-log",
+      "to": "factory-maintenance",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 1.4166666666666667,
+      "x": 3349.143796563514,
+      "y": 596
+    },
+    {
+      "from": "factory-maintenance",
+      "to": "factory-coolant-west",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.4666666666666667,
+      "x": 3466.267569049248,
+      "y": 496
+    },
+    {
+      "from": "factory-coolant-west",
+      "to": "factory-coolant-east",
+      "mode": {
+        "type": "double"
+      },
+      "seconds": 1.0333333333333334,
+      "x": 3717.6363852674504,
+      "y": 496
+    },
+    {
+      "from": "factory-coolant-east",
+      "to": "factory-service-west",
+      "mode": {
+        "type": "double"
+      },
+      "seconds": 1.0666666666666667,
+      "x": 3964.5005243237847,
+      "y": 536
+    },
+    {
+      "from": "factory-service-west",
+      "to": "factory-service-east",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.7,
+      "x": 4116.585409997406,
+      "y": 536
+    },
+    {
+      "from": "ground:5200",
+      "to": "security-entry",
+      "mode": {
+        "type": "double"
+      },
+      "seconds": 0.8666666666666667,
+      "x": 5502.4722222222335,
+      "y": 626
+    },
+    {
+      "from": "security-entry",
+      "to": "security-west",
+      "mode": {
+        "type": "hook",
+        "id": "security-entry-hook"
+      },
+      "seconds": 0.7833333333333333,
+      "x": 5814.806705244665,
+      "y": 511
+    },
+    {
+      "from": "security-west",
+      "to": "security-camera",
+      "mode": {
+        "type": "hook",
+        "id": "security-camera-hook"
+      },
+      "seconds": 0.8333333333333334,
+      "x": 6142.641188267097,
+      "y": 401
+    },
+    {
+      "from": "security-camera",
+      "to": "security-partition-west",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.85,
+      "x": 6364.256290371779,
+      "y": 511
+    },
+    {
+      "from": "security-partition-west",
+      "to": "security-laser-bridge",
+      "mode": {
+        "type": "double"
+      },
+      "seconds": 1.1333333333333333,
+      "x": 6656.704725809799,
+      "y": 621
+    },
+    {
+      "from": "ground:6930",
+      "to": "security-partition-east",
+      "mode": {
+        "type": "hook",
+        "id": "security-east-hook"
+      },
+      "seconds": 1.0833333333333333,
+      "x": 7483.5954099800065,
+      "y": 511
+    },
+    {
+      "from": "security-partition-east",
+      "to": "security-lift",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.85,
+      "x": 7859.737647159098,
+      "y": 626
+    },
+    {
+      "from": "ground:8800",
+      "to": "lab-entry",
+      "mode": {
+        "type": "double"
+      },
+      "seconds": 0.8666666666666667,
+      "x": 9182.472222222199,
+      "y": 621
+    },
+    {
+      "from": "lab-entry",
+      "to": "lab-west",
+      "mode": {
+        "type": "double"
+      },
+      "seconds": 0.8666666666666667,
+      "x": 9408.253990993513,
+      "y": 506
+    },
+    {
+      "from": "lab-west",
+      "to": "lab-partition-west",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.36666666666666664,
+      "x": 9737.938423703494,
+      "y": 391
+    },
+    {
+      "from": "lab-partition-west",
+      "to": "lab-log",
+      "mode": {
+        "type": "double"
+      },
+      "seconds": 0.8666666666666667,
+      "x": 9963.720192474808,
+      "y": 276
+    },
+    {
+      "from": "lab-log",
+      "to": "lab-panel-approach",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.9666666666666667,
+      "x": 10214.501961246118,
+      "y": 506
+    },
+    {
+      "from": "ground:10648",
+      "to": "lab-barrier-east",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.36666666666666664,
+      "x": 10770.532202065757,
+      "y": 621
+    },
+    {
+      "from": "lab-barrier-east",
+      "to": "lab-east-approach",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.7833333333333333,
+      "x": 10975.48063750374,
+      "y": 621
+    },
+    {
+      "from": "lab-east-approach",
+      "to": "lab-camera",
+      "mode": {
+        "type": "hook",
+        "id": "lab-east-hook"
+      },
+      "seconds": 0.95,
+      "x": 11348.982069129186,
+      "y": 391
+    },
+    {
+      "from": "lab-camera",
+      "to": "lab-partition-east",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.36666666666666664,
+      "x": 11384.368027292307,
+      "y": 276
+    },
+    {
+      "from": "lab-partition-east",
+      "to": "lab-exit",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 1.8333333333333333,
+      "x": 11832.050644932191,
+      "y": 506
+    },
+    {
+      "from": "ground:13000",
+      "to": "core-step",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.4,
+      "x": 13146.133554317026,
+      "y": 626
+    },
+    {
+      "from": "core-step",
+      "to": "core-maintenance",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.4,
+      "x": 13208.432612288616,
+      "y": 516
+    },
+    {
+      "from": "core-maintenance",
+      "to": "core-shaft-crossing",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 0.43333333333333335,
+      "x": 13325.881047726612,
+      "y": 406
+    },
+    {
+      "from": "core-shaft-crossing",
+      "to": "core-descent",
+      "mode": {
+        "type": "jump"
+      },
+      "seconds": 1.7333333333333334,
+      "x": 13722.735266431138,
+      "y": 626
+    }
+  ],
+  "timings": [
+    {
+      "id": "sector9-quarantine",
+      "time": 9.95383333333229
+    },
+    {
+      "id": "matrona-checkpoint",
+      "time": 11.853833333332384
+    },
+    {
+      "id": "factory-coolant",
+      "time": 24.83716666666542
+    },
+    {
+      "id": "warden-checkpoint",
+      "time": 31.62049999999837
+    },
+    {
+      "id": "security-route",
+      "time": 39.003833333331286
+    },
+    {
+      "id": "lab-route",
+      "time": 56.73716666666361
+    },
+    {
+      "id": "core-ascent",
+      "time": 80.33716666666227
+    },
+    {
+      "id": "vespera-checkpoint",
+      "time": 81.80383333332885
+    }
+  ],
+  "realtime": true,
+  "checkpoint": {
+    "id": "tower_floor_3-checkpoint",
+    "x": 13810,
+    "region": 2,
+    "floor": "tower_floor_3",
+    "name": "Último abrigo · Núcleo central",
+    "purpose": "Após a subida final, antes de Véspera",
+    "y": 733
+  },
+  "assets": {
+    "total": 52,
+    "ready": 52,
+    "failed": 0,
+    "loading": 0,
+    "errors": [],
+    "elapsed": 86886.80000000075
+  }
+}

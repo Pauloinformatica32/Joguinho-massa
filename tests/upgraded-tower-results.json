@@ -1,0 +1,216 @@
+[
+  {
+    "id": "interceptor_i9",
+    "direction": -1,
+    "walkFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "attackFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "invalid": [],
+    "fixed": true,
+    "impact": {
+      "id": "interceptor_i9",
+      "a": "attack",
+      "frame": 4,
+      "ok": true,
+      "x": 5580,
+      "y": 730,
+      "facing": -1,
+      "active": true,
+      "sourceFlip": true
+    }
+  },
+  {
+    "id": "interceptor_i9",
+    "direction": 1,
+    "walkFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "attackFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "invalid": [],
+    "fixed": true,
+    "impact": {
+      "id": "interceptor_i9",
+      "a": "attack",
+      "frame": 4,
+      "ok": true,
+      "x": 5900,
+      "y": 730,
+      "facing": 1,
+      "active": true,
+      "sourceFlip": false
+    }
+  },
+  {
+    "id": "synaptic_h0",
+    "direction": -1,
+    "walkFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "attackFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "invalid": [],
+    "fixed": true,
+    "impact": {
+      "id": "synaptic_h0",
+      "a": "attack",
+      "frame": 3,
+      "ok": true,
+      "x": 10550.918380000003,
+      "y": 730,
+      "facing": -1,
+      "active": true,
+      "sourceFlip": true
+    }
+  },
+  {
+    "id": "synaptic_h0",
+    "direction": 1,
+    "walkFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "attackFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "invalid": [],
+    "fixed": true,
+    "impact": {
+      "id": "synaptic_h0",
+      "a": "attack",
+      "frame": 3,
+      "ok": true,
+      "x": 10559.221619999997,
+      "y": 730,
+      "facing": 1,
+      "active": true,
+      "sourceFlip": false
+    }
+  },
+  {
+    "id": "optic_s6",
+    "direction": -1,
+    "walkFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "attackFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "invalid": [],
+    "fixed": true,
+    "impact": {
+      "id": "optic_s6",
+      "a": "attack",
+      "frame": 3,
+      "ok": true,
+      "x": 6210,
+      "y": 473,
+      "facing": -1,
+      "active": true,
+      "sourceFlip": false
+    }
+  },
+  {
+    "id": "optic_s6",
+    "direction": 1,
+    "walkFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "attackFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "invalid": [],
+    "fixed": true,
+    "impact": {
+      "id": "optic_s6",
+      "a": "attack",
+      "frame": 3,
+      "ok": true,
+      "x": 6210,
+      "y": 473,
+      "facing": 1,
+      "active": true,
+      "sourceFlip": true
+    }
+  }
+]

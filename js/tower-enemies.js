@@ -23,7 +23,7 @@ const center=e=>e.x+e.w/2;
 const clamp=(v,l,r)=>Math.max(l,Math.min(r,v));
 export function resetTowerEnemy(e,revive=false){
  const cfg=TOWER_ENEMY_SPECS[e.assetId];if(!cfg)return;
- Object.assign(e,{towerState:'patrol',stateTime:0,visualTime:0,attackCooldown:1,pendingAttack:null,windupTimer:0,beam:null,attackHit:false,projectiles:[],vx:0,vy:0,deathTime:0,lastAnimation:'idle',lastFrame:0});
+ Object.assign(e,{towerState:'patrol',stateTime:0,visualTime:0,walkTime:0,attackCooldown:1,pendingAttack:null,windupTimer:0,beam:null,attackHit:false,projectiles:[],vx:0,vy:0,deathTime:0,lastAnimation:'idle',lastFrame:0});
  if(revive){e.dead=false;e.health=e.maxHealth;e.x=e.homeX;e.y=e.homeY;e.hurtTimer=e.stunTimer=0}
 }
 export function configureTowerEnemies(list){
@@ -62,8 +62,8 @@ export function towerAttackBox(e,platforms=[]){
  return{x:Math.min(a.x,beam.z.x),y,w:Math.abs(beam.z.x-a.x),h:18};
 }
 export function towerBeamActive(e){const s=TOWER_ENEMY_SPECS.optic_s6;return!e.dead&&!(e.hurtTimer>0)&&!(e.stunTimer>0)&&e.assetId==='optic_s6'&&e.towerState==='attack'&&e.stateTime*s.fps+1e-8>=s.impact&&e.stateTime*s.fps+1e-8<s.impact+s.activeFrames}
-export function towerAnimation(e){return e.dead?e.deathPose?.animation||'idle':['windup','attack'].includes(e.towerState)&&e.towerState==='attack'?'attack':e.assetId==='optic_s6'&&e.towerState==='tracking'?'walk':e.moving?'walk':'idle'}
-export function towerFrame(e){if(e.dead)return e.deathPose?.frame||0;const a=towerAnimation(e),s=TOWER_ENEMY_SPECS[e.assetId];return a==='attack'?Math.min(s.frames-1,Math.floor(e.stateTime*s.fps)):a==='walk'?Math.floor(e.visualTime*(e.assetId==='optic_s6'?7:e.assetId==='synaptic_h0'?8:10))%(e.assetId==='optic_s6'?6:8):0}
+export function towerAnimation(e){return e.dead?e.deathPose?.animation||'idle':e.towerState==='attack'?'attack':e.assetId==='optic_s6'&&e.towerState==='tracking'?'walk':e.moving?'walk':'idle'}
+export function towerFrame(e){if(e.dead)return e.deathPose?.frame||0;const a=towerAnimation(e),s=TOWER_ENEMY_SPECS[e.assetId];return a==='attack'?Math.min(s.frames-1,Math.floor(e.stateTime*s.fps)):a==='walk'?Math.floor((e.walkTime??0)*(e.assetId==='optic_s6'?7:e.assetId==='synaptic_h0'?8:10))%(e.assetId==='optic_s6'?6:8):0}
 export function updateTowerEnemy(e,p,dt,world){
  const s=TOWER_ENEMY_SPECS[e.assetId],platforms=world.map.platforms;if(!e.towerState)resetTowerEnemy(e);
  const same=towerFloorAt(p.x)?.id===e.towerFloor,near=same&&Math.abs(e.x-p.x)<1100;
@@ -102,6 +102,9 @@ export function updateTowerEnemy(e,p,dt,world){
   const oldX=e.x;moveBody(e,dt,platforms);e.x=clamp(e.x,e.patrolBounds.left,e.patrolBounds.right);e.moving=Math.abs(e.x-oldX)>.001;
   if(!detected&&(e.x<=e.patrolBounds.left||e.x>=e.patrolBounds.right))e.facing*=-1;
  }
+ // Keep the locomotion phase across stops/attacks. Idle time must not select a random
+ // walking pose on resumption; only simulation movement (or fixed-mount tracking) advances it.
+ if(e.moving||(camera&&e.towerState==='tracking'))e.walkTime=(e.walkTime||0)+dt;
  e.lastAnimation=towerAnimation(e);e.lastFrame=towerFrame(e);
 }
 export function renderTowerEnemy(c,e,camera,renderer){

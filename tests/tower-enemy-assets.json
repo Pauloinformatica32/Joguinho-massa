@@ -1,0 +1,11 @@
+{
+  "assets/enemies/interceptor_i9/attack.png": "059814f6bc32eb11eaef3ab443aa96887754d773348104509160c724a663c78b",
+  "assets/enemies/interceptor_i9/idle.png": "6b88eddfbe263df6ee43feab54ed36459f52a05e8bb80d8c3fc2e6ed0140e110",
+  "assets/enemies/interceptor_i9/walk.png": "53bb76d5a955bba6fc07c4c859697bdb4a6e456be81190a553ddfd7766cef8a0",
+  "assets/enemies/synaptic_h0/attack.png": "b4b059621f9ebd92a2105a1ebcf8ec7414255b98417bcd5ade324013046760ae",
+  "assets/enemies/synaptic_h0/idle.png": "8372e6120683bcb547c53cc442b0bd4093027d93548f4b813bdf440e6ba6a276",
+  "assets/enemies/synaptic_h0/walk.png": "49a84148600137011fa7d5e06869a5245cc9dbf838b75b6026a6fd5e58da203b",
+  "assets/enemies/optic_s6/attack.png": "ace9526aff1feae0ea194c1fa63e7060fd9f565146ad99ad01c9ec4464d0486b",
+  "assets/enemies/optic_s6/idle.png": "6dcd83fac7f19d138de502027aed1a41b1726282481ea675493e260df6f9f17b",
+  "assets/enemies/optic_s6/walk.png": "289d1a2912a5f3dbf12e9459ac552acc785977efaee9d5eddde0d4aa2ecde309"
+}

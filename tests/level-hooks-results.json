@@ -1,0 +1,379 @@
+{
+  "results": [
+    {
+      "id": "s9-tutorial-hook",
+      "from": "ground:0",
+      "to": "s9-tutorial-roof",
+      "used": [
+        "s9-tutorial-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "s9-upper-hook",
+      "from": "s9-log-roof",
+      "to": "s9-shortcut-east",
+      "used": [
+        "s9-upper-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "s9-quarantine-hook",
+      "from": "s9-shortcut-east",
+      "to": "s9-quarantine-ledge",
+      "used": [
+        "s9-upper-hook",
+        "s9-quarantine-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "s9-antenna-1",
+      "from": "s9-quarantine-ledge",
+      "to": "s9-antenna-lower",
+      "used": [
+        "s9-quarantine-hook",
+        "s9-upper-hook",
+        "s9-antenna-1"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "s9-antenna-2",
+      "from": "s9-antenna-lower",
+      "to": "s9-antenna-middle",
+      "used": [
+        "s9-antenna-1",
+        "s9-antenna-2"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "s9-antenna-3",
+      "from": "s9-antenna-middle",
+      "to": "s9-antenna",
+      "used": [
+        "s9-antenna-2",
+        "s9-antenna-3"
+      ],
+      "interactables": [
+        "world-s9-antenna"
+      ]
+    },
+    {
+      "id": "factory-coolant-hook",
+      "from": "factory-coolant-west",
+      "to": "factory-coolant-east",
+      "used": [
+        "factory-coolant-hook"
+      ],
+      "interactables": [
+        "implant-double"
+      ]
+    },
+    {
+      "id": "factory-service-hook",
+      "from": "factory-service-west",
+      "to": "factory-service-east",
+      "used": [
+        "factory-service-hook"
+      ],
+      "interactables": [
+        "network-maintenance"
+      ]
+    },
+    {
+      "id": "factory-crane-1",
+      "from": "factory-coolant-west",
+      "to": "factory-crane-lower",
+      "used": [
+        "factory-coolant-hook",
+        "factory-crane-1"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "factory-crane-2",
+      "from": "factory-crane-lower",
+      "to": "factory-crane-middle",
+      "used": [
+        "factory-coolant-hook",
+        "factory-crane-1",
+        "factory-crane-2"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "factory-crane-3",
+      "from": "factory-crane-middle",
+      "to": "factory-crane",
+      "used": [
+        "factory-crane-2",
+        "factory-crane-3"
+      ],
+      "interactables": [
+        "world-factory-crane"
+      ]
+    },
+    {
+      "id": "factory-turns-hook",
+      "from": "factory-turns-lower",
+      "to": "factory-turns-balcony",
+      "used": [
+        "factory-turns-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "security-entry-hook",
+      "from": "security-entry",
+      "to": "security-west",
+      "used": [
+        "security-entry-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "security-camera-hook",
+      "from": "security-west",
+      "to": "security-camera",
+      "used": [
+        "security-entry-hook",
+        "security-camera-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "security-east-hook",
+      "from": "ground:6930",
+      "to": "security-partition-east",
+      "used": [
+        "security-east-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "security-log-hook",
+      "from": "security-camera",
+      "to": "security-log",
+      "used": [
+        "security-camera-hook",
+        "security-log-hook"
+      ],
+      "interactables": [
+        "tower-security-log"
+      ]
+    },
+    {
+      "id": "security-archive-1",
+      "from": "security-log",
+      "to": "security-archive-lower",
+      "used": [
+        "security-log-hook",
+        "security-camera-hook",
+        "security-archive-1"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "security-archive-2",
+      "from": "security-archive-lower",
+      "to": "security-archive-upper",
+      "used": [
+        "security-archive-1",
+        "security-archive-2"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "security-archive-3",
+      "from": "security-archive-upper",
+      "to": "security-audit",
+      "used": [
+        "security-archive-2",
+        "security-archive-3"
+      ],
+      "interactables": [
+        "world-security-audit"
+      ]
+    },
+    {
+      "id": "lab-entry-hook",
+      "from": "lab-entry",
+      "to": "lab-west",
+      "used": [
+        "lab-entry-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "lab-partition-hook",
+      "from": "lab-west",
+      "to": "lab-partition-west",
+      "used": [
+        "lab-entry-hook",
+        "lab-partition-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "lab-log-hook",
+      "from": "lab-partition-west",
+      "to": "lab-log",
+      "used": [
+        "lab-partition-hook",
+        "lab-log-hook"
+      ],
+      "interactables": [
+        "log-3"
+      ]
+    },
+    {
+      "id": "lab-east-hook",
+      "from": "lab-east-approach",
+      "to": "lab-camera",
+      "used": [
+        "lab-east-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "lab-exit-hook",
+      "from": "lab-camera",
+      "to": "lab-partition-east",
+      "used": [
+        "lab-east-hook",
+        "lab-exit-hook"
+      ],
+      "interactables": [
+        "tower-log-vespera"
+      ]
+    },
+    {
+      "id": "lab-employees-hook",
+      "from": "lab-log",
+      "to": "lab-employees",
+      "used": [
+        "lab-log-hook",
+        "lab-employees-hook"
+      ],
+      "interactables": [
+        "tower-log-employees"
+      ]
+    },
+    {
+      "id": "lab-consent-1",
+      "from": "lab-employees",
+      "to": "lab-consent-middle",
+      "used": [
+        "lab-log-hook",
+        "lab-employees-hook",
+        "lab-consent-1"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "lab-consent-2",
+      "from": "lab-consent-middle",
+      "to": "lab-consent",
+      "used": [
+        "lab-consent-1",
+        "lab-consent-2"
+      ],
+      "interactables": [
+        "world-lab-consent"
+      ]
+    },
+    {
+      "id": "core-ascent-hook",
+      "from": "core-maintenance",
+      "to": "core-shaft-crossing",
+      "used": [
+        "core-ascent-hook"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "core-terminal-hook",
+      "from": "core-shaft-crossing",
+      "to": "core-terminal",
+      "used": [
+        "core-terminal-hook"
+      ],
+      "interactables": [
+        "network-core-service"
+      ]
+    },
+    {
+      "id": "core-map-access",
+      "from": "core-shaft-crossing",
+      "to": "core-map-middle",
+      "used": [
+        "core-ascent-hook",
+        "core-map-access"
+      ],
+      "interactables": []
+    },
+    {
+      "id": "core-map-hook",
+      "from": "core-map-middle",
+      "to": "core-map",
+      "used": [
+        "core-map-access",
+        "core-map-hook"
+      ],
+      "interactables": []
+    }
+  ],
+  "checkpoints": [
+    "s9-entry",
+    "s9-matrona",
+    "factory-entry",
+    "factory-warden",
+    "tower_floor_1-checkpoint",
+    "tower-security-mid",
+    "tower_floor_2-checkpoint",
+    "tower-lab-mid",
+    "tower_floor_3-checkpoint"
+  ],
+  "npcs": [
+    "yara",
+    "oren-slum",
+    "oren-factory",
+    "scientist",
+    "teo-factory",
+    "corporate-ai"
+  ],
+  "rewards": [
+    "Célula de energia",
+    "Dados de distribuição",
+    "Peças da vigilância 09",
+    "Esquema do circuito refrigerante",
+    "Arquivo de vigilância Aurora",
+    "Provas dos ensaios humanos",
+    "Memória dos moradores 09",
+    "Peças da antena comunitária",
+    "Projeto da linha de montagem",
+    "Registro dos turnos perdidos",
+    "Auditoria de vigilância",
+    "Protocolo de consentimento neural",
+    "Mapa da alimentação central"
+  ],
+  "trips": [
+    {
+      "x": 5310,
+      "checkpoint": "tower_floor_1-checkpoint"
+    },
+    {
+      "x": 5090,
+      "checkpoint": "factory-warden"
+    },
+    {
+      "x": 5310,
+      "checkpoint": "tower-security-mid"
+    }
+  ],
+  "lockedTutorial": true,
+  "finalShutdown": true
+}

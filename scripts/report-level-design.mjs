@@ -1,0 +1,20 @@
+import{readFileSync,writeFileSync}from'node:fs';
+import{buildMap}from'../js/map.js';
+const before=JSON.parse(readFileSync('tests/level-design-before.json')),after=buildMap();
+const geometry=p=>[p.x,p.y,p.w,p.h,p.kind].join('/');
+const position=p=>[p.x,p.y].join('/');
+const csv=(path,rows)=>writeFileSync(path,rows.map(row=>row.map(value=>'"'+String(value??'').replaceAll('"','""')+'"').join(',')).join('\n')+'\n');
+const platformRows=[['change','id','x','y','width','height','kind','route']];
+for(const [a,b,label]of [[before,after,'removed'],[after,before,'added']])for(const p of a.platforms)if(!b.platforms.some(q=>geometry(q)===geometry(p)))platformRows.push([label,p.id,p.x,p.y,p.w,p.h,p.kind,p.route]);
+for(const t of before.terminals.filter(t=>t.shortcut)){const next=after.terminals.find(n=>n.id===t.id)?.shortcut;if(next&&geometry(next)!==geometry(t.shortcut)){for(const [label,p]of [['shortcut-old',t.shortcut],['shortcut-new',next]])platformRows.push([label,t.id,p.x,p.y,p.w,p.h,p.kind,p.route])}}
+csv('docs/level-platform-changes.csv',platformRows);
+const hooks=[['change','id','x','y','from','landing','purpose']];
+for(const p of before.hookPoints)if(!after.hookPoints.some(q=>position(q)===position(p)))hooks.push(['removed',p.id,p.x,p.y]);
+for(const p of after.hookPoints)hooks.push([before.hookPoints.some(q=>position(q)===position(p))?'retained-position':'new-position',p.id,p.x,p.y,p.from,p.to,p.purpose]);
+csv('docs/level-anchor-changes.csv',hooks);
+writeFileSync('tests/level-design-after.json',JSON.stringify(after,null,2));
+const cpRows=before.checkpoints.map(cp=>`| ${cp.x<2400?'Setor 9':cp.x<5200?'Industrial':cp.floor} | ${cp.x} | ${cp.name} |`).join('\n');
+const current=after.checkpoints.map(cp=>`| ${cp.id} | ${cp.x} | ${cp.floor||cp.region} | ${cp.purpose} |`).join('\n');
+const decks=after.platforms.filter(p=>p.route).map(p=>`| ${p.id} | ${p.x} | ${p.y} | ${p.w} | ${p.route} |`).join('\n');
+writeFileSync('docs/level-design-coordinate-audit.md',`# Auditoria das coordenadas finais\n\n## Checkpoints originais de buildMap()\n\n| Região/andar | X | Nome |\n| --- | --- | --- |\n${cpRows}\n\n## Checkpoints atuais\n\n| ID | X | Região/andar | Motivo |\n| --- | --- | --- | --- |\n${current}\n\n## Plataformas de rota atuais (altura de colisão: 18 px)\n\n| ID | X | Y | Largura | Rota |\n| --- | --- | --- | --- | --- |\n${decks}\n\nAs remoções e adições exatas estão em [level-platform-changes.csv](level-platform-changes.csv). Todas as âncoras antigas removidas e atuais, com origem/destino/função, estão em [level-anchor-changes.csv](level-anchor-changes.csv). Warden mantém posições, recarga e colisões anteriores.\n`);
+console.log(JSON.stringify({before:{platforms:before.platforms.length,hooks:before.hookPoints.length,checkpoints:before.checkpoints.length},after:{platforms:after.platforms.length,hooks:after.hookPoints.length,checkpoints:after.checkpoints.length},removedPlatforms:platformRows.filter(r=>r[0]==='removed').length,addedPlatforms:platformRows.filter(r=>r[0]==='added').length}));
