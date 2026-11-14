@@ -1,3 +1,4 @@
+import{hostileProjectileScale}from'./cybernetics.js';
 import {hurt,intersects} from './combat.js';
 import {REGIONS} from './map.js';
 
@@ -31,7 +32,7 @@ export function v3SegmentHit(ax,ay,bx,by,box,padding=0){
 }
 function updateProjectiles(e,p,dt,platforms){
  for(const b of e.projectiles){
-  const duration=Math.min(dt,b.life),ax=b.x+b.w/2,ay=b.y+b.h/2,bx=ax+b.vx*duration,by=ay+b.vy*duration;
+  const duration=Math.min(dt,b.life)*hostileProjectileScale(p,b),ax=b.x+b.w/2,ay=b.y+b.h/2,bx=ax+b.vx*duration,by=ay+b.vy*duration;
   let cover=null;
   for(const solid of platforms){if(solid.disabled)continue;const t=v3SegmentHit(ax,ay,bx,by,solid,b.w/2);if(t!==null&&(cover===null||t<cover))cover=t;}
   const contact=p.dead?null:v3SegmentHit(ax,ay,bx,by,p,b.w/2);

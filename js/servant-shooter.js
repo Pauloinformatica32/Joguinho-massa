@@ -1,3 +1,4 @@
+import{hostileProjectileScale}from'./cybernetics.js';
 import {hurt,intersects} from './combat.js';
 import {moveBody} from './physics.js';
 
@@ -42,9 +43,9 @@ export function updateServant(e,p,dt,world){
  // Same projectile records and damage rules as existing shooters. Small steps
  // prevent fast bullets from skipping Kael or solid walls at low frame rates.
  for(const b of e.projectiles){
-  b.life-=dt;const steps=Math.max(1,Math.ceil(Math.abs(b.vx*dt)/6));
+  b.life-=dt;const speedScale=hostileProjectileScale(p,b);const steps=Math.max(1,Math.ceil(Math.abs(b.vx*dt*speedScale)/6));
   for(let i=0;i<steps&&b.life>0;i++){
-   b.x+=b.vx*dt/steps;
+   b.x+=b.vx*dt*speedScale/steps;
    const box={x:b.x,y:b.y,w:12,h:12};
    if(platforms.some(q=>q.h>=70&&intersects(box,q)))b.life=0;
    else if(intersects(box,p)){hurt(p,b.damage,e.x+e.w/2);b.life=0}

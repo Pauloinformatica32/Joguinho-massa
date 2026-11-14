@@ -1,0 +1,48 @@
+{
+  "units": [
+    {
+      "name": "Interceptor I-9",
+      "id": "interceptor_i9",
+      "folder": "interceptor_i9",
+      "width": 160,
+      "height": 192,
+      "walk": 8,
+      "attack": 8,
+      "attack_frame": 4,
+      "walk_fps": 10,
+      "attack_fps": 12,
+      "kind": "mobile humanoid; short blade slash"
+    },
+    {
+      "name": "Sentinela Óptica S-6",
+      "id": "optic_s6",
+      "folder": "optic_s6",
+      "width": 128,
+      "height": 96,
+      "walk": 6,
+      "attack": 6,
+      "attack_frame": 3,
+      "walk_fps": 7,
+      "attack_fps": 10,
+      "kind": "stationary ceiling-mounted camera; walk.png contains scan/track motion, not locomotion"
+    },
+    {
+      "name": "Protótipo Sináptico H-0",
+      "id": "synaptic_h0",
+      "folder": "synaptic_h0",
+      "width": 160,
+      "height": 192,
+      "walk": 8,
+      "attack": 8,
+      "attack_frame": 3,
+      "walk_fps": 8,
+      "attack_fps": 10,
+      "kind": "mobile humanoid; ground electrical pulse"
+    }
+  ],
+  "warnings": [
+    "animation frames are assembled from source sprites as basic prototypes, not hand-drawn redraws",
+    "config.json adaption needed to local schema"
+  ],
+  "transparent": true
+}

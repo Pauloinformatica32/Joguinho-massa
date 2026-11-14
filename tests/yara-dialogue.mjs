@@ -1,3 +1,4 @@
+import{answerNetworkQuestion}from'../js/upgrades.js';
 import assert from 'node:assert/strict';
 import {newState} from '../js/engine.js';
 import {YARA_DIALOGUES,yaraConversation} from '../js/dialogue.js';
@@ -12,7 +13,7 @@ assert.equal(yaraConversation(state),YARA_DIALOGUES.reunion);
 state.events.push('npc-yara'); // An old interaction alone must not complete the new conversation.
 assert.equal(yaraConversation(state),YARA_DIALOGUES.reunion);
 state.events.push('yara-reunion');assert.equal(yaraConversation(state),YARA_DIALOGUES.repeat);
-state.events.push('log-1');syncProgress(state);
+answerNetworkQuestion(state,'t01_yara_dns',1);state.events.push('log-1');syncProgress(state);
 assert.equal(yaraConversation(state),YARA_DIALOGUES.terminal);
 assert.ok(objective(state).includes('Volte a Yara'));
 state.events.push('yara-terminal');assert.equal(yaraConversation(state),YARA_DIALOGUES.repeat);

@@ -29,6 +29,7 @@ export function syncProgress(state){
 }
 export function objective(state){
  if(state.events.includes('ending'))return 'Transmissão interrompida · Nova Aurora começa a se recuperar';
+ if(state.player.x<2400&&!state.abilities.hook&&state.network)return state.events.includes('yara-reunion')?'Yara · Autentique o terminal ao lado dela para liberar o gancho.':'Encontre Yara · Sua antiga parceira de invasões conhece a rede.';
  const floor=towerFloorAt(state.player.x);if(floor)return floor.name+' \u00b7 '+(!state.abilities.emp?'Retorne a \u00cdris no Complexo Industrial para receber o EMP.':floor.objective);
  const index=unlockedAct(state),region=REGIONS.indexOf(regionAt(state.player.x));
  if(region<index)return `Passagem liberada · Siga para ${REGIONS[index].name}`;

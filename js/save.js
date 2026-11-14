@@ -1,3 +1,6 @@
+import{normalizeNetworkProgress}from'./upgrades.js';
+import{WORLD_TOP,WORLD_DESIGN}from'./world-design.js';
+import{restoreDefeatedVespera}from'./vespera.js';
 import{TOWER_LAYOUT,towerFloorAt}from'./tower-layout.js';
 import{createPlayer}from'./player.js';
 import{createBosses}from'./bosses.js';
@@ -13,16 +16,16 @@ export function normalizeSave(v){
  const legacy=v.version===1,oldX=v.version===2&&!v.towerLayout&&v.player.x>=5200?5390:v.player.x;
  const abilities=freshAbilities();for(const id of Object.keys(abilities))abilities[id]=v.abilities?.[id]===true;
  const player={...createPlayer(),...v.player};
- player.maxHealth=finite(player.maxHealth,100,100,250);player.health=finite(player.health,player.maxHealth,1,player.maxHealth);
+ player.maxHealth=finite(player.maxHealth,100,100,290);player.health=finite(player.health,player.maxHealth,1,player.maxHealth);
  player.maxEnergy=finite(player.maxEnergy,100,100,200);player.energy=finite(player.energy,player.maxEnergy,0,player.maxEnergy);
  Object.assign(player,{w:30,h:54,vx:0,vy:0,invuln:0,coyote:0,jumpBuffer:0,doubleJumpUsed:false,attackTimer:0,attackCooldown:0,dashTimer:0,dashCooldown:0,damageTimer:0,specialAnimTimer:0,landingTimer:0,animationEvent:null,attackHitConsumed:false,state:'idle',grounded:false,dead:false,fall:false,hookLiftTimer:0,hookCableTimer:0,hookCable:null,collisionConfigApplied:false});
  const bosses=createBosses();
- for(const b of bosses){const saved=v.bosses.find(old=>old.id===b.id);if(saved?.dead){b.dead=true;b.health=0}}
+ for(const b of bosses){const saved=v.bosses.find(old=>old.id===b.id);if(saved?.dead){b.dead=true;b.health=0;if(b.assetId==='vespera'&&Number.isFinite(saved.x))b.x=Math.max(b.arena.left,Math.min(b.arena.right-b.w,saved.x))}}
  // A later victory implies that earlier campaign gates have already been cleared.
  if(bosses[2].dead)bosses[1].dead=true;
  if(bosses[1].dead)bosses[0].dead=true;
- bosses.forEach(b=>{if(b.dead)b.health=0});
- const state={...v,version:2,towerLayout:TOWER_LAYOUT,factoryLayout:FACTORY_LAYOUT,sector9Layout:SECTOR9_LAYOUT,player,abilities,bosses,events:Array.isArray(v.events)?[...new Set(v.events.filter(x=>typeof x==='string'))]:[],items:Array.isArray(v.items)?[...new Set(v.items.filter(x=>typeof x==='string'))]:[],credits:finite(v.credits,40,0,99999),playTime:finite(v.playTime,0),explored:[],quests:[]};
+ bosses.forEach(b=>{if(b.dead){b.health=0;if(b.assetId==='vespera')restoreDefeatedVespera(b)}});
+ const state={...v,version:2,worldDesign:WORLD_DESIGN,towerLayout:TOWER_LAYOUT,factoryLayout:FACTORY_LAYOUT,sector9Layout:SECTOR9_LAYOUT,player,abilities,bosses,events:Array.isArray(v.events)?[...new Set(v.events.filter(x=>typeof x==='string'))]:[],items:Array.isArray(v.items)?[...new Set(v.items.filter(x=>typeof x==='string'))]:[],credits:finite(v.credits,40,0,99999),playTime:finite(v.playTime,0),explored:[],quests:[]};
  if(!v.towerLayout){if(state.events.includes('ending'))state.events.push('tower-central-shutdown');if(v.version===2&&player.x>=5200){player.x=5390;player.y=GROUND-player.h-3;v.player.x=5390;} }
  syncProgress(state);
  const unlocked=unlockedAct(state);
@@ -30,7 +33,7 @@ export function normalizeSave(v){
  desired=Math.max(0,Math.min(unlocked,desired));
  const oldIndex=Math.max(0,Math.floor(oldX/ROOM_W));
  const mappedX=legacy?REGIONS[desired].x+(oldX%ROOM_W):oldX;
- const invalidPosition=oldX<0||(!legacy&&oldX>=WORLD_W)||player.y<0||player.y+player.h>GROUND+5;
+ const invalidPosition=oldX<0||(!legacy&&oldX>=WORLD_W)||player.y<WORLD_TOP||player.y+player.h>GROUND+5;
  const wasDead=v.player.dead||v.player.health<=0;
  const relocate=invalidPosition||wasDead||(legacy&&oldIndex===2)||desired!==(legacy?(oldIndex>=3?2:oldIndex):REGIONS.indexOf(regionAt(oldX)));
  // Checkpoints are selected from real level data, never arbitrary stale coordinates.
@@ -48,14 +51,14 @@ export function normalizeSave(v){
  if((v.sector9Layout||1)<SECTOR9_LAYOUT&&desired===0&&!bosses[0].dead&&oldX>=MATRONA_ARENA.left&&oldX<1690){state.checkpoint=checkpointFor(0,true);player.x=state.checkpoint.x;player.y=state.checkpoint.y}
  // New ground-level cover can overlap an old coordinate. Keep progress and
  // place Kael on that solid's top rather than loading him inside its wall.
- for(const s of buildMap(state.events).platforms)if(s.h>=70&&s.y<GROUND&&player.x+player.w>s.x&&player.x<s.x+s.w&&player.y+player.h>s.y&&player.y<s.y+s.h)player.y=s.y-player.h;
+ for(const s of buildMap(state.events).platforms)if(s.h>=70&&s.y<GROUND&&player.x+player.w>s.x&&player.x<s.x+s.w&&player.y+player.h>s.y&&player.y<s.y+s.h){if(s.y-player.h>=WORLD_TOP)player.y=s.y-player.h;else{player.x=s.x-player.w-12;player.y=GROUND-player.h-3;}}
  // A legacy floor coordinate may now be inside the relocated coolant or press.
  if((v.factoryLayout||1)<FACTORY_LAYOUT&&desired===1)for(const h of buildMap(state.events).hazards)if(player.x+player.w>h.x&&player.x<h.x+h.w&&player.y+player.h>h.y&&player.y<h.y+h.h){player.x=h.x-player.w-12;player.y=GROUND-player.h-3;}
  const floor=towerFloorAt(player.x);if(floor&&towerFloorAt(state.checkpoint.x)?.id!==floor.id)state.checkpoint={x:floor.checkpoint,y:GROUND-player.h-3,region:2,floor:floor.id,name:floor.name+' \u00b7 Abrigo'};state.towerFloor=floor?.id||null;
  player.checkpoint={...state.checkpoint};
  const seen=Array.isArray(v.explored)?v.explored.filter(Number.isInteger):[];
  state.explored=[...new Set(seen.filter(id=>id>=0).flatMap(id=>legacy?(id<6?[id]:id<9?[]:id<15?[id>=12?8:id-3]:[]):id>=0&&id<9?[id]:[]))];
- syncProgress(state);if(!state.explored.includes(state.currentRoom))state.explored.push(state.currentRoom);
+ normalizeNetworkProgress(state);syncProgress(state);if(!state.explored.includes(state.currentRoom))state.explored.push(state.currentRoom);
  return state;
 }
 export function saveGame(state){if(state.devTowerTest)return true;try{

@@ -1,0 +1,72 @@
+{
+  "completed": {
+    "checks": 115,
+    "completed": 12,
+    "maxHealth": 140,
+    "damage": 1.1500000000000001,
+    "speed": 1.06,
+    "defense": 0.08
+  },
+  "assistance": {
+    "checks": 344,
+    "beforeAnswer": 12,
+    "afterWrong": 12
+  },
+  "implants": {
+    "checks": 21,
+    "unlocked": [
+      "firewall",
+      "overclock",
+      "interference"
+    ],
+    "selected": "interference"
+  },
+  "equipment": {
+    "checks": 46,
+    "selected": "interference",
+    "active": "interference",
+    "viewports": [
+      {
+        "checks": 38,
+        "width": 1280,
+        "height": 900
+      },
+      {
+        "checks": 41,
+        "width": 390,
+        "height": 640
+      },
+      {
+        "checks": 44,
+        "width": 640,
+        "height": 360
+      }
+    ]
+  },
+  "difficulty": [
+    {
+      "difficulty": "easy",
+      "checks": 24
+    },
+    {
+      "difficulty": "medium",
+      "checks": 27
+    },
+    {
+      "difficulty": "hard",
+      "checks": 30
+    },
+    {
+      "difficulty": "hard",
+      "checks": 33
+    },
+    {
+      "difficulty": "hard",
+      "checks": 36
+    }
+  ],
+  "continued": {
+    "checks": 10
+  },
+  "errors": 0
+}

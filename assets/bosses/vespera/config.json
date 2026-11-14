@@ -1,1 +1,77 @@
-{"id":"vespera","name":"Véspera","scale":0.68,"origin":{"x":128,"y":192},"visual":{"offsetX":0,"offsetY":0},"collision":{"width":74,"height":132,"offsetX":0,"offsetY":0},"facing":-1,"animations":{"idle":{"sheet":"assets/bosses/vespera/idle.png","frameWidth":256,"frameHeight":192,"columns":8,"count":8,"fps":7,"loop":true},"attack":{"sheet":"assets/bosses/vespera/attack.png","frameWidth":288,"frameHeight":192,"columns":8,"count":8,"fps":10,"loop":false,"events":[{"frame":5,"name":"surge"}]},"damage":{"sheet":"assets/bosses/vespera/damage.png","frameWidth":256,"frameHeight":192,"columns":4,"count":4,"fps":10,"loop":false},"death":{"sheet":"assets/bosses/vespera/death.png","frameWidth":288,"frameHeight":192,"columns":8,"count":8,"fps":8,"loop":false}}}
+{
+  "id": "vespera",
+  "name": "Véspera",
+  "scale": 0.34,
+  "origin": {
+    "x": 73.5,
+    "y": 251
+  },
+  "nativeFacing": 1,
+  "facing": -1,
+  "visual": {
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "collision": {
+    "width": 26,
+    "height": 80,
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "animations": {
+    "idle": {
+      "sheet": "assets/bosses/vespera/idle.png",
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "columns": 6,
+      "count": 6,
+      "fps": 6,
+      "loop": true
+    },
+    "walk": {
+      "sheet": "assets/bosses/vespera/walk.png",
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "columns": 8,
+      "count": 8,
+      "fps": 10,
+      "loop": true
+    },
+    "command": {
+      "sheet": "assets/bosses/vespera/command.png",
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "columns": 6,
+      "count": 6,
+      "fps": 10,
+      "loop": false
+    },
+    "attack": {
+      "sheet": "assets/bosses/vespera/attack.png",
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "columns": 8,
+      "count": 8,
+      "fps": 12,
+      "loop": false
+    },
+    "hurt": {
+      "sheet": "assets/bosses/vespera/hurt.png",
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "columns": 4,
+      "count": 4,
+      "fps": 10,
+      "loop": false
+    },
+    "death": {
+      "sheet": "assets/bosses/vespera/death.png",
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "columns": 8,
+      "count": 8,
+      "fps": 8,
+      "loop": false
+    }
+  }
+}

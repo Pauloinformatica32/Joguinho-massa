@@ -1,0 +1,46 @@
+{
+  "id": "synaptic_h0",
+  "name": "Protótipo Sináptico H-0",
+  "scale": 0.36,
+  "origin": {
+    "x": 80,
+    "y": 182
+  },
+  "nativeFacing": -1,
+  "facing": -1,
+  "collision": {
+    "width": 28,
+    "height": 60,
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "animations": {
+    "idle": {
+      "sheet": "assets/enemies/synaptic_h0/idle.png",
+      "frameWidth": 160,
+      "frameHeight": 192,
+      "columns": 1,
+      "count": 1,
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "sheet": "assets/enemies/synaptic_h0/walk.png",
+      "frameWidth": 160,
+      "frameHeight": 192,
+      "columns": 8,
+      "count": 8,
+      "fps": 8,
+      "loop": true
+    },
+    "attack": {
+      "sheet": "assets/enemies/synaptic_h0/attack.png",
+      "frameWidth": 160,
+      "frameHeight": 192,
+      "columns": 8,
+      "count": 8,
+      "fps": 10,
+      "loop": false
+    }
+  }
+}

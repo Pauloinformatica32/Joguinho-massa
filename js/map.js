@@ -1,3 +1,5 @@
+import{attachNetworkTerminals}from'./network-terminals.js';
+import{expandWorld}from'./world-design.js';
 import{TOWER_FLOORS,buildTower,towerFloorAt}from'./tower-layout.js';
 export const ROOM_W=2400,WORLD_H=900,GROUND=790;
 export const FACTORY_LAYOUT=2;
@@ -91,5 +93,5 @@ export function buildMap(events=[]){
   {id:'warden-hook-right',x:4970,y:480,industrial:true,recharge:3,cooldown:0});
  const map={platforms,hazards,checkpoints,terminals,secrets,npcs,hookPoints,visuals:[]};
  for(const list of [platforms,hazards,checkpoints,terminals,secrets,npcs,hookPoints])for(let i=list.length-1;i>=0;i--)if(list[i].x>=5200)list.splice(i,1);
- buildTower(map,events);return map;
+ buildTower(map,events);expandWorld(map);attachNetworkTerminals(map);return map;
 }

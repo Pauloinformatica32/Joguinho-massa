@@ -1,0 +1,24 @@
+VÉSPERA — NOVA AURORA | ARQUIVOS DE ARTE PARA CODEX
+
+Extraia este ZIP na RAIZ do projeto, mantendo a estrutura assets/bosses/vespera/.
+Todos os PNGs foram copiados, sem reamostragem nem modificações da arte.
+
+Todas as spritesheets da Véspera: 147x253 pixels por quadro, dispostas na horizontal.
+Idle: 6 quadros / 882x253 / 6 FPS / loop
+Walk: 8 quadros / 1176x253 / 10 FPS / loop
+Command (execução): 6 quadros / 882x253 / 10 FPS / sem loop
+Attack (corte cibernético): 8 quadros / 1176x253 / 12 FPS / sem loop
+Hurt (dano): 4 quadros / 588x253 / 10 FPS / sem loop
+Death (morte): 8 quadros / 1176x253 / 8 FPS / sem loop; manter quadro final
+Drone/NEXUS-01: idle.png, 54x48 pixels, 1 quadro, independente
+
+FPS acima são sugestões iniciais, a ajustar no jogo.
+O arquivo sprite_manifest.json é informativo; o Codex precisa adaptar o config.json ao esquema real do jogo.
+
+INTEGRAÇÃO
+- Preservar a máscara e o visual original.
+- Não desenhar o drone junto do sprite da Véspera; entidade separada.
+- Não criar duplicatas do boss ou alterar a estrutura do terceiro mapa.
+- Acoplar ataques ao ciclo de animação; evitar reinício por frame.
+- Analisar hitboxes/hurtboxes, transparência, alinhamento dos pés e escala.
+- Fase 2 reutiliza sprites e adiciona efeitos Canvas.

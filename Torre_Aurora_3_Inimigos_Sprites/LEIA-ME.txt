@@ -1,0 +1,15 @@
+NOVA AURORA — PACOTE DE NPCS HOSTIS, MAPA 3
+
+Contém: Interceptor I-9, Sentinela Óptica S-6 e Protótipo Sináptico H-0.
+
+CADA PASTA: idle.png (um quadro), walk.png (quadros em linha horizontal), attack.png (quadros em linha horizontal), config.json de referência.
+
+I-9: 160x192 por quadro; walk 8 quadros; ataque 8 quadros (corte).
+H-0: 160x192 por quadro; walk 8 quadros; ataque 8 quadros (descarga elétrica no chão).
+S-6: 128x96 por quadro; walk 6 quadros (TRACK / rastreio, câmera fixa); attack 6 quadros (carga e início de laser).
+
+IMPORTANTE: As poses intermediárias foram montadas a partir da arte-base usando deslocamento/rotação dos pixels e efeitos 2D. São protótipos jogáveis, não animações redesenhadas à mão. O Codex deve alinhar hitboxes aos instantes visíveis, e gerar o laser longo da câmera via Canvas.
+
+A câmera permanece fixa na parede/teto; use walk.png como scan/track. No I-9 e H-0, a arte base reproduz os designs que você aprovou. Fundos transparentes.
+
+USO: extraia o ZIP na RAIZ do seu repositório. Não sobrescreva arquivos existentes sem revisar. O config.json é REFERÊNCIA e deve ser adaptado ao esquema real do projeto.

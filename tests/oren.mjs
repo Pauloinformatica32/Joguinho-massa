@@ -40,6 +40,6 @@ assert.equal(buyOrenUpgrade(oddSave).success,false);assert.equal(JSON.stringify(
 const loaded=normalizeSave(JSON.parse(JSON.stringify(state)));
 assert.equal(loaded.player.maxHealth,190);assert.equal(loaded.credits,120);assert.equal(orenConversation(loaded),OREN_DIALOGUES.repeat);
 assert.equal(yaraConversation(loaded),YARA_DIALOGUES.reunion);
-const old=newState();old.version=1;old.player.maxHealth=145;old.events.push('npc-oren-slum');
+const old=newState();old.version=1;delete old.network;old.player.maxHealth=145;old.events.push('npc-oren-slum');
 const migrated=normalizeSave(old);assert.equal(migrated.player.maxHealth,145);assert.equal(migrated.credits,40);assert.equal(orenConversation(migrated),OREN_DIALOGUES.reunion);
 console.log('PASS: Oren PNG, two existing locations, conversation progression, price/effect, insufficient credits, six-tier limit, old/current saves and Yara independence.');

@@ -2,6 +2,10 @@ export const ASSET_MANIFEST={
  // Planned backgrounds remain registered; enable once their PNGs are installed.
  loadBackgrounds:false,
  entities:{
+  interceptor_i9:{category:'enemies',name:'Interceptor I-9',config:'assets/enemies/interceptor_i9/config.json',regions:['corporate','virus_core']},
+  optic_s6:{category:'enemies',name:'Sentinela Optica S-6',config:'assets/enemies/optic_s6/config.json',regions:['corporate','virus_core']},
+  synaptic_h0:{category:'enemies',name:'Prototipo Sinaptico H-0',config:'assets/enemies/synaptic_h0/config.json',regions:['corporate','virus_core']},
+  nexus01:{category:'bosses',name:'NEXUS-01',config:'assets/bosses/vespera/drone/config.json',regions:['corporate','virus_core']},
   v3_drone:{category:'enemies',name:'Drone Sentinela V-3',config:'assets/enemies/v3_drone/config.json',regions:['industrial']},
   e7_shield:{category:"enemies",name:"Escudeiro de Contenção E-7",config:"assets/enemies/e7_shield/config.json",regions:["industrial"]},
   servant_shooter:{category:"enemies",name:"Servo Atirador",config:"assets/enemies/servant_shooter/config.json",regions:["slums"]},
@@ -12,7 +16,7 @@ export const ASSET_MANIFEST={
   infected_robot:{category:'enemies',name:'Robô industrial corrompido',config:'assets/enemies/infected_robot/config.json',regions:['slums','industrial','corporate','virus_core']},
   m4:{category:'enemies',name:'Autômato de Manutenção M-4',config:'assets/enemies/m4/config.json',regions:['industrial']},
   matrona:{category:'bosses',name:'Matrona-7',config:'assets/bosses/matrona/config.json',regions:['slums']},abismo:{category:'bosses',name:'Abismo',config:'assets/bosses/abismo/config.json',procedural:true,regions:[]},
-  warden:{category:'bosses',name:'Warden Prime',config:'assets/bosses/warden/config.json',regions:['industrial']},vespera:{category:'bosses',name:'Véspera',config:'assets/bosses/vespera/config.json',procedural:true,regions:['corporate','virus_core']},
+  warden:{category:'bosses',name:'Warden Prime',config:'assets/bosses/warden/config.json',regions:['industrial']},vespera:{category:'bosses',name:'Véspera',config:'assets/bosses/vespera/config.json',regions:['corporate','virus_core']},
   emp_pulse:{procedural:true,category:'effects',name:'Pulso eletromagnético',config:'assets/effects/emp_pulse/config.json',regions:['slums','industrial','corporate','virus_core']},
   npc_survivor:{procedural:true,category:'characters',name:'Habitante sobrevivente',config:'assets/characters/npcs/survivor/config.json',regions:['slums','industrial','corporate','virus_core']},
   yara:{category:'characters',name:'Yara',config:'assets/characters/npcs/yara/config.json',regions:['slums']},

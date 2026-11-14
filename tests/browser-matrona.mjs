@@ -10,7 +10,7 @@ async function screenshot(name){const r=await call('Page.captureScreenshot',{for
 try{
  await call('Runtime.enable');await call('Network.enable');await call('Network.setCacheDisabled',{cacheDisabled:true});
  await call('Emulation.setDeviceMetricsOverride',{width:1280,height:900,deviceScaleFactor:1,mobile:false});
- await call('Page.navigate',{url:'http://127.0.0.1:8765/index.html?matrona='+Date.now()});
+ await call('Page.navigate',{url:(process.env.TEST_BASE_URL||'http://127.0.0.1:8765/')+'index.html?matrona='+Date.now()});
  await new Promise(resolve=>setTimeout(resolve,700));errors.length=0;badResponses.length=0;
  const report=await evaluate(`(async()=>{
   const {Engine,newState}=await import('/js/engine.js');const {UI}=await import('/js/ui.js');const {renderBoss}=await import('/js/bosses.js');

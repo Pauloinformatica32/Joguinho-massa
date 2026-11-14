@@ -1,0 +1,46 @@
+{
+  "id": "interceptor_i9",
+  "name": "Interceptor I-9",
+  "scale": 0.36,
+  "origin": {
+    "x": 80,
+    "y": 182
+  },
+  "nativeFacing": -1,
+  "facing": -1,
+  "collision": {
+    "width": 26,
+    "height": 60,
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "animations": {
+    "idle": {
+      "sheet": "assets/enemies/interceptor_i9/idle.png",
+      "frameWidth": 160,
+      "frameHeight": 192,
+      "columns": 1,
+      "count": 1,
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "sheet": "assets/enemies/interceptor_i9/walk.png",
+      "frameWidth": 160,
+      "frameHeight": 192,
+      "columns": 8,
+      "count": 8,
+      "fps": 10,
+      "loop": true
+    },
+    "attack": {
+      "sheet": "assets/enemies/interceptor_i9/attack.png",
+      "frameWidth": 160,
+      "frameHeight": 192,
+      "columns": 8,
+      "count": 8,
+      "fps": 12,
+      "loop": false
+    }
+  }
+}

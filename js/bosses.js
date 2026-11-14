@@ -1,3 +1,6 @@
+import{hostileProjectileScale}from'./cybernetics.js';
+import{scaledPlayerDamage}from'./upgrades.js';
+import{resetVespera,updateVespera,hitVespera,renderVespera}from'./vespera.js';
 import{TOWER_ARENA}from'./tower-layout.js';
 import{wardenAttackState,updateWarden,clearWarden,renderWarden,wardenHurtbox,transitionWarden}from'./warden.js';
 import{hurt,intersects}from'./combat.js';
@@ -6,14 +9,16 @@ import{updateMatrona,clearMatrona,matronaAnimation,matronaFrame,renderMatronaEff
 export const BOSS_DATA=[
  {id:'boss-0',assetId:'matrona',room:0,name:'MATRONA Â· VIGILÃ‚NCIA DO SETOR 9',title:'Matrona',ability:'dash',hp:180,color:'#e26b68',intro:'Unidade Matrona: o Setor 9 estÃ¡ isolado. Nenhum registro da Aurora Dynamics deixarÃ¡ esta regiÃ£o.'},
  {id:'boss-2',assetId:'warden',room:1,name:'WARDEN · SEGURANÇA INDUSTRIAL',title:'Warden',ability:'emp',hp:240,color:'#9984ff',intro:'Warden: os dispositivos continuarão saindo. Sua investigação termina antes da Torre Aurora.'},
- {id:'boss-3',assetId:'vespera',room:2,name:'VÃ‰SPERA Â· DIRETORA DO PROJETO',title:'VÃ©spera',ability:null,hp:320,color:'#ff4f93',intro:'VÃ©spera: a cidade chama caos de liberdade. Minha rede acabarÃ¡ com seus conflitos. A epidemia foi apenas o primeiro teste.'}
+ {id:'boss-3',assetId:'vespera',room:2,name:'V\u00c9SPERA \u00b7 DIRETORA DO PROJETO',title:'V\u00e9spera',ability:null,hp:320,color:'#ff4f93',intro:'V\u00e9spera: a cidade chama caos de liberdade. Minha rede acabar\u00e1 com seus conflitos. A epidemia foi apenas o primeiro teste.'}
 ];
-export function createBosses(){return BOSS_DATA.map(d=>({...d,...(d.assetId==='warden'?wardenAttackState():{}),x:d.room===1?WARDEN_ARENA.spawnX:d.room===2?TOWER_ARENA.spawnX:REGIONS[d.room].x+2070,y:GROUND-(d.room===1?112:132),w:d.room===1?64:74,h:d.room===1?112:132,health:d.hp,maxHealth:d.hp,arena:d.room===1?{...WARDEN_ARENA}:d.room===0?{...MATRONA_ARENA}:{...TOWER_ARENA},active:false,dead:false,phase:1,timer:.8,warning:0,attackType:'recovery',hitCooldown:0,projectiles:[]}))}
+export function createBosses(){return BOSS_DATA.map(d=>({...d,...(d.assetId==='warden'?wardenAttackState():{}),x:d.room===1?WARDEN_ARENA.spawnX:d.room===2?TOWER_ARENA.spawnX:REGIONS[d.room].x+2070,y:GROUND-(d.room===1?112:132),w:d.room===1?64:74,h:d.room===1?112:132,health:d.hp,maxHealth:d.hp,arena:d.room===1?{...WARDEN_ARENA}:d.room===0?{...MATRONA_ARENA}:{...TOWER_ARENA},active:false,dead:false,phase:1,timer:.8,warning:0,attackType:'recovery',hitCooldown:0,projectiles:[]})).map(b=>{if(b.assetId==='vespera'){b.w=26;b.h=80;b.y=GROUND-b.h;resetVespera(b)}return b})}
 export function updateBoss(b,p,dt,context={}){
+ if(b.assetId==='vespera'&&b.dead)return updateVespera(b,p,dt);
  if(b.dead)return null;
  const inside=p.x+p.w>b.arena.left&&p.x<b.arena.right&&(b.assetId!=='matrona'||p.y+p.h>=GROUND-140);
  if(!b.active&&inside){b.active=true;b.timer=1;b.attackType='recovery';return{kind:'intro',boss:b}}
  if(!b.active)return null;
+ if(b.assetId==='vespera')return updateVespera(b,p,dt);
  if(b.assetId==='warden'){updateWarden(b,p,dt,context);return null}
  if(b.assetId==='matrona'){updateMatrona(b,p,dt,context);return null}
  if(b.attackType!=='windup')b.facing=p.x>b.x?1:-1;
@@ -36,12 +41,13 @@ export function updateBoss(b,p,dt,context={}){
   b.pattern=b.room===0?(b.turn%3===0?'burst':'sweep'):(b.turn%2?'burst':'sweep');
   b.attackType='windup';b.warning=.8-b.room*.08;b.timer=b.warning;
  }
- for(const bolt of b.projectiles){bolt.x+=bolt.vx*dt;bolt.y+=bolt.vy*dt;bolt.life-=dt;if(bolt.life>0&&intersects(p,{x:bolt.x,y:bolt.y,w:17,h:12})){hurt(p,bolt.damage,bolt.x,{source:"projectile",entity:b.id,x:bolt.x,y:bolt.y});bolt.life=0}}
+ for(const bolt of b.projectiles){const speedScale=hostileProjectileScale(p,bolt);bolt.x+=bolt.vx*dt*speedScale;bolt.y+=bolt.vy*dt*speedScale;bolt.life-=dt;if(bolt.life>0&&intersects(p,{x:bolt.x,y:bolt.y,w:17,h:12})){hurt(p,bolt.damage,bolt.x,{source:"projectile",entity:b.id,x:bolt.x,y:bolt.y});bolt.life=0}}
  b.projectiles=b.projectiles.filter(x=>x.life>0);
  return null;
 }
-export function damageBoss(b,player){if(!b?.active||b.dead||player.attackTimer<=0||player.state!=='attack'||player.attackHitConsumed||(b.attackType==='windup'||(b.assetId==='warden'&&b.wardenState==='transition'))||b.hitCooldown>0||(player.externalAttackAnimation&&!player.attackFrameReady))return false;if(!intersects(player.attackBox,b.assetId==="warden"?wardenHurtbox(b):b))return false;b.health=Math.max(0,b.health-(player.overloadTimer>0?38:20+player.combo*3));b.hitCooldown=.16;player.attackHitConsumed=true;if(b.assetId==='warden'&&b.health>0&&b.health<=b.maxHealth*.5)transitionWarden(b);if(!b.health){b.dead=true;b.deathTimer=.9;b.projectiles=[];if(b.assetId==='matrona')clearMatrona(b);if(b.assetId==='warden')clearWarden(b);return true}return false}
+export function damageBoss(b,player){if(b?.assetId==='vespera'){if(!b.active||b.dead||player.attackTimer<=0||player.state!=='attack'||player.attackHitConsumed||(player.externalAttackAnimation&&!player.attackFrameReady)||!intersects(player.attackBox,b))return false;const hit=hitVespera(b,scaledPlayerDamage(player,player.overloadTimer>0?38:20+player.combo*3));if(hit)player.attackHitConsumed=true;return hit&&b.dead;}if(!b?.active||b.dead||player.attackTimer<=0||player.state!=='attack'||player.attackHitConsumed||(b.attackType==='windup'||(b.assetId==='warden'&&b.wardenState==='transition'))||b.hitCooldown>0||(player.externalAttackAnimation&&!player.attackFrameReady))return false;if(!intersects(player.attackBox,b.assetId==="warden"?wardenHurtbox(b):b))return false;b.health=Math.max(0,b.health-scaledPlayerDamage(player,player.overloadTimer>0?38:20+player.combo*3));b.hitCooldown=.16;player.attackHitConsumed=true;if(b.assetId==='warden'&&b.health>0&&b.health<=b.maxHealth*.5)transitionWarden(b);if(!b.health){b.dead=true;b.deathTimer=.9;b.projectiles=[];if(b.assetId==='matrona')clearMatrona(b);if(b.assetId==='warden')clearWarden(b);return true}return false}
 export function renderBoss(c,b,camera,spriteRenderer,dt=0){
+ if(b.assetId==='vespera'){renderVespera(c,b,camera,spriteRenderer);return}
  if(!b.active||(b.dead&&!(b.deathTimer>0)))return;
  if(b.assetId==='warden'){renderWarden(c,b,camera,spriteRenderer);return}
  const x=Math.round(b.x-camera.x),y=Math.round(b.y-camera.y),id=b.assetId||'matrona';

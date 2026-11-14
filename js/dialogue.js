@@ -11,17 +11,28 @@ const yara=text=>({speaker:'Yara · Hacker',text});
 const kael=text=>({speaker:'Kael',text});
 export const YARA_DIALOGUES={
  reunion:{event:'yara-reunion',lines:[
-  yara('Olha só quem resolveu aparecer. Achei que tivesse esquecido o caminho de casa.'),
-  kael('Difícil esquecer um lugar que continua caindo aos pedaços.'),
-  yara('Você continua com esse humor horrível. Algumas coisas nunca mudam.'),
-  kael('Crescemos juntos no Setor 9. Você teve tempo de se acostumar.'),
-  yara('E de aprender quando você está prestes a fazer alguma besteira.'),
-  kael('E outras mudaram demais. O que está acontecendo com os infectados?'),
-  yara('Andei interceptando algumas transmissões. Tem algo estranho nos sinais.'),
-  kael('Conseguiu descobrir de onde vêm?'),
-  yara('Ainda não. Mas tem um terminal nos telhados conectado à rede antiga. Vá até lá. Vou tentar abrir o acesso.'),
-  kael('Sabia que podia contar com você.'),
-  yara('Não se acostume. E tenta não morrer antes de voltar.')
+  yara("Olha só quem resolveu voltar. Pensei que tivesse abandonado a rede de vez."),
+  kael("Eu tentei. Mas o vírus não está deixando ninguém em paz."),
+  yara("Quando éramos uma equipe, você invadia os terminais e eu limpava nossos rastros. Depois saiu sem explicar direito."),
+  kael("Achei que podia começar outra vida. Não podia ignorar o que está acontecendo aqui."),
+  yara("A Aurora Dynamics está usando a infraestrutura da cidade para espalhar comandos pelo vírus. Ainda existem terminais que podemos retomar."),
+  kael("Então vamos invadir o sistema deles, como antes?"),
+  yara("Sim, mas os terminais exigem desafios de autenticação sobre redes. Se escolher a resposta correta, libera módulos e melhorias para seus implantes."),
+  kael("E se eu errar?"),
+  yara("A conexão recusa o acesso. Você pode tentar de novo. Melhor revisar do que perder um braço para um firewall."),
+  kael("Qual é o primeiro alvo?"),
+  yara("Esse terminal ao lado. Resolva a autenticação e eu libero a atualização do seu gancho cibernético."),
+  kael("E se algum terminal me der trabalho?"),
+  yara("Me chama pelo comunicador: use PEDIR DICA À YARA. Eu te ajudo a pensar, mas não vou fazer todo o serviço por você."),
+  kael("Continua a mesma de sempre."),
+  yara("E você continua esquecendo de pedir ajuda. Pode chamar antes ou depois de errar; não custa nada e não reduz sua recompensa."),
+  kael("Sabia que podia contar com você."),
+  yara("Depois de autenticar este console, investigue o terminal nos telhados conectado à rede antiga. Vou acompanhar as transmissões.")
+ ]},
+ networkSuccess:{event:'yara-network-training',lines:[
+  yara("Resposta correta. A autenticação reconheceu sua assinatura antiga... Ainda lembra como fazemos as coisas."),
+  kael("Algumas coisas não se esquecem."),
+  yara("Gancho liberado. Use K perto dos pontos magnéticos. Os outros terminais podem fortalecer sua vida, dano, velocidade e defesa. Continue procurando.")
  ]},
  terminal:{event:'yara-terminal',lines:[
   yara('Você encontrou alguma coisa?'),

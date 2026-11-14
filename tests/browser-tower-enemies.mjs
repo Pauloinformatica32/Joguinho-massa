@@ -1,0 +1,11 @@
+import{writeFileSync}from'node:fs';
+const base=process.env.TEST_BASE_URL||'http://127.0.0.1:5500/';
+async function connect(url){const ws=new WebSocket(url);await new Promise((ok,fail)=>{ws.addEventListener('open',ok,{once:true});ws.addEventListener('error',fail,{once:true})});let serial=0;const pending=new Map(),events=[];ws.addEventListener('message',e=>{const m=JSON.parse(e.data);if(!m.id){events.push(m);return}const p=pending.get(m.id);if(!p)return;pending.delete(m.id);clearTimeout(p.timer);m.error?p.reject(Error(JSON.stringify(m.error))):p.resolve(m.result)});return{ws,events,call(method,params={}){return new Promise((resolve,reject)=>{const id=++serial,timer=setTimeout(()=>reject(Error('Timeout '+method)),20000);pending.set(id,{resolve,reject,timer});ws.send(JSON.stringify({id,method,params}))})}}}
+const v=await(await fetch('http://127.0.0.1:9222/json/version')).json(),browser=await connect(v.webSocketDebuggerUrl);let context,page;
+try{
+ context=(await browser.call('Target.createBrowserContext')).browserContextId;const {targetId}=await browser.call('Target.createTarget',{url:'about:blank',browserContextId:context});const tabs=await(await fetch('http://127.0.0.1:9222/json/list')).json();page=await connect(tabs.find(t=>t.id===targetId).webSocketDebuggerUrl);
+ await page.call('Runtime.enable');await page.call('Emulation.setDeviceMetricsOverride',{width:1200,height:1100,deviceScaleFactor:1,mobile:false});await page.call('Page.navigate',{url:base+'index.html'});await new Promise(r=>setTimeout(r,1000));
+ const r=await page.call('Runtime.evaluate',{expression:"import('/tests/tower-enemies-browser.js').then(m=>m.runTowerEnemiesBrowser())",awaitPromise:true,returnByValue:true});if(r.exceptionDetails)throw Error(JSON.stringify(r.exceptionDetails));console.log(JSON.stringify(r.result.value));
+ const exceptions=page.events.filter(e=>e.method==='Runtime.exceptionThrown');if(exceptions.length)throw Error(JSON.stringify(exceptions));
+ const image=await page.call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});writeFileSync(new URL('./tower-enemies-atlas-preview.png',import.meta.url),Buffer.from(image.data,'base64'));
+}finally{page?.ws.close();if(context)await browser.call('Target.disposeBrowserContext',{browserContextId:context});browser.ws.close()}

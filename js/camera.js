@@ -1,9 +1,10 @@
+import{WORLD_TOP}from'./world-design.js';
 export class Camera{
  constructor(){this.x=0;this.y=0;this.arena=null}
  update(target,w,h,worldW,worldH,dt){
   const maxX=Math.max(0,worldW-w),maxY=Math.max(0,worldH-h);
   let tx=Math.max(0,Math.min(maxX,target.x+target.w/2-w*.46));
-  let ty=Math.max(0,Math.min(maxY,target.y+target.h/2-h*.58));
+  let ty=Math.max(WORLD_TOP,Math.min(maxY,target.y+target.h/2-h*.58));
   if(this.region){const f=this.region;tx=Math.max(f.left,Math.min(Math.max(f.left,f.right-w),tx));}
   if(this.arena){
    const a=this.arena;

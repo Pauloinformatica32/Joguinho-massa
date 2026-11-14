@@ -8,8 +8,8 @@ const call=(method,params={})=>new Promise((resolve,reject)=>{const id=++serial;
 async function evaluate(expression){const r=await call('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(r.exceptionDetails)throw Error(JSON.stringify(r.exceptionDetails));return r.result.value;}
 async function shot(name){const r=await call('Page.captureScreenshot',{format:'png'});writeFileSync(new URL('./'+name+'.png',import.meta.url),Buffer.from(r.data,'base64'));}
 try{
- await call('Runtime.enable');await call('Emulation.setDeviceMetricsOverride',{width:1280,height:900,deviceScaleFactor:1,mobile:false});
- await call('Page.navigate',{url:'http://127.0.0.1:8765/index.html?warden='+Date.now()});await new Promise(r=>setTimeout(r,600));
+ await call('Runtime.enable');await call('Network.enable');await call('Network.setCacheDisabled',{cacheDisabled:true});await call('Emulation.setDeviceMetricsOverride',{width:1280,height:900,deviceScaleFactor:1,mobile:false});
+ await call('Page.navigate',{url:(process.env.TEST_BASE_URL||'http://127.0.0.1:8765/')+'index.html?warden='+Date.now()});await new Promise(r=>setTimeout(r,600));
  const report=await evaluate(`(async()=>{
  const {Engine,newState}=await import('/js/engine.js'),{UI}=await import('/js/ui.js'),{resetWarden,updateWarden,wardenAnimation,wardenFrame}=await import('/js/warden.js');
  const state=newState();state.bosses[0].dead=true;state.player.x=4700;state.player.y=736;

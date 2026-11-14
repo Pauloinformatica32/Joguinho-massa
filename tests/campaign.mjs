@@ -28,7 +28,7 @@ state.bosses[1].dead=true;syncProgress(state);assert.equal(unlockedAct(state),2)
 state.player.x=5300;Engine.prototype.checkGates.call(fake);assert.equal(state.player.x,5300);
 state.player.x=100;Engine.prototype.checkGates.call(fake);assert.equal(state.player.x,100);
 
-for(const fps of [30,60,120])for(const boss of createBosses()){
+for(const fps of [30,60,120])for(const boss of createBosses().filter(b=>b.assetId!=='vespera')){
  const p={x:boss.x-45,y:GROUND-54,w:30,h:54,health:100,invuln:0,attackTimer:1,state:'attack',attackFrameReady:true,externalAttackAnimation:true,combo:1,facing:1};
  assert.equal(updateBoss(boss,p,1/fps).kind,'intro');
  let sawWindup=false,sawRecovery=false,sawProjectile=false,sawExclusive=false;

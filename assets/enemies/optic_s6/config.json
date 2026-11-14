@@ -1,0 +1,46 @@
+{
+  "id": "optic_s6",
+  "name": "Sentinela Óptica S-6",
+  "scale": 0.6,
+  "origin": {
+    "x": 64,
+    "y": 10
+  },
+  "nativeFacing": -1,
+  "facing": -1,
+  "collision": {
+    "width": 42,
+    "height": 44,
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "animations": {
+    "idle": {
+      "sheet": "assets/enemies/optic_s6/idle.png",
+      "frameWidth": 128,
+      "frameHeight": 96,
+      "columns": 1,
+      "count": 1,
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "sheet": "assets/enemies/optic_s6/walk.png",
+      "frameWidth": 128,
+      "frameHeight": 96,
+      "columns": 6,
+      "count": 6,
+      "fps": 7,
+      "loop": true
+    },
+    "attack": {
+      "sheet": "assets/enemies/optic_s6/attack.png",
+      "frameWidth": 128,
+      "frameHeight": 96,
+      "columns": 6,
+      "count": 6,
+      "fps": 10,
+      "loop": false
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "asset": "vespera",
+  "notes": "This is informational metadata for Codex. Create or update the game-specific config.json based on the actual project config schema. Do NOT assume this JSON is game-ready.",
+  "animations": {
+    "idle": {
+      "file": "idle.png",
+      "frames": 6,
+      "fps": 6,
+      "loop": true,
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "sheetWidth": 882,
+      "sheetHeight": 253
+    },
+    "walk": {
+      "file": "walk.png",
+      "frames": 8,
+      "fps": 10,
+      "loop": true,
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "sheetWidth": 1176,
+      "sheetHeight": 253
+    },
+    "command": {
+      "file": "command.png",
+      "frames": 6,
+      "fps": 10,
+      "loop": false,
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "sheetWidth": 882,
+      "sheetHeight": 253
+    },
+    "attack": {
+      "file": "attack.png",
+      "frames": 8,
+      "fps": 12,
+      "loop": false,
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "sheetWidth": 1176,
+      "sheetHeight": 253
+    },
+    "hurt": {
+      "file": "hurt.png",
+      "frames": 4,
+      "fps": 10,
+      "loop": false,
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "sheetWidth": 588,
+      "sheetHeight": 253
+    },
+    "death": {
+      "file": "death.png",
+      "frames": 8,
+      "fps": 8,
+      "loop": false,
+      "frameWidth": 147,
+      "frameHeight": 253,
+      "sheetWidth": 1176,
+      "sheetHeight": 253
+    }
+  },
+  "drone": {
+    "file": "drone/idle.png",
+    "frameWidth": 54,
+    "frameHeight": 48,
+    "frames": 1,
+    "fps": 1,
+    "loop": true
+  },
+  "rules": [
+    "Separate drone from Véspera entity",
+    "Keep the original artwork unchanged; do not resample PNGs",
+    "Boss animations are horizontal strips with no gaps",
+    "Preserve existing boss progression and post-defeat central terminal logic",
+    "Check for missing frames or crop in real browser"
+  ],
+  "source_filenames": {
+    "idle.png": "vésperaidle.png",
+    "walk.png": "vésperawalk.png",
+    "command.png": "vésperaexecução.png",
+    "attack.png": "ataquevéspera.png",
+    "hurt.png": "vésperadano.png",
+    "death.png": "vésperadeath.png",
+    "drone/idle.png": "nexus01_drone_original.png"
+  }
+}

@@ -4,7 +4,7 @@ const GROUND_Y=790;
 export function updatePlayer(p,input,dt,abilities){p.anim+=dt;p.hookCableTimer=Math.max(0,(p.hookCableTimer||0)-dt);p.hookLiftTimer=Math.max(0,(p.hookLiftTimer||0)-dt);if(p.dead||p.damageTimer>0){p.hookLiftTimer=p.hookCableTimer=0}if(p.hookCableTimer===0)p.hookCable=null;p.invuln=Math.max(0,p.invuln-dt);p.attackTimer=Math.max(0,p.attackTimer-dt);p.attackCooldown=Math.max(0,p.attackCooldown-dt);p.dashCooldown=Math.max(0,p.dashCooldown-dt);p.landingTimer=Math.max(0,(p.landingTimer||0)-dt);p.damageTimer=Math.max(0,(p.damageTimer||0)-dt);p.specialAnimTimer=Math.max(0,(p.specialAnimTimer||0)-dt);p.coyote=p.grounded ? .12 : Math.max(0,p.coyote-dt);p.jumpBuffer=input.jump?0.13:Math.max(0,p.jumpBuffer-dt);p.energy=Math.min(p.maxEnergy,p.energy+8*dt);
  // Recover expired timers from older running states before checking movement friction.
  p.dashTimer=Math.max(0,Number.isFinite(p.dashTimer)?p.dashTimer:0);
- const dir=(input.right?1:0)-(input.left?1:0);if(dir)p.facing=dir;const accel=p.grounded?1700:1100,max=250;
+ const dir=(input.right?1:0)-(input.left?1:0);if(dir)p.facing=dir;const accel=p.grounded?1700:1100,max=250*(p.networkMoveSpeedMultiplier||1);
  const groundAttack=p.grounded&&!input.jump&&p.dashTimer<=0&&!(input.dash&&abilities.dash&&p.dashCooldown<=0&&p.energy>=18)&&!(p.damageTimer>0)&&!(p.specialAnimTimer>0)&&(p.attackTimer>0||(input.attack&&p.attackCooldown<=0));
  // Exponential braking uses elapsed seconds, with no movement acceleration during a grounded swing.
  if(groundAttack)p.vx*=Math.exp(-22*dt);
