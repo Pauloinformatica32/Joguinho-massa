@@ -20,6 +20,7 @@ if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(lo
  const test=newState();test.devTowerTest=true;test.bosses.slice(0,2).forEach(b=>{b.dead=true;b.health=0});
  begin(test);
  window.towerTest={
+  engine,
   floor(number=1){const f=TOWER_FLOORS[number-1];if(!f)return;engine.tower.transition=null;state.player.x=f.checkpoint;state.player.y=733;state.player.vx=state.player.vy=0;state.checkpoint={x:f.checkpoint,y:733,region:2,floor:f.id,name:f.name};engine.tower.syncCamera(true);engine.render()},
   emp(owned=true){state.abilities.emp=owned},
   elevator(number=1,reverse=false){const lift=TOWER_ELEVATORS[number-1];if(!lift)return;state.player.x=lift.stops[reverse?1:0].x;state.player.y=733;engine.tower.syncCamera(true);engine.interact()},

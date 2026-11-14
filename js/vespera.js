@@ -6,8 +6,9 @@ export const VESPERA=Object.freeze({scale:.34,walkSpeed:90,recovery:1.05,hurt:.4
 const clamp=(v,a,z)=>Math.max(a,Math.min(z,v));
 const center=b=>b.x+b.w/2;
 export function resetVespera(b){
+ b.facing=b.facing===1?1:-1;
  Object.assign(b,{vesperaState:'idle',stateTime:0,visualTime:0,phase:1,phaseTransitioned:false,transitionCount:0,hitCooldown:0,hurtResistance:0,recoveryTimer:.7,attackType:'recovery',warning:0,projectiles:[],zones:[],rupture:null,attackHistory:[],shotsFired:0,deathComplete:false});
- b.drone={x:center(b)-45,y:b.y+18,targetX:center(b)-45,targetY:b.y+18,disabled:0,resistance:0,active:true,facing:-1};
+ b.drone={x:center(b)+b.facing*58,y:b.arena.floor-112,targetX:center(b)+b.facing*58,targetY:b.arena.floor-112,disabled:0,resistance:0,active:true,facing:-1};
 }
 export function restoreDefeatedVespera(b){resetVespera(b);b.dead=true;b.health=0;b.active=false;b.vesperaState='death';b.stateTime=VESPERA.death;b.deathComplete=true;b.drone.active=false}
 function enter(b,state){b.vesperaState=state;b.stateTime=0;b.warning=0;b.attackType=['command','isolation_protocol','network_overload','phase_transition'].includes(state)?'windup':'recovery'}
@@ -53,7 +54,10 @@ export function startVesperaAttack(b,state,p){
 }
 function updateDrone(b,p,dt){
  const d=b.drone,a=b.arena;d.disabled=Math.max(0,d.disabled-dt);d.resistance=Math.max(0,d.resistance-dt);
- let tx=center(b)-b.facing*37,ty=a.floor-73+Math.sin(b.visualTime*3)*4;
+ b.facing=b.facing===1?1:-1;
+ let tx=center(b)+b.facing*58,ty=a.floor-112+Math.sin(b.visualTime*3)*4;
+ // Recover sessions created before facing was initialized: NaN otherwise persists forever.
+ if(!Number.isFinite(d.x)||!Number.isFinite(d.y)){d.x=tx;d.y=ty}
  if(d.active&&!d.disabled){
   if(b.vesperaState==='command'){tx=clamp(p.x+p.w/2-b.facing*145,a.left+45,a.right-45);ty=a.floor-(b.phase===2?200:145)}
   if(b.vesperaState==='network_overload'){tx=(a.left+a.right)/2;ty=a.floor-285}
@@ -113,6 +117,6 @@ export function renderVespera(c,b,camera,renderer){
  renderer?.draw(c,'vespera',vesperaAnimation(b),b,0,{x:center(b),y:b.arena.floor,frameOverride:vesperaFrame(b)});
  const box=slashBox(b);if(box){c.fillStyle='#71ffff38';c.fillRect(box.x,box.y,box.w,box.h);c.strokeStyle='#71ffff';c.lineWidth=3;c.beginPath();c.moveTo(box.x,box.y+15);c.lineTo(box.x+box.w,box.y+15);c.stroke()}
  if(b.rupture){const active=b.stateTime-b.rupture.start>=VESPERA.ruptureWarning;c.fillStyle=active?'#ff335fbb':'#ff335f44';c.fillRect(b.rupture.x,b.rupture.y,b.rupture.w,b.rupture.h)}
- const d=b.drone;if(d&&!d.active){c.save();c.globalAlpha=.35;renderer?.draw(c,'nexus01','idle',d,0,{x:d.x,y:d.y});c.restore()}if(d?.active){renderer?.draw(c,'nexus01','idle',d,0,{x:d.x,y:d.y});c.fillStyle=d.disabled?'#ffbf54':b.phase===2?'#ff315d':'#43efff';c.fillRect(Math.round(d.x-5),Math.round(d.y+12),10,3+Math.floor(Math.sin(b.visualTime*25)*2));if(d.disabled){c.strokeStyle='#ffdc81';c.beginPath();c.arc(d.x,d.y,22,0,Math.PI*2);c.stroke()}else if(b.vesperaState==='command'&&b.lockedAim){c.strokeStyle='#ff677c';c.setLineDash([5,6]);c.beginPath();c.moveTo(d.x,d.y);c.lineTo(b.lockedAim.x,b.lockedAim.y);c.stroke();c.setLineDash([]);c.strokeRect(b.lockedAim.x-9,b.lockedAim.y-9,18,18)}}
+ const d=b.drone;if(d&&!d.active){c.save();c.globalAlpha=.35;renderer?.draw(c,'nexus01','idle',d,0,{x:d.x,y:d.y});c.restore()}if(d?.active){c.save();c.shadowColor=b.phase===2?'#ff456d':'#43efff';c.shadowBlur=9;renderer?.draw(c,'nexus01','idle',d,0,{x:d.x,y:d.y});c.restore();c.fillStyle=d.disabled?'#ffbf54':b.phase===2?'#ff315d':'#43efff';c.fillRect(Math.round(d.x-5),Math.round(d.y+12),10,3+Math.floor(Math.sin(b.visualTime*25)*2));if(d.disabled){c.strokeStyle='#ffdc81';c.beginPath();c.arc(d.x,d.y,22,0,Math.PI*2);c.stroke()}else if(b.vesperaState==='command'&&b.lockedAim){c.strokeStyle='#ff677c';c.setLineDash([5,6]);c.beginPath();c.moveTo(d.x,d.y);c.lineTo(b.lockedAim.x,b.lockedAim.y);c.stroke();c.setLineDash([]);c.strokeRect(b.lockedAim.x-9,b.lockedAim.y-9,18,18)}}
  for(const q of b.projectiles){c.fillStyle=q.color;c.fillRect(Math.round(q.x-5),Math.round(q.y-5),10,10);c.fillStyle='#ffffff';c.fillRect(Math.round(q.x-2),Math.round(q.y-2),4,4)}c.restore();
 }

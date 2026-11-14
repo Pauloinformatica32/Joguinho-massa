@@ -11,6 +11,11 @@ const cfg=JSON.parse(readFileSync('assets/bosses/vespera/config.json'));
 let checks=0;const check=(label,ok)=>{checks++;assert.ok(ok,label)};
 const make=()=>{const b=createBosses()[2];b.active=true;return b};
 const player=b=>({...createPlayer(),x:b.x-60,y:736,invuln:0,health:10000,maxHealth:10000});
+for(const fps of [30,60,120]){
+ const b=make(),p=player(b);
+ for(let i=0;i<fps*4;i++){updateVespera(b,p,1/fps);check('fresh encounter drone stays finite '+fps,Number.isFinite(b.drone.x)&&Number.isFinite(b.drone.y))}
+ b.drone.x=NaN;updateVespera(b,p,1/fps);check('legacy invalid drone recovers '+fps,Number.isFinite(b.drone.x));
+}
 for(const [name,a] of Object.entries(cfg.animations)){
  const bytes=readFileSync(a.sheet),original=readFileSync('Vespera_Boss_Sprites_Codex/'+a.sheet);
  check(name+' unchanged',createHash('sha256').update(bytes).digest('hex')===createHash('sha256').update(original).digest('hex'));

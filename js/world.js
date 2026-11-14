@@ -110,7 +110,16 @@ c.fillStyle='#1b242a';for(let x=p.x+8;x<p.x+p.w-4;x+=40){c.fillRect(x,p.y+10,18,
   }
   for(const b of state.bosses)if(b.active&&!b.dead){c.fillStyle='#ff4d8d66';c.fillRect(b.arena.left,['matrona','warden'].includes(b.assetId)?220:GROUND-220,4,['matrona','warden'].includes(b.assetId)?GROUND-220:220);c.fillRect(b.arena.right,['matrona','warden'].includes(b.assetId)?220:GROUND-220,4,['matrona','warden'].includes(b.assetId)?GROUND-220:220)}
  }
- drawPlayer(c,p,spriteRenderer,dt){const animation={attack:p.attackAnimation||'melee',dash:'dodge',special:'special',jump:'jump',fall:'fall',landing:'landing',run:'run',walk:'walk',damage:'damage',death:'death'}[p.state]||'idle';p.externalAttackAnimation=p.state==='attack'&&!!spriteRenderer?.available('protagonist',animation);const drawn=spriteRenderer?.draw(c,'protagonist',animation,p,dt,{x:p.x+p.w/2,y:p.y+p.h,onEvent:name=>{p.animationEvent=name}});if(!drawn&&spriteRenderer?.assets.getConfig('protagonist')?.fallback?.procedural===true)drawKael(c,p,this.time)}
+ drawPlayer(c,p,spriteRenderer,dt){
+  const animation={attack:p.attackAnimation||'melee',dash:'dodge',special:'special',jump:'jump',fall:'fall',landing:'landing',run:'run',walk:'walk',damage:'damage',death:'death'}[p.state]||'idle';
+  p.externalAttackAnimation=p.state==='attack'&&!!spriteRenderer?.available('protagonist',animation);
+  // Fit these brief visual reactions to the existing gameplay timers, without extending them.
+  const def=spriteRenderer?.assets.getConfig('protagonist')?.animations?.[animation];
+  const remaining=p.state==='dash'?p.dashTimer:p.state==='damage'?p.damageTimer:null;
+  const frameOverride=remaining!==null&&def?.stateDuration>0?Math.min(def.count-1,Math.max(0,Math.floor((1-remaining/def.stateDuration)*def.count))):null;
+  const drawn=spriteRenderer?.draw(c,'protagonist',animation,p,dt,{x:p.x+p.w/2,y:p.y+p.h,frameOverride,onEvent:name=>{p.animationEvent=name}});
+  if(!drawn&&spriteRenderer?.assets.getConfig('protagonist')?.fallback?.procedural===true)drawKael(c,p,this.time)
+ }
  drawRain(c,w,h,offset){c.strokeStyle='#7aafbf38';c.lineWidth=1;c.beginPath();for(const d of this.rain){const x=(d.x-offset*.8+w*4)%(w+30),y=(d.y+this.time*d.speed)%(h+20);c.moveTo(x,y);c.lineTo(x-5,y+13)}c.stroke()}
  drawVignette(c,w,h){const g=c.createRadialGradient(w/2,h/2,h*.2,w/2,h/2,h*.75);g.addColorStop(0,'#0000');g.addColorStop(1,'#050a10bb');c.fillStyle=g;c.fillRect(0,0,w,h)}
 }

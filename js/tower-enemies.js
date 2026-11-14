@@ -14,9 +14,9 @@ export const TOWER_ENEMY_SLOTS=[
  {id:'2-1100-sentinel',assetId:'optic_s6',x:6210,y:473},
  {id:'2-1480-heavy',assetId:'interceptor_i9',x:6680,y:730,left:6470,right:6770},
  {id:'2-4200-drone',assetId:'interceptor_i9',x:9400,y:730,left:9280,right:9660},
- {id:'2-4850-shooter',assetId:'synaptic_h0',x:10050,y:730,left:9980,right:10230},
+ {id:'2-4850-shooter',assetId:'synaptic_h0',x:10560,y:730,left:10525,right:10590},
  {id:'2-6000-sentinel',assetId:'optic_s6',x:11275,y:463},
- {id:'2-6500-heavy',assetId:'synaptic_h0',x:11700,y:730,left:11620,right:11820}
+ {id:'2-6500-heavy',assetId:'synaptic_h0',x:11900,y:730,left:11800,right:11970}
 ];
 export const isTowerEnemy=e=>!!TOWER_ENEMY_SPECS[e.assetId];
 const center=e=>e.x+e.w/2;
@@ -75,6 +75,8 @@ export function updateTowerEnemy(e,p,dt,world){
  if(!near||p.dead){cancelTowerAttack(e);e.moving=false;return}
  if(e.assetId==='optic_s6'){e.x=e.homeX;e.y=e.homeY;e.vx=e.vy=0}
  e.visualTime+=dt;e.stateTime+=dt;e.attackCooldown=Math.max(0,e.attackCooldown-dt);
+ if(e.assetId==='synaptic_h0'&&same&&Math.abs(center(e)-(p.x+p.w/2))<300&&Math.abs(e.y-p.y)<160&&!e.encounterNamed){e.encounterNamed=true;e.nameTimer=3}
+ e.nameTimer=Math.max(0,(e.nameTimer||0)-dt);
  if(e.hurtTimer>0||e.stunTimer>0){cancelTowerAttack(e);e.moving=false;if(e.assetId!=='optic_s6'){e.vx*=Math.exp(-18*dt);moveBody(e,dt,platforms);e.x=clamp(e.x,e.patrolBounds.left,e.patrolBounds.right)}return}
  if(['attack','windup'].includes(e.towerState)&&!e.pendingAttack)cancelTowerAttack(e);
  const dx=p.x+p.w/2-center(e),dy=p.y+p.h/2-(e.y+e.h/2),camera=e.assetId==='optic_s6';
@@ -117,6 +119,7 @@ export function renderTowerEnemy(c,e,camera,renderer){
    else{const box=towerAttackBox(e);if(box){c.fillStyle='#ff426a66';c.fillRect(box.x,box.y,box.w,box.h)}else if(e.towerState==='windup'){c.fillStyle='#ffbd71';c.fillRect(e.x,e.y-8,e.w,3)}}
   }
   c.fillStyle='#101820';c.fillRect(e.x,e.y-5,e.w,3);c.fillStyle='#e95b76';c.fillRect(e.x,e.y-5,e.w*Math.max(0,e.health/e.maxHealth),3);
+  if(e.nameTimer>0){c.font='11px monospace';c.textAlign='center';c.fillStyle='#101820ed';c.fillRect(center(e)-99,e.y-34,198,20);c.fillStyle='#a4ffff';c.fillText('PROTÓTIPO SINÁPTICO H-0',center(e),e.y-20)}
  }
  c.restore();
 }

@@ -46,23 +46,24 @@
       "loop": true
     },
     "jump": {
-      "sheet": "assets/characters/protagonist/kael/spritesheets/idle.png",
+      "sheet": "assets/characters/protagonist/kael/spritesheets/jump.png",
       "frameWidth": 145,
       "frameHeight": 114,
-      "columns": 1,
-      "count": 1,
-      "fps": 9,
+      "columns": 4,
+      "count": 4,
+      "fps": 10,
       "loop": false,
       "freezeLast": true
     },
     "fall": {
-      "sheet": "assets/characters/protagonist/kael/spritesheets/idle.png",
+      "sheet": "assets/characters/protagonist/kael/spritesheets/fall.png",
       "frameWidth": 145,
       "frameHeight": 114,
-      "columns": 1,
-      "count": 1,
-      "fps": 6,
-      "loop": true
+      "columns": 8,
+      "count": 8,
+      "fps": 10,
+      "loop": true,
+      "freezeLast": true
     },
     "landing": {
       "sheet": "assets/characters/protagonist/kael/spritesheets/landing_placeholder.png",
@@ -117,14 +118,15 @@
       ]
     },
     "dodge": {
-      "sheet": "assets/characters/protagonist/kael/spritesheets/idle.png",
+      "sheet": "assets/characters/protagonist/kael/spritesheets/dash.png",
       "frameWidth": 145,
       "frameHeight": 114,
-      "columns": 1,
-      "count": 1,
-      "fps": 12,
+      "columns": 7,
+      "count": 7,
+      "fps": 14,
       "loop": false,
-      "freezeLast": true
+      "freezeLast": true,
+      "stateDuration": 0.18
     },
     "special": {
       "sheet": "assets/characters/protagonist/kael/spritesheets/special_placeholder.png",
@@ -143,21 +145,22 @@
       ]
     },
     "damage": {
-      "sheet": "assets/characters/protagonist/kael/spritesheets/idle.png",
+      "sheet": "assets/characters/protagonist/kael/spritesheets/damage.png",
       "frameWidth": 145,
       "frameHeight": 114,
-      "columns": 1,
-      "count": 1,
-      "fps": 12,
+      "columns": 5,
+      "count": 5,
+      "fps": 10,
       "loop": false,
-      "freezeLast": true
+      "freezeLast": true,
+      "stateDuration": 0.22
     },
     "death": {
-      "sheet": "assets/characters/protagonist/kael/spritesheets/idle.png",
+      "sheet": "assets/characters/protagonist/kael/spritesheets/death.png",
       "frameWidth": 145,
       "frameHeight": 114,
-      "columns": 1,
-      "count": 1,
+      "columns": 8,
+      "count": 8,
       "fps": 8,
       "loop": false,
       "freezeLast": true

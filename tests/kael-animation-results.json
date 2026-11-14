@@ -1,0 +1,67 @@
+{
+  "assets": {
+    "total": 36,
+    "ready": 36,
+    "failed": 0,
+    "loading": 0,
+    "errors": [],
+    "elapsed": 5417.9000000003725
+  },
+  "animations": {
+    "jump": {
+      "available": true,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "fall": {
+      "available": true,
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "dodge": {
+      "available": true,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "damage": {
+      "available": true,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "death": {
+      "available": true,
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  "failed": [],
+  "state": "death"
+}

@@ -8,7 +8,8 @@ import{Engine}from'../js/engine.js';
 import{buildMap}from'../js/map.js';
 import{TOWER_ENEMY_SPECS as SPECS,TOWER_ENEMY_SLOTS,isTowerEnemy,resetTowerEnemy,updateTowerEnemy,towerAttackBox,towerBeamActive,clipTowerBeam,opticMuzzle,segmentRect,towerFrame}from'../js/tower-enemies.js';
 let checks=0;const check=(name,ok)=>{checks++;assert.ok(ok,name)};
-const make=id=>spawnEnemies().find(e=>e.assetId===id);
+// Combat fixtures use a flat floor; encounter placement is checked against the real map below.
+const make=id=>{const e=spawnEnemies().find(e=>e.assetId===id);e.y=e.homeY=790-e.h;return e};
 const world={map:{platforms:[{x:5200,y:790,w:7400,h:110}]}};
 const hero=e=>({...createPlayer(),x:e.x-35,y:736,health:100,maxHealth:100});
 for(const id of Object.keys(SPECS)){
@@ -74,4 +75,5 @@ const clipped=clipTowerBeam({x:6000,y:700},{x:6500,y:700},[{x:6200,y:600,w:40,h:
 check('beam segment precision',segmentRect(clipped.a,clipped.z,{x:6300,y:690,w:30,h:30})===null&&segmentRect(clipped.a,clipped.z,{x:6100,y:690,w:30,h:30})!==null);
 const h=make('synaptic_h0');h.towerState='attack';h.pendingAttack=h.assetId;h.stateTime=.35;h.meleeFacing=1;const box=towerAttackBox(h,[{x:h.x+60,y:700,w:20,h:90}]);check('discharge clipped by cover',box.x+box.w===h.x+60);
 const map=buildMap();check('cameras attach below actual decks',list.filter(e=>e.assetId==='optic_s6').every(e=>map.platforms.some(p=>e.y===p.y+p.h&&e.x>=p.x&&e.x+e.w<=p.x+p.w)));
+check('H0 patrols supported by current lab decks',list.filter(e=>e.assetId==='synaptic_h0').every(e=>map.platforms.some(p=>p.y===e.y+e.h&&e.patrolBounds.left>=p.x&&e.patrolBounds.right+e.w<=p.x+p.w)));
 console.log(`PASS: ${checks} tower enemy checks at 30/60/120 FPS.`);

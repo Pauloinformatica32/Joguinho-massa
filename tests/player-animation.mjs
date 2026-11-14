@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 import {createPlayer, updatePlayer} from '../js/player.js';
 import {AnimationManager} from '../js/engine/animationManager.js';
 import {SpriteRenderer} from '../js/engine/spriteRenderer.js';
+import {World} from '../js/world.js';
 
 const cfg=JSON.parse(readFileSync(new URL('../assets/characters/protagonist/config.json',import.meta.url)));
 const platforms=[{x:0,y:790,w:2000,h:100}];
@@ -67,4 +68,18 @@ assert.equal(manager.instances.get(p).index,2);
 const events=[];const attackTarget={};
 for(let i=0;i<40;i++)manager.play(attackTarget,'melee',cfg.animations.melee,1/60,name=>events.push(name));
 assert.deepEqual(events,['hit']);
+// Runtime PNG grids and short reactions must match the real World drawing path.
+for(const [key,count] of [['jump',4],['fall',8],['dodge',7],['damage',5],['death',8]]){
+ const a=cfg.animations[key],png=readFileSync(new URL('../'+a.sheet,import.meta.url));
+ assert.equal(a.count,count);assert.equal(png.readUInt32BE(16),a.frameWidth*count);assert.equal(png.readUInt32BE(20),a.frameHeight);
+}
+for(const [state,key,timer] of [['dash','dodge','dashTimer'],['damage','damage','damageTimer']]){
+ const def=cfg.animations[key],p={...createPlayer(),state},seen=new Set();
+ const renderer={assets:{getConfig:()=>cfg},draw(c,id,a,t,dt,o){assert.equal(a,key);seen.add(o.frameOverride);return true}};
+ for(let i=0;i<def.count;i++){
+  p[timer]=def.stateDuration*(1-(i+.1)/def.count);
+  World.prototype.drawPlayer.call({},ctx,p,renderer,1/60);
+ }
+ assert.equal(seen.size,def.count);
+}
 console.log('PASS: landing, walk/run, jump/fall/idle, collisions, priorities, animation continuity and hit event (30/60/120 fps).');

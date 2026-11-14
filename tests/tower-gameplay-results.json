@@ -1,0 +1,87 @@
+[
+  {
+    "i9": {
+      "walk": [
+        6,
+        0,
+        7,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "idle": [
+        0
+      ],
+      "attack": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "h0": [
+      {
+        "id": "synaptic_h0",
+        "a": "idle",
+        "frame": 0,
+        "x": 11900,
+        "y": 730,
+        "ok": true,
+        "time": 5773.399999999907
+      }
+    ],
+    "player": {
+      "x": 10590,
+      "y": 731.411358
+    },
+    "enemies": [
+      {
+        "x": 10560,
+        "y": 730,
+        "health": 72,
+        "state": "attack",
+        "named": true
+      },
+      {
+        "x": 11900,
+        "y": 730,
+        "health": 72,
+        "state": "patrol"
+      }
+    ]
+  },
+  {
+    "nexus": {
+      "available": true,
+      "drone": {
+        "x": 14888.005679144078,
+        "y": 675.3142078681137,
+        "targetX": 14887.990999999989,
+        "targetY": 676.5028020665961,
+        "disabled": 0,
+        "resistance": 4.050099999999967,
+        "active": true,
+        "facing": -1
+      },
+      "phase": 2,
+      "draws": 497,
+      "invalid": 0
+    },
+    "assets": {
+      "total": 31,
+      "ready": 31,
+      "failed": 0,
+      "loading": 0,
+      "errors": [],
+      "elapsed": 14207.399999999907
+    }
+  }
+]
