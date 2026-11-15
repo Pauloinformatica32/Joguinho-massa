@@ -15,12 +15,22 @@ try{
  const {call,events}=page;await call('Runtime.enable');await call('Network.enable');
  const pause=ms=>new Promise(r=>setTimeout(r,ms));
  const evaluate=async expression=>{const r=await call('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(r.exceptionDetails)throw Error(JSON.stringify(r.exceptionDetails));return r.result.value};
+ if(process.argv.includes('--blocked-display'))await call('Network.setBlockedURLs',{urls:['*display-mode.js']});
+ if(process.argv.includes('--no-fullscreen')){
+  await call('Page.enable');
+  await call('Page.addScriptToEvaluateOnNewDocument',{source:`Object.defineProperty(Element.prototype,'requestFullscreen',{value:undefined,configurable:true});Object.defineProperty(Document.prototype,'exitFullscreen',{value:undefined,configurable:true});`});
+ }
  await call('Page.navigate',{url:base+'index.html'});await pause(1300);
  if(process.argv.includes('--diagnose')){
   await evaluate(`document.querySelector('#new-game').click();document.querySelector('#continue-game').click()`);
   console.log(JSON.stringify({handlers:await evaluate(`({newGame:typeof document.querySelector('#new-game').onclick,continueGame:typeof document.querySelector('#continue-game').onclick,titleVisible:!document.querySelector('#title-screen').classList.contains('hidden')})`),errors:events.filter(e=>e.method==='Runtime.exceptionThrown').map(e=>e.params.exceptionDetails)},null,2));
  }else{
   let checks=0;const check=(n,ok)=>{checks++;assert.ok(ok,n)};
+  await evaluate(`document.querySelector('#title-settings').click()`);
+  check('settings and custom controls open',await evaluate(`document.querySelectorAll('.binding-row').length===15&&!document.querySelector('#pause-screen').classList.contains('hidden')`));
+  await evaluate(`document.querySelector('[data-tab="video"]').click()`);
+  if(process.argv.includes('--blocked-display')||process.argv.includes('--no-fullscreen'))check('optional fullscreen unavailable without blocking settings',await evaluate(`document.querySelector('#panel-content [data-fullscreen]').disabled&&document.querySelector('#video-message').textContent.includes('não disponível')`));
+  await evaluate(`document.querySelector('#resume-button').click()`);
   const instrument=()=>evaluate(`(async()=>{const {Engine}=await import('/js/engine.js');const original=Engine.prototype.update;Engine.prototype.update=function(dt){window.__startupEngine=this;return original.call(this,dt)};return true})()`);
   await instrument();await evaluate(`document.querySelector('#new-game').click()`);await pause(500);
   check('new journey starts',await evaluate(`document.querySelector('#title-screen').classList.contains('hidden')&&!!window.__startupEngine`));

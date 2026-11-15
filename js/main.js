@@ -1,11 +1,13 @@
 import{Engine,newState}from'./engine.js';import{UI}from'./ui.js';import{loadGame,saveGame,hasSave}from'./save.js';
 import{ACTIONS,controls,keyLabel,primaryKey,canonical,codeOf,matchesAction}from'./input.js';
-import{settingsMenu}from'./settings-ui.js';import{FullscreenController}from'./fullscreen.js';
+import{settingsMenu}from'./settings-ui.js';
 const $=s=>document.querySelector(s);let engine=null,state=null,ui=null,last=performance.now(),menuOrigin='game',previousFocus=null;
 const title=$('#title-screen'),pause=$('#pause-screen'),dialog=$('#dialog-screen');
 const clearInput=()=>{engine?.keys.clear();engine?.pressed.clear()};
-const fullscreen=new FullscreenController($('.stage'),clearInput);
-settingsMenu.configure({clearInput,canCapture:()=>!engine?.network.session,fullscreen});
+// Optional display support must never block menu or game initialization.
+let fullscreen={active:false,supported:false,message:'Tela cheia não disponível neste navegador. O modo janela continua funcionando.',subscribe(){return()=>{}},toggle(){return false}};
+function configureDisplay(){settingsMenu.configure({clearInput,canCapture:()=>!engine?.network.session,fullscreen});settingsMenu.updateVideo()}
+configureDisplay();
 function refreshInstructions(){
  const footer=$('.controls');footer.replaceChildren();
  for(const [action,label]of [['moveLeft','esquerda'],['moveRight','direita'],['moveDown','baixo'],['jump','pular'],['attack','atacar'],['dash','impulso'],['special','gancho / EMP'],['interact','interagir'],['equip1','implante 1'],['equip2','implante 2'],['equip3','implante 3'],['cycleImplant','alternar'],['activateImplant','ativar'],['map','mapa'],['pause','pausa']]){
@@ -31,6 +33,10 @@ $('#save-button').onclick=()=>{if(state&&saveGame(state))ui.toast('Progresso gua
 $('#asset-lab-close').onclick=()=>engine?.toggleAssetLab(false);
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{clearInput();settingsMenu.close();ui.panel(state,b.dataset.tab)});
 document.querySelectorAll('[data-fullscreen]').forEach(b=>b.onclick=()=>fullscreen.toggle());
+import('./display-mode.js').then(({FullscreenController})=>{
+ fullscreen=new FullscreenController($('.stage'),clearInput);
+ configureDisplay();
+}).catch(error=>{console.warn('Tela cheia indisponível; o jogo continua em modo janela.',error)});
 controls.subscribe(()=>{clearInput();refreshInstructions();if(ui&&state)ui.update(state)});refreshInstructions();
 $('#ending-continue').onclick=()=>{$('#ending-screen').classList.add('hidden');engine.paused=false;clearInput();engine.render()};
 $('#dialog-close').onclick=()=>{if(engine)engine.advanceDialog();else dialog.classList.add('hidden')};

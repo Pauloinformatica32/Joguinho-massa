@@ -18,7 +18,7 @@ Canvas mantém 960×540 lógicos. CSS ajusta apenas a apresentação para 16:9 c
 
 ## Arquivos desta tarefa
 
-- Criados: `js/input.js`, `js/settings-ui.js`, `js/fullscreen.js`, `css/settings.css`.
+- Criados: `js/input.js`, `js/settings-ui.js`, `js/display-mode.js`, `css/settings.css`.
 - Alterados: `index.html`, `js/main.js`, `js/engine.js`, `js/ui.js`, `js/network-hacking.js`, `js/world.js`, `js/tower.js`, `js/region-transitions.js`, `js/tower-core-visuals.js`.
 - Testes: `tests/input-settings.mjs`, `tests/browser-settings.mjs`, `tests/settings-browser-results.json` e capturas `tests/settings-*.png`.
 - Relatório: este arquivo. Testes de regressão também atualizaram suas capturas/resultados existentes.
