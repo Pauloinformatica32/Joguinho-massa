@@ -3,11 +3,15 @@ import{ACTIONS,controls,keyLabel,primaryKey,canonical,codeOf,matchesAction}from'
 import{settingsMenu}from'./settings-ui.js';
 const $=s=>document.querySelector(s);let engine=null,state=null,ui=null,last=performance.now(),menuOrigin='game',previousFocus=null;
 const title=$('#title-screen'),pause=$('#pause-screen'),dialog=$('#dialog-screen');
-const clearInput=()=>{engine?.keys.clear();engine?.pressed.clear()};
+let mobile=null;
+const clearInput=()=>{mobile?.clear();engine?.input.clear()};
 // Optional display support must never block menu or game initialization.
 let fullscreen={active:false,supported:false,message:'Tela cheia não disponível neste navegador. O modo janela continua funcionando.',subscribe(){return()=>{}},toggle(){return false}};
 function configureDisplay(){settingsMenu.configure({clearInput,canCapture:()=>!engine?.network.session,fullscreen});settingsMenu.updateVideo()}
 configureDisplay();
+import('./mobile-controls.js').then(({MobileControls})=>{
+ mobile=new MobileControls({stage:$('.stage'),getEngine:()=>engine,pause:()=>togglePause(),fullscreen:async()=>{await fullscreen.toggle();ui?.toast(fullscreen.message|| (fullscreen.active?'Tela cheia ativada.':'Modo janela.'))}});
+}).catch(error=>console.warn('Controles de toque indisponíveis; os menus continuam ativos.',error));
 function refreshInstructions(){
  const footer=$('.controls');footer.replaceChildren();
  for(const [action,label]of [['moveLeft','esquerda'],['moveRight','direita'],['moveDown','baixo'],['jump','pular'],['attack','atacar'],['dash','impulso'],['special','gancho / EMP'],['interact','interagir'],['equip1','implante 1'],['equip2','implante 2'],['equip3','implante 3'],['cycleImplant','alternar'],['activateImplant','ativar'],['map','mapa'],['pause','pausa']]){
@@ -69,12 +73,14 @@ window.addEventListener('keydown',event=>{
  if(engine.input.consume('interact')){engine.interact();if(!dialog.classList.contains('hidden'))engine.paused=true}
 });
 window.addEventListener('keyup',event=>engine?.keyup(event));window.addEventListener('blur',clearInput);window.addEventListener('focus',clearInput);document.addEventListener('visibilitychange',()=>{if(document.hidden)clearInput()});
-$('#game').addEventListener('pointerdown',event=>{if(event.button===0&&engine&&!engine.paused&&!engine.state.player.dead&&pause.classList.contains('hidden')&&dialog.classList.contains('hidden'))engine.input.press('Mouse0')});
-for(const type of ['pointerup','pointercancel'])window.addEventListener(type,()=>engine?.input.release('Mouse0'));
-function frame(now){const dt=Math.min(.033,(now-last)/1000);last=now;if(engine&&!engine.paused)engine.update(dt);else if(engine?.state.player.state==='death')engine.renderPausedDeath(dt);if(engine?.assetLab.open)engine.renderAssetLab(dt);requestAnimationFrame(frame)}requestAnimationFrame(frame);
+$('#game').addEventListener('pointerdown',event=>{if(event.pointerType==='mouse'&&event.button===0&&engine&&!engine.paused&&!engine.state.player.dead&&pause.classList.contains('hidden')&&dialog.classList.contains('hidden'))engine.input.press('Mouse0')});
+for(const type of ['pointerup','pointercancel'])window.addEventListener(type,event=>{if(event.pointerType==='mouse')engine?.input.release('Mouse0')});
+// Fixed simulation steps preserve movement and attack timing on slower displays.
+let accumulator=0;
+function frame(now){const dt=Math.min(.1,(now-last)/1000);last=now;mobile?.sync();if(engine&&!engine.paused&&!document.hidden&&!mobile?.rotateVisible){accumulator+=dt;while(accumulator>=1/60&&!engine.paused){engine.update(1/60);accumulator-=1/60}}else{accumulator=0;if(engine?.state.player.state==='death')engine.renderPausedDeath(dt)}if(engine?.assetLab.open)engine.renderAssetLab(dt);mobile?.sync();requestAnimationFrame(frame)}requestAnimationFrame(frame);
 
 // Explicit localhost-only developer session. Never writes campaign saves.
-if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('towerTest')==='1'){
+async function startDeveloperSession(){
  const {TOWER_FLOORS,TOWER_ELEVATORS}=await import('./tower-layout.js');
  const {resetVespera,startVesperaAttack,restoreDefeatedVespera}=await import('./vespera.js');
  const test=newState();test.devTowerTest=true;test.bosses.slice(0,2).forEach(b=>{b.dead=true;b.health=0});
@@ -88,3 +94,4 @@ if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(lo
   final(){this.floor(3);const b=state.bosses.find(b=>b.id==='boss-3');restoreDefeatedVespera(b);state.player.x=15410;engine.tower.syncCamera(true);engine.interact()}
  };window.towerTest.floor(1);
 }
+if(['localhost','127.0.0.1'].includes(location.hostname)&&new URLSearchParams(location.search).get('towerTest')==='1')startDeveloperSession().catch(error=>console.warn('Sessão de desenvolvimento indisponível.',error));

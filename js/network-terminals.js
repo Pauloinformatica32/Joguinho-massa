@@ -1,4 +1,4 @@
-import bank from '../Nova_Aurora_Terminais_Redes/data/network_questions.json' with {type:'json'};
+import bank from './network-question-bank.js';
 
 export function validateQuestionBank(data){
  if(!Array.isArray(data?.questions)||data.questions.length<10)throw Error('O banco precisa de pelo menos dez questões.');

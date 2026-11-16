@@ -1,0 +1,567 @@
+{
+  "checks": [
+    "new game through real CDP touch",
+    "hold right moves continuously",
+    "right + attack multitouch",
+    "releasing attack preserves right",
+    "left + jump",
+    "second touch triggers double jump",
+    "right + dash",
+    "leaving button releases captured pointer",
+    "pointer cancel releases movement",
+    "pause clears and hides touch controls",
+    "blur clears held touch",
+    "orientation resize clears held touch",
+    "fullscreen refusal displays helpful message",
+    "down + jump drops without normal jump",
+    "grapple while moving",
+    "Yara dialogue via touch blocks gameplay and preserves portrait",
+    "Yara hint through actual touch",
+    "360x800: quiz wraps without horizontal clipping",
+    "390x844: quiz wraps without horizontal clipping",
+    "640x360: quiz wraps without horizontal clipping",
+    "844x390: quiz wraps without horizontal clipping",
+    "915x412: quiz wraps without horizontal clipping",
+    "quiz answer through actual touch",
+    "existing 12-challenge educational + inventory regression suite",
+    "cycle and activate implant through touch",
+    "existing implant activation and inventory regression suite",
+    "save / continue / respawn regression suite",
+    "360x800: 16:9 canvas without horizontal scrolling",
+    "360x800: all touch targets visible and at least 44px",
+    "360x800: long dialogue scrolls",
+    "390x844: 16:9 canvas without horizontal scrolling",
+    "390x844: all touch targets visible and at least 44px",
+    "390x844: long dialogue scrolls",
+    "640x360: 16:9 canvas without horizontal scrolling",
+    "640x360: all touch targets visible and at least 44px",
+    "640x360: long dialogue scrolls",
+    "844x390: 16:9 canvas without horizontal scrolling",
+    "844x390: all touch targets visible and at least 44px",
+    "844x390: long dialogue scrolls",
+    "915x412: 16:9 canvas without horizontal scrolling",
+    "915x412: all touch targets visible and at least 44px",
+    "915x412: long dialogue scrolls",
+    "death screen blocks gameplay",
+    "restart from checkpoint through touch",
+    "manual hide preference",
+    "touch preference persists independently of campaign",
+    "desktop keyboard movement retained",
+    "Aurora Tower movement and jump through touch",
+    "boss dash controls, health and attack telegraphs retained",
+    "Industrial Complex movement and attack through touch",
+    "New Game works with both optional modules blocked",
+    "Continue works with both optional modules blocked",
+    "no uncaught browser exceptions"
+  ],
+  "viewports": [
+    {
+      "width": 360,
+      "height": 800,
+      "canvas": {
+        "w": 360,
+        "h": 202.5
+      },
+      "overflow": false,
+      "buttons": [
+        {
+          "action": "moveLeft",
+          "x": 10,
+          "y": 722,
+          "w": 44,
+          "h": 58
+        },
+        {
+          "action": "moveDown",
+          "x": 57,
+          "y": 722,
+          "w": 44,
+          "h": 58
+        },
+        {
+          "action": "moveRight",
+          "x": 104,
+          "y": 722,
+          "w": 44,
+          "h": 58
+        },
+        {
+          "action": "special",
+          "x": 198,
+          "y": 686,
+          "w": 48,
+          "h": 49
+        },
+        {
+          "action": "dash",
+          "x": 250,
+          "y": 686,
+          "w": 48,
+          "h": 49
+        },
+        {
+          "action": "interact",
+          "x": 302,
+          "y": 686,
+          "w": 48,
+          "h": 49
+        },
+        {
+          "action": "attack",
+          "x": 250,
+          "y": 739,
+          "w": 48,
+          "h": 49
+        },
+        {
+          "action": "jump",
+          "x": 302,
+          "y": 739,
+          "w": 48,
+          "h": 49
+        },
+        {
+          "action": "pause",
+          "x": 257,
+          "y": 8,
+          "w": 46,
+          "h": 50.1875
+        },
+        {
+          "action": "fullscreen",
+          "x": 308,
+          "y": 8,
+          "w": 46,
+          "h": 50.1875
+        },
+        {
+          "action": "cycleImplant",
+          "x": 257,
+          "y": 63.1875,
+          "w": 46,
+          "h": 44
+        },
+        {
+          "action": "activateImplant",
+          "x": 308,
+          "y": 63.1875,
+          "w": 46,
+          "h": 44
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "canvas": {
+        "w": 390,
+        "h": 219.375
+      },
+      "overflow": false,
+      "buttons": [
+        {
+          "action": "moveLeft",
+          "x": 10,
+          "y": 766,
+          "w": 44,
+          "h": 58
+        },
+        {
+          "action": "moveDown",
+          "x": 57,
+          "y": 766,
+          "w": 44,
+          "h": 58
+        },
+        {
+          "action": "moveRight",
+          "x": 104,
+          "y": 766,
+          "w": 44,
+          "h": 58
+        },
+        {
+          "action": "special",
+          "x": 228,
+          "y": 730,
+          "w": 48,
+          "h": 49
+        },
+        {
+          "action": "dash",
+          "x": 280,
+          "y": 730,
+          "w": 48,
+          "h": 49
+        },
+        {
+          "action": "interact",
+          "x": 332,
+          "y": 730,
+          "w": 48,
+          "h": 49
+        },
+        {
+          "action": "attack",
+          "x": 280,
+          "y": 783,
+          "w": 48,
+          "h": 49
+        },
+        {
+          "action": "jump",
+          "x": 332,
+          "y": 783,
+          "w": 48,
+          "h": 49
+        },
+        {
+          "action": "pause",
+          "x": 287,
+          "y": 8,
+          "w": 46,
+          "h": 50.1875
+        },
+        {
+          "action": "fullscreen",
+          "x": 338,
+          "y": 8,
+          "w": 46,
+          "h": 50.1875
+        },
+        {
+          "action": "cycleImplant",
+          "x": 287,
+          "y": 63.1875,
+          "w": 46,
+          "h": 44
+        },
+        {
+          "action": "activateImplant",
+          "x": 338,
+          "y": 63.1875,
+          "w": 46,
+          "h": 44
+        }
+      ]
+    },
+    {
+      "width": 640,
+      "height": 360,
+      "canvas": {
+        "w": 640,
+        "h": 360
+      },
+      "overflow": false,
+      "buttons": [
+        {
+          "action": "moveLeft",
+          "x": 10,
+          "y": 290,
+          "w": 48,
+          "h": 58
+        },
+        {
+          "action": "moveDown",
+          "x": 64,
+          "y": 290,
+          "w": 48,
+          "h": 58
+        },
+        {
+          "action": "moveRight",
+          "x": 118,
+          "y": 290,
+          "w": 48,
+          "h": 58
+        },
+        {
+          "action": "special",
+          "x": 462,
+          "y": 244,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "dash",
+          "x": 520,
+          "y": 244,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "interact",
+          "x": 578,
+          "y": 244,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "attack",
+          "x": 520,
+          "y": 299,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "jump",
+          "x": 578,
+          "y": 299,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "pause",
+          "x": 423.015625,
+          "y": 8,
+          "w": 46,
+          "h": 44
+        },
+        {
+          "action": "fullscreen",
+          "x": 474.015625,
+          "y": 8,
+          "w": 53.984375,
+          "h": 44
+        },
+        {
+          "action": "cycleImplant",
+          "x": 533,
+          "y": 8,
+          "w": 46,
+          "h": 44
+        },
+        {
+          "action": "activateImplant",
+          "x": 584,
+          "y": 8,
+          "w": 46,
+          "h": 44
+        }
+      ]
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "canvas": {
+        "w": 693.328125,
+        "h": 390
+      },
+      "overflow": false,
+      "buttons": [
+        {
+          "action": "moveLeft",
+          "x": 10,
+          "y": 320,
+          "w": 48,
+          "h": 58
+        },
+        {
+          "action": "moveDown",
+          "x": 64,
+          "y": 320,
+          "w": 48,
+          "h": 58
+        },
+        {
+          "action": "moveRight",
+          "x": 118,
+          "y": 320,
+          "w": 48,
+          "h": 58
+        },
+        {
+          "action": "special",
+          "x": 666,
+          "y": 274,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "dash",
+          "x": 724,
+          "y": 274,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "interact",
+          "x": 782,
+          "y": 274,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "attack",
+          "x": 724,
+          "y": 329,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "jump",
+          "x": 782,
+          "y": 329,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "pause",
+          "x": 627.015625,
+          "y": 8,
+          "w": 46,
+          "h": 44
+        },
+        {
+          "action": "fullscreen",
+          "x": 678.015625,
+          "y": 8,
+          "w": 53.984375,
+          "h": 44
+        },
+        {
+          "action": "cycleImplant",
+          "x": 737,
+          "y": 8,
+          "w": 46,
+          "h": 44
+        },
+        {
+          "action": "activateImplant",
+          "x": 788,
+          "y": 8,
+          "w": 46,
+          "h": 44
+        }
+      ]
+    },
+    {
+      "width": 915,
+      "height": 412,
+      "canvas": {
+        "w": 732.4375,
+        "h": 412
+      },
+      "overflow": false,
+      "buttons": [
+        {
+          "action": "moveLeft",
+          "x": 10,
+          "y": 342,
+          "w": 48,
+          "h": 58
+        },
+        {
+          "action": "moveDown",
+          "x": 64,
+          "y": 342,
+          "w": 48,
+          "h": 58
+        },
+        {
+          "action": "moveRight",
+          "x": 118,
+          "y": 342,
+          "w": 48,
+          "h": 58
+        },
+        {
+          "action": "special",
+          "x": 737,
+          "y": 296,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "dash",
+          "x": 795,
+          "y": 296,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "interact",
+          "x": 853,
+          "y": 296,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "attack",
+          "x": 795,
+          "y": 351,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "jump",
+          "x": 853,
+          "y": 351,
+          "w": 52,
+          "h": 49
+        },
+        {
+          "action": "pause",
+          "x": 698.015625,
+          "y": 8,
+          "w": 46,
+          "h": 44
+        },
+        {
+          "action": "fullscreen",
+          "x": 749.015625,
+          "y": 8,
+          "w": 53.984375,
+          "h": 44
+        },
+        {
+          "action": "cycleImplant",
+          "x": 808,
+          "y": 8,
+          "w": 46,
+          "h": 44
+        },
+        {
+          "action": "activateImplant",
+          "x": 859,
+          "y": 8,
+          "w": 46,
+          "h": 44
+        }
+      ]
+    }
+  ],
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/157.0.8103.78",
+    "revision": "@4b3d0dabb8250b6f152d2d85d79e7706e309d087",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36",
+    "jsVersion": "15.7.112.43"
+  },
+  "fullscreen": {
+    "active": false,
+    "toast": "Não foi possível mudar o modo de exibição. Tente novamente pelo botão ou use o modo janela.",
+    "error": "TypeError: not granted",
+    "calls": [
+      true
+    ]
+  },
+  "network": {
+    "checks": 116,
+    "completed": 12,
+    "maxHealth": 140,
+    "damage": 1.1500000000000001,
+    "speed": 1.06,
+    "defense": 0.08
+  },
+  "inventory": {
+    "checks": 35,
+    "selected": "interference",
+    "active": "interference"
+  },
+  "continue": {
+    "checks": 10
+  },
+  "errors": [],
+  "passed": true
+}

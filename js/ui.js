@@ -11,8 +11,10 @@ export class UI{
  constructor(){this.toastEl=document.querySelector('#toast');this.toastTimer=0;this.panelTab='map'}
  toast(message){this.toastEl.textContent=message;this.toastEl.classList.add('show');clearTimeout(this.toastTimer);this.toastTimer=setTimeout(()=>this.toastEl.classList.remove('show'),3000)}
  update(state){
-  const p=state.player;
   this.implantHUD(state);
+  // UI text need not be rebuilt on every physics step; telegraphs remain on Canvas.
+  const now=performance.now();if(this.lastHUDState===state&&now-(this.lastHUDUpdate||0)<50)return;this.lastHUDState=state;this.lastHUDUpdate=now;
+  const p=state.player;
   document.querySelector('#health-fill').style.width=`${p.health/p.maxHealth*100}%`;
   document.querySelector('#health-text').textContent=`${Math.ceil(p.health)} / ${p.maxHealth}`;
   document.querySelector('#energy-fill').style.width=`${p.energy/p.maxEnergy*100}%`;

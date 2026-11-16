@@ -1,0 +1,54 @@
+:root{--mobile-vh:100vh;--mobile-panel-height:calc(var(--mobile-vh) - max(8px,env(safe-area-inset-top)) - max(8px,env(safe-area-inset-bottom)) - 8px)}
+@supports(height:100dvh){:root{--mobile-vh:100dvh}}
+/* Canvas coordinates stay 960x540. Only the display rectangle changes. */
+body{overflow-x:hidden}
+.stage{width:min(100%,1120px,calc((var(--mobile-vh) - 112px) * 16 / 9))}
+#game{aspect-ratio:16/9;touch-action:none;image-rendering:pixelated}
+.touch-controls{position:absolute;inset:0;z-index:4;pointer-events:none;user-select:none;-webkit-user-select:none}
+.touch-controls button{pointer-events:auto;touch-action:none;min-width:48px;min-height:48px;padding:4px;border:1px solid #66e8de99;border-radius:12px;background:#061420c9;color:#93fff3;box-shadow:inset 0 0 6px #63fce422,0 1px 3px #000;font:10px/1.2 monospace;letter-spacing:0;text-shadow:0 1px 2px #000;-webkit-tap-highlight-color:transparent}
+.touch-controls button b{display:block;font:24px/1 monospace}
+.touch-controls button span{display:block;margin-top:3px}
+.touch-controls button.pressed{background:#225b65e8;border-color:#c4fff7;transform:translateY(1px);box-shadow:inset 0 0 8px #7cfff488}
+.touch-movement{position:absolute;left:max(10px,env(safe-area-inset-left));bottom:max(12px,env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(3,48px);gap:6px;align-items:end}
+.touch-movement button{height:58px}.touch-movement button span{font-size:8px}
+.touch-actions{position:absolute;right:max(10px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(3,52px);gap:6px}
+.touch-actions button[data-action="attack"]{color:#ff9bc6;border-color:#ff62acbb;grid-column:2}
+.touch-actions button[data-action="jump"]{grid-column:3}
+.touch-quick{position:absolute;right:max(10px,env(safe-area-inset-right));top:max(8px,env(safe-area-inset-top));display:flex;gap:5px}
+.touch-quick button{min-width:46px;min-height:44px;border-radius:7px;font-size:8px}.touch-quick button b{font-size:18px}
+.rotate-prompt{position:absolute;inset:0;z-index:4;background:#07131be8;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;text-align:center;font:14px/1.6 monospace;color:#c0fff4}
+.rotate-prompt button{min-height:48px}
+.touch-setting{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 18px;font:12px/1.5 monospace;color:#91ebe2}
+.touch-setting select{max-width:100%;min-height:44px;background:#102b38;color:#e0f8f6;border:1px solid #527b89;padding:6px;font:inherit}
+.screen,.panel,.dialog,#panel-content{overscroll-behavior:contain;touch-action:pan-y pinch-zoom}
+/* Fixed overlays can scroll independently of gameplay, including in fullscreen. */
+#death-screen,#ending-screen{position:fixed;padding:12px;overflow:auto}
+.mobile-layout #app{padding:0}
+.mobile-layout .topbar,.mobile-layout .controls{display:none}
+.mobile-layout .stage,.mobile-layout .stage:fullscreen{width:100%;height:100vh;height:var(--mobile-vh);max-height:none;max-width:none;margin:0;border:0;aspect-ratio:auto;box-shadow:none;display:grid;place-items:center;background:#03080d;--game-width:min(100vw,calc(var(--mobile-vh) * 16 / 9));--game-height:min(var(--mobile-vh),calc(100vw * 9 / 16))}
+.mobile-layout .stage>#game{width:var(--game-width);height:var(--game-height)}
+.mobile-layout .stage>.hud{inset:calc((var(--mobile-vh) - var(--game-height)) / 2) calc((100vw - var(--game-width)) / 2);width:var(--game-width);height:var(--game-height)}
+.mobile-layout .fullscreen-tools{display:none!important}
+.mobile-layout .status{top:6px;left:max(6px,env(safe-area-inset-left));transform:none;min-width:0;padding:5px;gap:6px}
+.mobile-layout .status .portrait,.mobile-layout .credits{display:none}
+.mobile-layout .status .bar{width:82px}.mobile-layout .status .energy{padding-left:6px}
+.mobile-layout .objective{top:62px;left:50%;right:auto;transform:translateX(-50%);max-width:45%;font-size:9px;padding:4px 6px;max-height:42px;overflow:auto}
+.mobile-layout .implant-hud{top:6px;bottom:auto;left:210px;width:150px;padding:3px 5px;font-size:8px}
+.mobile-layout .implant-hud>small,.mobile-layout .implant-hud kbd{display:none}
+.mobile-layout .implant-hud .implant-icon{width:24px;height:24px;flex-basis:24px}
+.mobile-layout .boss-hud{top:112px;bottom:auto;left:29%;right:29%;font-size:9px}
+.mobile-layout .bossbar{height:6px;margin-top:4px}
+.mobile-layout .toast{top:90px;max-width:60%;width:max-content;text-align:center;font-size:10px;padding:5px 8px}
+.mobile-layout .screen button{min-height:44px;white-space:normal}
+.mobile-layout .screen{padding-top:max(8px,env(safe-area-inset-top));padding-bottom:max(8px,env(safe-area-inset-bottom));padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right));backdrop-filter:none}
+.mobile-layout .panel,.mobile-layout .title-card,.mobile-layout .ending-card{max-height:var(--mobile-panel-height);overflow:auto;padding:16px}
+.mobile-layout #panel-content{min-height:0;max-height:none;overflow:visible;font-size:12px}
+.mobile-layout .binding-row{font-size:12px}
+.mobile-layout .panel nav button{font-size:10px;padding:6px 8px}
+.mobile-layout #dialog-screen:not(.network-screen) .dialog{max-height:var(--mobile-panel-height);padding:12px}
+.mobile-layout .network-screen .dialog{max-height:var(--mobile-panel-height)}
+.mobile-layout .network-screen #dialog-actions button,.mobile-layout .network-screen #yara-help-toggle,.mobile-layout .network-screen #yara-hint-close{min-height:48px;font-size:13px}
+.mobile-layout .network-screen .dialog.yara-help-open{display:flex;flex-direction:column;width:min(720px,100%)}
+.mobile-layout .title-card h1{font-size:48px;line-height:.85;margin:10px 0}.mobile-layout .title-card .subtitle{margin:12px 0;font-size:12px}
+.mobile-layout #pilot-name{font-size:16px}
+@media(orientation:portrait){.mobile-layout .touch-movement{bottom:max(20px,env(safe-area-inset-bottom));grid-template-columns:repeat(3,44px);gap:3px}.mobile-layout .touch-movement button{min-width:44px}.mobile-layout .touch-actions{grid-template-columns:repeat(3,48px);gap:4px}.mobile-layout .implant-hud{left:6px;top:62px;width:140px}.mobile-layout .objective{top:62px;left:auto;right:6px;transform:none;max-width:52%}.mobile-layout .boss-hud{top:115px;left:15%;right:15%}.mobile-layout .touch-quick{top:8px;right:6px;display:grid;grid-template-columns:repeat(2,46px)}}

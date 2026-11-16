@@ -24,7 +24,7 @@ c.fillStyle='#1b242a';for(let x=p.x+8;x<p.x+p.w-4;x+=40){c.fillRect(x,p.y+10,18,
  c.save();
  if(h.kind==='coolant'){
   c.fillStyle='#112d3b';c.fillRect(h.x-7,h.y-3,h.w+14,h.h+6);
-  c.shadowColor='#28dfff';c.shadowBlur=14;c.fillStyle='#087fba';c.fillRect(h.x,h.y,h.w,h.h);
+  c.shadowColor='#28dfff';c.shadowBlur=this.mobileGraphics?0:14;c.fillStyle='#087fba';c.fillRect(h.x,h.y,h.w,h.h);
   c.shadowBlur=0;c.strokeStyle='#73f6ff';c.lineWidth=2;c.strokeRect(h.x,h.y,h.w,h.h);
   c.beginPath();for(let x=0;x<=h.w;x+=4){const y=h.y+6+Math.sin(x*.08+this.time*3)*2;if(x===0)c.moveTo(h.x+x,y);else c.lineTo(h.x+x,y)}c.stroke();
   for(let i=0;i<9;i++){const x=h.x+10+i*22,y=h.y+13-((this.time*9+i*3)%12);c.strokeStyle='#a5faff99';c.beginPath();c.arc(x,y,1.5+(i%2),0,Math.PI*2);c.stroke()}
@@ -89,7 +89,7 @@ c.fillStyle='#1b242a';for(let x=p.x+8;x<p.x+p.w-4;x+=40){c.fillRect(x,p.y+10,18,
     c.fillStyle=h.cooldown>0?'#ff394d':'#ffad42';c.fillRect(h.x-18,h.y-16,4,4);c.fillRect(h.x+14,h.y-16,4,4);
     if(h.cooldown>0){c.fillStyle='#ff394d';c.fillRect(h.x-10,h.y+12,20*(1-h.cooldown/h.recharge),2);}
    }
-   if(ready){c.shadowColor='#36e9ff';c.shadowBlur=14;c.strokeStyle='rgba(54,233,255,'+pulse+')';c.lineWidth=2;c.beginPath();c.arc(h.x,h.y,14,0,Math.PI*2);c.stroke()}
+   if(ready){c.shadowColor='#36e9ff';c.shadowBlur=this.mobileGraphics?0:14;c.strokeStyle='rgba(54,233,255,'+pulse+')';c.lineWidth=2;c.beginPath();c.arc(h.x,h.y,14,0,Math.PI*2);c.stroke()}
    c.fillStyle='#151e27';c.fillRect(h.x-10,h.y-5,20,12);
    c.fillStyle=ready?'#36e9ff':'#ba9a54';c.fillRect(h.x-6,h.y-3,12,5);
    c.fillStyle=ready?'#d8fcff':'#e4c47a';c.fillRect(h.x-2,h.y-1,4,2);c.restore();
@@ -98,7 +98,7 @@ c.fillStyle='#1b242a';for(let x=p.x+8;x<p.x+p.w-4;x+=40){c.fillRect(x,p.y+10,18,
  drawHookCable(c,p){
   if(p.dead||!p.hookCable||!(p.hookCableTimer>0))return;
   const a=hookOrigin(p),h=p.hookCable;
-  c.save();c.globalAlpha=Math.min(1,p.hookCableTimer/.12);c.shadowColor='#36e9ff';c.shadowBlur=10;c.strokeStyle='#36dfff';c.lineWidth=3;
+  c.save();c.globalAlpha=Math.min(1,p.hookCableTimer/.12);c.shadowColor='#36e9ff';c.shadowBlur=this.mobileGraphics?0:10;c.strokeStyle='#36dfff';c.lineWidth=3;
   c.beginPath();c.moveTo(a.x,a.y);c.lineTo(h.x,h.y);c.stroke();
   c.shadowBlur=0;c.strokeStyle='#d9ffff';c.lineWidth=1;c.stroke();c.restore();
  }
@@ -122,6 +122,6 @@ c.fillStyle='#1b242a';for(let x=p.x+8;x<p.x+p.w-4;x+=40){c.fillRect(x,p.y+10,18,
   const drawn=spriteRenderer?.draw(c,'protagonist',animation,p,dt,{x:p.x+p.w/2,y:p.y+p.h,frameOverride,onEvent:name=>{p.animationEvent=name}});
   if(!drawn&&spriteRenderer?.assets.getConfig('protagonist')?.fallback?.procedural===true)drawKael(c,p,this.time)
  }
- drawRain(c,w,h,offset){c.strokeStyle='#7aafbf38';c.lineWidth=1;c.beginPath();for(const d of this.rain){const x=(d.x-offset*.8+w*4)%(w+30),y=(d.y+this.time*d.speed)%(h+20);c.moveTo(x,y);c.lineTo(x-5,y+13)}c.stroke()}
+ drawRain(c,w,h,offset){c.strokeStyle='#7aafbf38';c.lineWidth=1;c.beginPath();for(let i=0;i<this.rain.length;i+=this.mobileGraphics?3:1){const d=this.rain[i];const x=(d.x-offset*.8+w*4)%(w+30),y=(d.y+this.time*d.speed)%(h+20);c.moveTo(x,y);c.lineTo(x-5,y+13)}c.stroke()}
  drawVignette(c,w,h){const g=c.createRadialGradient(w/2,h/2,h*.2,w/2,h/2,h*.75);g.addColorStop(0,'#0000');g.addColorStop(1,'#050a10bb');c.fillStyle=g;c.fillRect(0,0,w,h)}
 }

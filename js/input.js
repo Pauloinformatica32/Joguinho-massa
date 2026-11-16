@@ -1,7 +1,7 @@
 export const SETTINGS_KEY='nova-aurora-settings-v1';
 export const ACTIONS=Object.freeze({
  moveLeft:{name:'Mover para a esquerda',keys:['KeyA','ArrowLeft']},moveRight:{name:'Mover para a direita',keys:['KeyD','ArrowRight']},
- moveDown:{name:'Mover para baixo (reservado)',keys:['KeyS','ArrowDown']},jump:{name:'Pular / salto duplo',keys:['Space']},
+ moveDown:{name:'Baixo / descer com pulo',keys:['KeyS','ArrowDown']},jump:{name:'Pular / salto duplo',keys:['Space']},
  attack:{name:'Atacar',keys:['KeyJ','Mouse0']},dash:{name:'Impulso / dash',keys:['Shift']},special:{name:'Gancho / EMP / habilidade',keys:['KeyK']},
  interact:{name:'Interagir',keys:['KeyE']},equip1:{name:'Equipar implante 1',keys:['Digit1']},equip2:{name:'Equipar implante 2',keys:['Digit2']},equip3:{name:'Equipar implante 3',keys:['Digit3']},
  cycleImplant:{name:'Alternar implante',keys:['KeyQ']},activateImplant:{name:'Ativar implante',keys:['KeyF']},map:{name:'Abrir mapa',keys:['KeyM']},pause:{name:'Pausar / menu',keys:['Escape']}
@@ -53,15 +53,20 @@ export class ControlsSettings{
 // localStorage may be unavailable (privacy settings); gameplay still receives defaults.
 let storage;if(typeof window!=='undefined')try{storage=globalThis.localStorage}catch{}
 export const controls=new ControlsSettings(storage);
+export const TOUCH_KEY='nova-aurora-touch-v1';
+export function touchPreference(){try{const value=storage?.getItem(TOUCH_KEY);return ['auto','always','hide'].includes(value)?value:'auto'}catch{return 'auto'}}
+export function setTouchPreference(value){if(!['auto','always','hide'].includes(value))return;try{storage?.setItem(TOUCH_KEY,value)}catch{}window.dispatchEvent(new CustomEvent('touchpreferencechange',{detail:value}))}
 export const keyLabel=action=>controls.bindings[action].map(keyName).join(' / ');
 export const primaryKey=action=>keyName(controls.bindings[action][0]);
 export const matchesAction=(action,event)=>controls.bindings[action]?.includes(canonical(codeOf(event)));
 export class ActionInput{
- constructor(keys=new Set(),pressed=new Set(),settings=controls){this.keys=keys;this.pressed=pressed;this.settings=settings}
- isDown(action){return [...this.keys].some(k=>this.settings.bindings[action]?.includes(canonical(k)))}
- consume(action){let hit=false;for(const key of this.pressed)if(this.settings.bindings[action]?.includes(canonical(key))){this.pressed.delete(key);hit=true}return hit}
+ constructor(keys=new Set(),pressed=new Set(),settings=controls){this.keys=keys;this.pressed=pressed;this.settings=settings;this.sources=new Map();this.actionPressed=new Set()}
+ isDown(action){for(const value of this.sources.values())if(value===action)return true;for(const k of this.keys)if(this.settings.bindings[action]?.includes(canonical(k)))return true;return false}
+ consume(action){let hit=this.actionPressed.delete(action);for(const key of this.pressed)if(this.settings.bindings[action]?.includes(canonical(key))){this.pressed.delete(key);hit=true}return hit}
+ setAction(action,source,down){if(!ACTIONS[action])return;if(down){if(this.sources.get(source)===action)return;const held=this.isDown(action);this.sources.set(source,action);if(!held)this.actionPressed.add(action)}else this.sources.delete(source)}
+ clearActions(){this.sources.clear();this.actionPressed.clear()}
  press(event){if(typeof event==='object'&&event.repeat)return false;const raw=codeOf(event),was=[...this.keys].some(k=>canonical(k)===canonical(raw));this.keys.add(raw);if(!was)this.pressed.add(raw);return !was}
  release(event){const raw=codeOf(event);this.keys.delete(raw);if(typeof event==='string')for(const key of this.keys)if(canonical(key)===canonical(raw))this.keys.delete(key)}
- clear(){this.keys.clear();this.pressed.clear()}
+ clear(){this.keys.clear();this.pressed.clear();this.clearActions()}
 }
 export function controlText(text){return String(text).replace(/\bUse K\b/g,()=>`Use ${primaryKey('special')}`).replace(/\(K\)/g,()=>`(${primaryKey('special')})`).replace(/\bK mantém/g,()=>`${primaryKey('special')} mantém`).replace(/\bQ seleciona/g,()=>`${primaryKey('cycleImplant')} seleciona`).replace(/\bF ativa/g,()=>`${primaryKey('activateImplant')} ativa`).replace(/\bE (?=para interagir|ativa abrigos|\/|·)/g,()=>`${primaryKey('interact')} `)}

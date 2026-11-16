@@ -1,0 +1,98 @@
+[
+  {
+    "suite": "input-settings",
+    "exitCode": 0,
+    "stdout": "PASS: 15 actions, code/layout handling, modifiers, discrete input, alternative bindings, conflict swaps, mandatory keys, persistence, corruption and unavailable storage.",
+    "stderr": "[1116/091436.427:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "mobile-input",
+    "exitCode": 0,
+    "stdout": "PASS semantic multi-source input, rebinding, overlay reset and one-way drop / solid jump at 30/60/120 FPS.",
+    "stderr": "[1116/091436.533:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "player-animation",
+    "exitCode": 0,
+    "stdout": "PASS: landing, walk/run, jump/fall/idle, collisions, priorities, animation continuity and hit event (30/60/120 fps).",
+    "stderr": "[1116/091436.699:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "dash",
+    "exitCode": 0,
+    "stdout": "PASS: 4592 dash checks at 30/60/120 FPS.",
+    "stderr": "[1116/091436.869:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "combat",
+    "exitCode": 0,
+    "stdout": "PASS: 159 combat checks at 30/60/120 FPS.",
+    "stderr": "[1116/091437.131:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "player-death",
+    "exitCode": 0,
+    "stdout": "PASS: 4177 player death lifecycle checks (3 cycles at 30/60/120 FPS).",
+    "stderr": "[1116/091437.296:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "factory",
+    "exitCode": 0,
+    "stdout": "PASS: factory damage, telegraphs, height, projectile consumption/death cleanup, pool boundaries, full floor route and optional platform jumps at 30/60/120 FPS; saves and camera.",
+    "stderr": "[1116/091437.498:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "tower",
+    "exitCode": 0,
+    "stdout": "PASS: 27 tower traversal and storage checks at 30/60/120 FPS.",
+    "stderr": "[1116/091437.884:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "network-terminals",
+    "exitCode": 0,
+    "stdout": "PASS: 159 networking checks; 12 questions, four choices, 48 grading cases, all reward formulas, no duplicate payouts, placement and legacy/new saves.",
+    "stderr": "[1116/091438.129:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "cybernetics",
+    "exitCode": 0,
+    "stdout": "PASS: 111 cybernetic checks; 3/6/3 difficulty, rewards, shield, real damage/projectile effects, cooldowns at 30/60/120 FPS, selection and migration.",
+    "stderr": "[1116/091438.379:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "implant-equipment",
+    "exitCode": 0,
+    "stdout": "PASS: 85 equipment checks at 30/60/120 FPS; automatic/manual equip, exclusive effects, cooldown integrity, legacy saves and invalid IDs.",
+    "stderr": "[1116/091438.598:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "yara-hints",
+    "exitCode": 0,
+    "stdout": "PASS: 93 Yara hint checks; 12 unique concise hints, unchanged answers, no quoted answers/results and compatible legacy saves.",
+    "stderr": "[1116/091438.801:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "level-design",
+    "exitCode": 0,
+    "stdout": "PASS: 93 supports / 88 simulated links at 30 FPS\nPASS: 93 supports / 88 simulated links at 60 FPS\nPASS: 93 supports / 88 simulated links at 120 FPS\nPASS: stable checkpoints, all old checkpoint migrations, floor preservation, travel history, every authored grapple, consoles and Teo shortcut.",
+    "stderr": "[1116/091438.980:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "matrona",
+    "exitCode": 0,
+    "stdout": "PASS: Matrona at 30/60/120 FPS: diagonal geometry, locked aim, damage, invulnerability, recovery, surfaces, safe space, movement, attack selection, death/reset.",
+    "stderr": "[1116/091504.424:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "warden",
+    "exitCode": 0,
+    "stdout": "PASS: Warden six PNG grids; movement, all attacks and both phases at 30/60/120 FPS; damage, telegraphs, jump/dash, unique transition, death cleanup, old saves, victory persistence, arena camera.",
+    "stderr": "[1116/091504.760:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  },
+  {
+    "suite": "vespera",
+    "exitCode": 0,
+    "stdout": "PASS: 3802 Véspera checks at 30/60/120 FPS.",
+    "stderr": "[1116/091505.039:ERROR:third_party\\crashpad\\crashpad\\util\\win\\registration_protocol_win.cc:108] CreateFile: Acesso negado. (0x5)"
+  }
+]
